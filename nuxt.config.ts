@@ -1,15 +1,18 @@
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from "nuxt3";
 
 export default defineNuxtConfig({
-    srcDir: './',
-    build: {
-        postcss: {
-            postcssOptions: {
-                plugins: {
-                    tailwindcss: {},
-                    autoprefixer: {},
-                }
-            }
+  app: {
+    lang: "en",
+  },
+  build: {
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
         },
-    }
-})
+      },
+    },
+  },
+  extensions: [".js", ".mjs", ".ts", ".tsx", ".vue", ".json"],
+});
