@@ -1,5 +1,5 @@
 module.exports = {
-  mode: "jit",
+  // TODO:
   purge: [
     "./components/**/*.{vue,js}",
     "./layouts/**/*.vue",

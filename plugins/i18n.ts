@@ -1,7 +1,7 @@
 import { defineNuxtPlugin } from "#app";
-import i18nEN from "../i18n/i18n-en.json";
-import i18nFR from "../i18n/i18n-fr.json";
-import i18nES from "../i18n/i18n-es.json";
+import * as i18nEN from "../i18n/i18n-en.json";
+import * as i18nFR from "../i18n/i18n-fr.json";
+import * as i18nES from "../i18n/i18n-es.json";
 
 export const langOptions = [
   {
@@ -45,12 +45,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       currentLang = route ? route : lang;
     }
     const langIndex = langOptions.findIndex((x: any) => x.id == currentLang);
+    // @ts-ignore
     return langIndex != -1 ? langOptions[langIndex]["json"][key] : null;
   });
 });
-
-declare module "#app" {
-  interface NuxtApp {
-    $i18n(msg: string): string;
-  }
-}
