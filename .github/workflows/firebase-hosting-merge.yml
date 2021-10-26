@@ -13,9 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build
-        run: npm install -g nuxt3 \
-          npm install
+      - name: Npm install
+        run: npm install -g nuxt3; npm install
+
       - name: Build
         run: npm run build-firebase
       - name: Deploy site to Firebase
