@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-between">
-    <span class="text-4xl">{{ $i18n("greeting") }}</span>
+    <span class="text-4xl">Flipword tell you: {{ i18n("greeting") }}</span>
     <select
       v-if="currentLang"
       v-model="currentLang"

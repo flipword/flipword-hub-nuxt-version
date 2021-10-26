@@ -10,13 +10,25 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - run: npm install -g nuxt3
-      - run: npm install
-      - run: npm run build-firebase
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: npm install -g nuxt3 \
+          npm install
+      - name: Build
+        run: npm run build-firebase
+      - name: Deploy site to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_FLUTTER_FLIP_CARD }}'
           channelId: live
           projectId: flutter-flip-card
+
+      - name: Deploy function to Firebase
+        uses: w9jds/firebase-action@master
+        with:
+          args: deploy --only functions
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
