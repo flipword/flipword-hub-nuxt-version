@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "flutter-flip-card"
+  },
+  "targets": {
+    "flutter-flip-card": {
+      "hosting": {
+        "flutter-flip-card": [
+          "flutter-flip-card"
+        ]
+      }
+    }
+  }
+}
