@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="screen-part1 bg-primary flex flex-row">
-      <div class="w-1/2 flex justify-center">
+      <div class="w-1/2 flex flex-col justify-center items-center">
         <div class="h-3/5 w-3/4 relative">
           <div
             class="
@@ -40,17 +40,39 @@
                 <div class="w-full flex flex-row justify-center">
                   <img
                     src="assets/icons/logo.png"
-                    style="height: 120px; width: 120px"
+                    style="height: 100%; width: 25%"
                   />
-                  <span class="text-9xl text-black">FlipWord</span>
+                  <span class="font-sans text-title text-black font-bold"
+                    >FlipWord</span
+                  >
                 </div>
-                <div class="w-full flex justify-center mt-2">
-                  <span class="text-4xl text-black">{{
+                <div class="w-full flex justify-center">
+                  <span class="font-sans text-subtitle text-black">{{
                     i18n("subtitle")
                   }}</span>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        <div class="h-2/5 w-full flex flex-row justify-center gap-4">
+          <div class="w-1/3 h-1/2 flex flex-col justify-center">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+              ><img
+                alt="Get it on Google Play"
+                src="assets/images/download_android.png"
+                style="width: 90%; height: auto"
+            /></a>
+          </div>
+          <div class="w-1/3 h-1/2 flex flex-col justify-center">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+              ><img
+                alt="Get it on App Store"
+                src="assets/images/download_ios.png"
+                style="width: 90%; height: auto"
+            /></a>
           </div>
         </div>
       </div>

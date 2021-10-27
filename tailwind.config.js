@@ -21,7 +21,7 @@ module.exports = {
       white: "#FFFFFF",
     },
     fontFamily: {
-      sans: ["Graphik", "sans-serif"],
+      sans: ["Roboto", "sans-serif"],
       serif: ["Merriweather", "serif"],
     },
     textColor: {
@@ -30,6 +30,10 @@ module.exports = {
     extend: {
       borderRadius: {
         "5xl": "5rem",
+      },
+      fontSize: {
+        title: "5vw",
+        subtitle: "1.75vw",
       },
     },
   },
