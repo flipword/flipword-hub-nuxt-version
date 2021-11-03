@@ -77,11 +77,11 @@
         </div>
       </div>
       <div class="w-1/2">
-        <div class="flex justify-end">
+        <div class="flex flex-col justify-end">
           <select
             v-if="currentLang"
             v-model="currentLang"
-            class="mr-5 mt-2"
+            class="w-1/4 mr-5 mt-2"
             name="lang"
             @change="updateLang"
           >
@@ -94,6 +94,7 @@
               {{ lang.label }}
             </option>
           </select>
+          <IsometricCard />
         </div>
       </div>
     </div>
@@ -105,9 +106,11 @@
 import { defineComponent, ref, onBeforeMount } from "vue";
 import { useNuxtApp } from "#app";
 import { langOptions } from "~/plugins/i18n";
+import IsometricCard from "../components/IsometricCard.vue";
 
 export default defineComponent({
   name: "Index",
+  components: { IsometricCard },
   setup() {
     const {
       $i18n,
