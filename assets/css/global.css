@@ -1,0 +1,18 @@
+body {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 0.5em;
+    border-radius: 0.5rem;
+}
+
+body::-webkit-scrollbar-track {
+    background: white;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+    border-radius: 1rem;
+}
