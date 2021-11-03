@@ -35,6 +35,12 @@ module.exports = {
         title: "5vw",
         subtitle: "1.75vw",
       },
+      spacing: {
+        110: "27rem",
+      },
+      screens: {
+        "4xl": "1600px",
+      },
     },
   },
   variants: {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="screen-part1 bg-primary flex flex-row">
+    <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
       <div class="w-1/2 flex flex-col justify-center items-center">
         <div class="h-3/5 w-3/4 relative">
           <div
@@ -78,23 +78,25 @@
       </div>
       <div class="w-1/2">
         <div class="flex flex-col justify-end">
-          <select
-            v-if="currentLang"
-            v-model="currentLang"
-            class="w-1/4 mr-5 mt-2"
-            name="lang"
-            @change="updateLang"
-          >
-            <option
-              v-for="(lang, index) in langOptions"
-              :key="index"
-              :value="lang.id"
-              :selected="currentLang == lang.id"
+          <div class="flex flex-row justify-end mr-6">
+            <select
+              v-if="currentLang"
+              v-model="currentLang"
+              class="w-1/4 mr-5 mt-2"
+              name="lang"
+              @change="updateLang"
             >
-              {{ lang.label }}
-            </option>
-          </select>
-          <IsometricCard />
+              <option
+                v-for="(lang, index) in langOptions"
+                :key="index"
+                :value="lang.id"
+                :selected="currentLang == lang.id"
+              >
+                {{ lang.label }}
+              </option>
+            </select>
+          </div>
+          <IsometricCards />
         </div>
       </div>
     </div>
@@ -106,11 +108,11 @@
 import { defineComponent, ref, onBeforeMount } from "vue";
 import { useNuxtApp } from "#app";
 import { langOptions } from "~/plugins/i18n";
-import IsometricCard from "../components/IsometricCard.vue";
+import IsometricCards from "../components/IsometricCards.vue";
 
 export default defineComponent({
   name: "Index",
-  components: { IsometricCard },
+  components: { IsometricCards },
   setup() {
     const {
       $i18n,
