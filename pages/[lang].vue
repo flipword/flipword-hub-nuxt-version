@@ -79,22 +79,10 @@
       <div class="w-1/2">
         <div class="flex flex-col justify-end">
           <div class="flex flex-row justify-end mr-6">
-            <select
-              v-if="currentLang"
-              v-model="currentLang"
-              class="w-1/4 mr-5 mt-2"
-              name="lang"
-              @change="updateLang"
-            >
-              <option
-                v-for="(lang, index) in langOptions"
-                :key="index"
-                :value="lang.id"
-                :selected="currentLang == lang.id"
-              >
-                {{ lang.label }}
-              </option>
-            </select>
+            <CountrySelect
+              :current-lang="currentLang"
+              @changeLang="updateLang"
+            />
           </div>
           <IsometricCards />
         </div>
@@ -108,11 +96,12 @@
 import { defineComponent, ref, onBeforeMount } from "vue";
 import { useNuxtApp } from "#app";
 import { langOptions } from "~/plugins/i18n";
-import IsometricCards from "../components/IsometricCards.vue";
+import IsometricCards from "~/components/IsometricCards.vue";
+import CountrySelect from "~/components/CountrySelect.vue";
 
 export default defineComponent({
   name: "Index",
-  components: { IsometricCards },
+  components: { IsometricCards, CountrySelect },
   setup() {
     const {
       $i18n,
@@ -139,13 +128,16 @@ export default defineComponent({
     );
     const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
 
-    const updateLang = () => {
+    const updateLang = (lang: string) => {
+      console.log("ping ", lang);
+      currentLang.value = lang;
       if (currentLang.value == lang) {
         $router.push("/");
       } else {
         $router.push(`/${currentLang.value}`);
       }
     };
+
     return {
       updateLang,
       langOptions,
