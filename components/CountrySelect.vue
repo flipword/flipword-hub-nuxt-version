@@ -2,7 +2,7 @@
   <div class="flex flex-row gap-2">
     <div class="flex flex-col pt-2">
       <img
-        :src="`assets/images/flags/${flagPath()}`"
+        :src="`~/assets/images/flags/${flagPath()}`"
         style="height: 100%; width: 40px"
       />
     </div>

@@ -38,7 +38,7 @@
                 "
               >
                 <div class="w-full flex flex-row justify-center">
-                  <img src="assets/icons/logo.png" class="h-full w-1/4" />
+                  <img src="~/assets/icons/logo.png" class="h-full w-1/4" />
                   <span class="font-sans text-title text-black font-bold"
                     >FlipWord</span
                   >
@@ -59,7 +59,7 @@
               href="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
               ><img
                 alt="Get it on Google Play"
-                src="assets/images/download_android.png"
+                src="~/assets/images/download_android.png"
                 class="w-56 h-auto"
             /></a>
           </div>
@@ -69,7 +69,7 @@
               href="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
               ><img
                 alt="Get it on App Store"
-                src="assets/images/download_ios.png"
+                src="~/assets/images/download_ios.png"
                 class="w-60 h-auto"
             /></a>
           </div>
