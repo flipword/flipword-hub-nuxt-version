@@ -6,5 +6,5 @@
 
 <script lang="ts" setup>
 import "./assets/css/tailwind.css";
-import "./assets/css/global.css";
+import "./assets/css/default.css";
 </script>
