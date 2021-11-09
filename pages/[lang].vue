@@ -38,10 +38,7 @@
                 "
               >
                 <div class="w-full flex flex-row justify-center">
-                  <img
-                    src="assets/icons/logo.png"
-                    style="height: 100%; width: 25%"
-                  />
+                  <img src="assets/icons/logo.png" class="h-full w-1/4" />
                   <span class="font-sans text-title text-black font-bold"
                     >FlipWord</span
                   >
@@ -58,20 +55,22 @@
         <div class="h-2/5 w-full flex flex-row justify-center gap-4">
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
             <a
+              class="flex flex-row justify-center"
               href="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
               ><img
                 alt="Get it on Google Play"
                 src="assets/images/download_android.png"
-                style="width: 90%; height: auto"
+                class="w-56 h-auto"
             /></a>
           </div>
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
             <a
+              class="flex flex-row justify-center"
               href="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
               ><img
                 alt="Get it on App Store"
                 src="assets/images/download_ios.png"
-                style="width: 90%; height: auto"
+                class="w-60 h-auto"
             /></a>
           </div>
         </div>
@@ -88,7 +87,48 @@
         </div>
       </div>
     </div>
-    <div class="screen-part2 bg-base"></div>
+    <div class="screen-part2 flex flex-row bg-primary">
+      <div class="h-full w-7/12">
+        <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
+          <div class="w-full h-10 bg-primary rounded-b-3xl"></div>
+          <div class="w-full h-10 flex flex-row justify-center">
+            <div class="w-3/4 h-full bg-primary rounded-b-3xl"></div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="
+          h-full
+          w-5/12
+          bg-base
+          rounded-tl-5xl rounded-bl-5xl
+          flex flex-col
+          justify-center
+          items-center
+        "
+      >
+        <div
+          class="
+            h-2/5
+            w-5/6
+            my-1/12
+            rounded-t-5xl
+            bg-primary
+            flex flex-col
+            justify-center
+            items-center
+            px-12
+          "
+        >
+          <span
+            class="font-sans text-4xl leading-normal text-black"
+            v-html="i18n('create_description')"
+          />
+        </div>
+        <div class="h-1/2 w-full" />
+      </div>
+    </div>
+    <div class="screen-part3 flex flex-row bg-primary"></div>
   </div>
 </template>
 
@@ -128,9 +168,8 @@ export default defineComponent({
     );
     const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
 
-    const updateLang = (lang: string) => {
-      console.log("ping ", lang);
-      currentLang.value = lang;
+    const updateLang = (updatedLang: string) => {
+      currentLang.value = updatedLang;
       if (currentLang.value == lang) {
         $router.push("/");
       } else {
@@ -156,6 +195,11 @@ export default defineComponent({
 
 .screen-part2 {
   height: 160vh;
+  width: 100%;
+}
+
+.screen-part3 {
+  height: 20vh;
   width: 100%;
 }
 </style>

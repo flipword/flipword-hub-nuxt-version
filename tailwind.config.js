@@ -41,6 +41,12 @@ module.exports = {
       screens: {
         "4xl": "1600px",
       },
+      margin: {
+        "1/12": "8.33%",
+      },
+      padding: {
+        "1/12": "8.33%",
+      },
     },
   },
   variants: {
