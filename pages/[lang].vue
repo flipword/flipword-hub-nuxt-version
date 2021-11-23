@@ -90,10 +90,7 @@
     <div class="screen-part2 flex flex-row bg-primary">
       <div class="h-full w-7/12">
         <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
-          <div class="w-full h-10 bg-primary rounded-b-3xl"></div>
-          <div class="w-full h-10 flex flex-row justify-center">
-            <div class="w-3/4 h-full bg-primary rounded-b-3xl"></div>
-          </div>
+          <AddingPopup />
         </div>
       </div>
       <div
@@ -138,10 +135,11 @@ import { useNuxtApp } from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
+import AddingPopup from "~/components/AddingPopup.vue";
 
 export default defineComponent({
   name: "Index",
-  components: { IsometricCards, CountrySelect },
+  components: { IsometricCards, CountrySelect, AddingPopup },
   setup() {
     const {
       $i18n,
