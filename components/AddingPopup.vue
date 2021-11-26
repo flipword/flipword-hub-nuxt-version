@@ -13,6 +13,23 @@
       <span class="text-black">English</span>
     </div>
   </div>
+  <div class="mt-5 flex flex-col w-full px-12 h-96 gap-5">
+    <div class="flex flex-row w-full h-40 bg-white rounded-3xl">
+      <div class="flex flex-row w-full justify-end pt-3 pr-3">
+        <div><img src="~/assets/icons/clear.png"/></div>
+      </div>
+    </div>
+    <div class="transform rotate-90 h-12 w-12">
+      <div class="flex flex-row justify-center items-center rounded-lg w-full h-full bg-primary">
+        <div ><img src="~/assets/icons/g_translate.png"/></div>
+      </div>
+    </div>
+    <div class="w-full h-40 bg-white flex flex-row rounded-3xl">
+      <div class="flex flex-row w-full justify-end pt-3 pr-3">
+        <div><img src="~/assets/icons/clear.png"/></div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
