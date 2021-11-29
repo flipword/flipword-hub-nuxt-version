@@ -6,7 +6,9 @@
           <img src="assets/icons/volume.png" />
         </div>
         <div class="flex flex-row mb-7 justify-center">
-          <span class="font-sans text-4xl text-black">{{ foreignWord }}</span>
+          <span class="font-sans text-4xl text-black">{{
+            word.foreignWord
+          }}</span>
         </div>
         <div></div>
       </div>
@@ -15,7 +17,9 @@
           <img src="assets/icons/volume.png" />
         </div>
         <div class="flex flex-row mb-7 justify-center">
-          <span class="font-sans text-4xl text-black">{{ nativeWord }}</span>
+          <span class="font-sans text-4xl text-black">{{
+            word.nativeWord
+          }}</span>
         </div>
         <div></div>
       </div>
@@ -25,12 +29,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { Word } from "assets/data/words";
 
 export default defineComponent({
   name: "Card",
   props: {
-    nativeWord: { default: "" },
-    foreignWord: { default: "" },
+    word: {
+      type: Word,
+      required: true,
+    },
   },
   setup() {
     return {};

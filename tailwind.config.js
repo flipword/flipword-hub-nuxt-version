@@ -26,6 +26,7 @@ module.exports = {
     },
     textColor: {
       black: "#1E1E1E",
+      white: "#FFFFFF",
     },
     extend: {
       borderRadius: {

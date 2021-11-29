@@ -83,7 +83,7 @@
               @changeLang="updateLang"
             />
           </div>
-          <IsometricCards />
+          <IsometricCards :lang="currentLang" />
         </div>
       </div>
     </div>
@@ -122,7 +122,14 @@
             v-html="i18n('create_description')"
           />
         </div>
-        <div class="h-1/2 w-full" />
+        <div class="h-1/2 px-16 w-full">
+          <div class="w-full flex flex-col">
+            <div class="flex flex-row justify-around">
+              <ListCard native-word="vache" foreign-word="cow"></ListCard>
+              <ListCard native-word="vache" foreign-word="cow"></ListCard>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="screen-part3 flex flex-row bg-primary"></div>
@@ -136,10 +143,11 @@ import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
+import ListCard from "~/components/ListCard.vue";
 
 export default defineComponent({
   name: "Index",
-  components: { IsometricCards, CountrySelect, AddingPopup },
+  components: { IsometricCards, CountrySelect, AddingPopup, ListCard },
   setup() {
     const {
       $i18n,
