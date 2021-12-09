@@ -29,7 +29,11 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { Word } from "assets/data/words";
+
+export interface Word {
+  nativeWord: string;
+  foreignWord: string;
+}
 
 export default defineComponent({
   name: "Card",

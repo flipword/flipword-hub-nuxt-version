@@ -1,4 +1,4 @@
-export interface Word {
+interface Word {
   nativeWord: string;
   foreignWord: string;
 }

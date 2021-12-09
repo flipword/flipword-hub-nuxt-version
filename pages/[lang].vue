@@ -4,38 +4,14 @@
       <div class="w-1/2 flex flex-col justify-center items-center">
         <div class="h-3/5 w-3/4 relative">
           <div
-            class="
-              w-full
-              top-0
-              -right-2
-              -bottom-1
-              bg-whiteShadow
-              rounded-b-5xl
-              absolute
-            "
+            class="w-full top-0 -right-2 -bottom-1 bg-whiteShadow rounded-b-5xl absolute"
           ></div>
           <div
-            class="
-              h-full
-              w-full
-              bg-white
-              rounded-b-5xl
-              relative
-              flex
-              justify-center
-              items-center
-            "
+            class="h-full w-full bg-white rounded-b-5xl relative flex justify-center items-center"
           >
             <div class="h-5/6 w-5/6 bg-primary rounded-b-5xl">
               <div
-                class="
-                  w-full
-                  h-full
-                  pb-20
-                  flex flex-col
-                  justify-center
-                  items-center
-                "
+                class="w-full h-full pb-20 flex flex-col justify-center items-center"
               >
                 <div class="w-full flex flex-row justify-center">
                   <img src="~/assets/icons/logo.png" class="h-full w-1/4" />
@@ -103,29 +79,10 @@
         </div>
       </div>
       <div
-        class="
-          h-full
-          w-5/12
-          bg-base
-          rounded-tl-5xl rounded-bl-5xl
-          flex flex-col
-          justify-center
-          items-center
-          overflow-hidden
-        "
+        class="h-full w-5/12 bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
       >
         <div
-          class="
-            h-2/5
-            w-5/6
-            my-1/12
-            rounded-t-5xl
-            bg-primary
-            flex flex-col
-            justify-center
-            items-center
-            px-12
-          "
+          class="h-2/5 w-5/6 my-1/12 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12"
         >
           <span
             class="font-sans text-4xl leading-normal text-black"
@@ -176,7 +133,8 @@ import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
-import { wordList, Word } from "assets/data/words";
+import { wordList } from "assets/data/words";
+import { Word } from "~/components/Card.vue";
 
 export default defineComponent({
   name: "Index",
