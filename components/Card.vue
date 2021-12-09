@@ -39,7 +39,7 @@ export default defineComponent({
   name: "Card",
   props: {
     word: {
-      type: Word,
+      type: Object as PropType<Word>,
       required: true,
     },
   },
