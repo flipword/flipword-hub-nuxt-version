@@ -117,8 +117,15 @@
         />
       </div>
       <div class="flex flex-row justify-center items-center flex-1">
-        <button class="bg-base px-3 py-2 rounded-lg" type="button">
-          {{ i18n("launch_app") }}
+        <button
+          class="bg-base px-6 py-4 rounded-3xl"
+          type="button"
+          @click="redirectToApp"
+        >
+          <div class="w-full flex flex-row items-center justify-center gap-4">
+            <span class="text-4xl font-bold">{{ i18n("launch_app") }}</span>
+            <img src="~/assets/icons/play.png" />
+          </div>
         </button>
       </div>
     </div>
@@ -188,12 +195,17 @@ export default defineComponent({
       }, []);
     };
 
+    const redirectToApp = () => {
+      window.open("https://app.flipword.oi");
+    };
+
     return {
       updateLang,
       langOptions,
       currentLang,
       i18n: $i18n,
       wordListChunked: wordListChunk(),
+      redirectToApp,
     };
   },
 });
