@@ -66,7 +66,7 @@
     <div class="screen-part2 flex flex-row bg-primary">
       <div class="h-full flex flex-col w-7/12">
         <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
-          <AddingPopup />
+          <AddingPopup :word="wordList[0]" />
         </div>
         <div class="w-full h-20 bg-base">
           <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
@@ -118,7 +118,7 @@
       </div>
       <div class="flex flex-row justify-center items-center flex-1">
         <button
-          class="bg-base px-6 py-4 rounded-3xl"
+          class="bg-base px-6 py-4 rounded-3xl filter drop-shadow-lg"
           type="button"
           @click="redirectToApp"
         >
@@ -195,6 +195,10 @@ export default defineComponent({
       }, []);
     };
 
+    const wordListWithGoodLang = (): Word[] => {
+      return wordList[lang];
+    };
+
     const redirectToApp = () => {
       window.open("https://app.flipword.oi");
     };
@@ -205,6 +209,7 @@ export default defineComponent({
       currentLang,
       i18n: $i18n,
       wordListChunked: wordListChunk(),
+      wordList: wordListWithGoodLang(),
       redirectToApp,
     };
   },

@@ -1,32 +1,14 @@
 <template>
-  <div class="w-60 h-28">
+  <div class="2xl:w-60 lg:w-48 h-28 filter drop-shadow-md">
     <div
-      class="
-        w-full
-        h-1/2
-        bg-primary
-        flex flex-row
-        justify-center
-        items-center
-        rounded-t-lg
-      "
+      class="w-full h-1/2 bg-primary flex flex-row justify-center items-center rounded-t-lg"
     >
       <span class="font-sans text-lg leading-normal text-white">{{
         nativeWord
       }}</span>
     </div>
     <div
-      class="
-        w-full
-        h-1/2
-        bg-white
-        items-center
-        flex flex-row
-        justify-center
-        items-center
-        rounded-b-lg
-        border-primary border-2
-      "
+      class="w-full h-1/2 bg-white items-center flex flex-row justify-center items-center rounded-b-lg border-primary border-2"
     >
       <span class="text-black">{{ foreignWord }}</span>
     </div>
