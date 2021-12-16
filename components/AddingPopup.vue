@@ -62,7 +62,7 @@
     </div>
     <div class="absolute flex flex-row justify-center inset-x-0 bottom-0">
       <div ref="savedNotifyRef" class="p-3 bg-positive rounded-lg elementToFadeOut">
-        <span class="text-white font-semibold">Word Saved !</span>
+        <span class="text-white font-semibold">{{i18n('saved_word')}}</span>
       </div>
     </div>
   </div>
@@ -80,8 +80,15 @@ export default defineComponent({
       type: Object as PropType<Word>,
       required: true,
     },
+    nativeWord: {
+      required: true,
+    },
+    foreignWord: {
+      required: true,
+    },
   },
-  setup(props) {
+  emits: ["updateWord"],
+  setup(props, { emit }) {
     const {
       $i18n
     } = useNuxtApp();
@@ -130,6 +137,7 @@ export default defineComponent({
             savedNotifyRef.value.classList.replace("elementToFadeIn", "elementToFadeOut")
             foreignWordDisplayed.value = false
             nativeWordDisplayed.value = false
+            emit("updateWord")
             break;
         }
       }
@@ -158,8 +166,8 @@ export default defineComponent({
     return {
       i18n: $i18n,
       loading: loading,
-      nativeWord: props.word.nativeWord,
-      foreignWord: props.word.foreignWord,
+      nativeWord: props.nativeWord,
+      foreignWord: props.foreignWord,
       nativeWordDisplayed: nativeWordDisplayed,
       foreignWordDisplayed: foreignWordDisplayed,
       foreignWordRef,

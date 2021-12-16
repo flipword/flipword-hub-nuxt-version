@@ -66,7 +66,12 @@
     <div class="screen-part2 flex flex-row bg-primary">
       <div class="h-full flex flex-col w-7/12">
         <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
-          <AddingPopup :word="wordList[0]" />
+          <AddingPopup
+            :word="currentWordInAddingPopup"
+            :native-word="currentWordInAddingPopup.nativeWord"
+            :foreign-word="currentWordInAddingPopup.foreignWord"
+            @update-word="updateWordInAddingPopup"
+          />
         </div>
         <div class="w-full h-20 bg-base">
           <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
@@ -140,7 +145,7 @@ import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
-import { wordList } from "assets/data/words";
+import { wordList } from "~/assets/data/words";
 import { Word } from "~/components/Card.vue";
 
 export default defineComponent({
@@ -195,12 +200,20 @@ export default defineComponent({
       }, []);
     };
 
-    const wordListWithGoodLang = (): Word[] => {
+    const wordListWithCurrentLang = (): Word[] => {
       return wordList[lang];
     };
 
     const redirectToApp = () => {
       window.open("https://app.flipword.oi");
+    };
+
+    const currentWordInAddingPopup = ref<Word>(wordListWithCurrentLang()[0]);
+
+    const updateWordInAddingPopup = () => {
+      const result = wordListWithCurrentLang();
+      const index = Math.floor(Math.random() * (result.length - 1));
+      currentWordInAddingPopup.value = result[index];
     };
 
     return {
@@ -209,8 +222,10 @@ export default defineComponent({
       currentLang,
       i18n: $i18n,
       wordListChunked: wordListChunk(),
-      wordList: wordListWithGoodLang(),
+      wordList: wordListWithCurrentLang(),
       redirectToApp,
+      updateWordInAddingPopup,
+      currentWordInAddingPopup,
     };
   },
 });

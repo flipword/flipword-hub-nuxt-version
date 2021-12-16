@@ -30,6 +30,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+// TODO: declare in specific ts file
 export interface Word {
   nativeWord: string;
   foreignWord: string;
