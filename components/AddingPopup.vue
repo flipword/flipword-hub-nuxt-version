@@ -29,7 +29,9 @@
           <div><img src="~/assets/icons/clear.png" /></div>
         </div>
         <div class="flex flex-grow flex-col justify-center">
-          <span v-if="nativeWordDisplayed" class="text-4xl">{{nativeWord}}</span>
+          <span v-if="nativeWordDisplayed" class="text-4xl">{{
+            props.nativeWord
+          }}</span>
         </div>
       </div>
       <div class="h-12 w-12 transform rotate-45 filter drop-shadow-xl">
@@ -51,18 +53,28 @@
           <div><img src="~/assets/icons/clear.png" /></div>
         </div>
         <div class="flex flex-grow flex-col justify-center">
-          <span v-if="foreignWordDisplayed" ref="foreignWordRef" class="text-4xl">{{foreignWord}}</span>
+          <span
+            v-if="foreignWordDisplayed"
+            ref="foreignWordRef"
+            class="text-4xl"
+            >{{ props.foreignWord }}</span
+          >
         </div>
       </div>
-      <div class="relative p-3 bg-primary flex flex-row gap-2 items-center rounded-lg overflow-hidden">
-        <span class="text-black font-semibold">{{ i18n('save') }}</span>
+      <div
+        class="relative p-3 bg-primary flex flex-row gap-2 items-center rounded-lg overflow-hidden"
+      >
+        <span class="text-black font-semibold">{{ i18n("save") }}</span>
         <img src="assets/icons/save.png" />
         <div ref="splashButtonRef" class="splash"></div>
       </div>
     </div>
     <div class="absolute flex flex-row justify-center inset-x-0 bottom-0">
-      <div ref="savedNotifyRef" class="p-3 bg-positive rounded-lg elementToFadeOut">
-        <span class="text-white font-semibold">{{i18n('saved_word')}}</span>
+      <div
+        ref="savedNotifyRef"
+        class="p-3 bg-positive rounded-lg elementToFadeOut"
+      >
+        <span class="text-white font-semibold">{{ i18n("saved_word") }}</span>
       </div>
     </div>
   </div>
@@ -71,15 +83,11 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import { Word } from "~/components/Card.vue";
-import {useNuxtApp} from "#app";
+import { useNuxtApp } from "#app";
 
 export default defineComponent({
   name: "AddingPopup",
   props: {
-    word: {
-      type: Object as PropType<Word>,
-      required: true,
-    },
     nativeWord: {
       required: true,
     },
@@ -89,97 +97,99 @@ export default defineComponent({
   },
   emits: ["updateWord"],
   setup(props, { emit }) {
-    const {
-      $i18n
-    } = useNuxtApp();
-    const loading = ref(false)
-    const nativeWordDisplayed = ref(false)
-    const foreignWordDisplayed = ref(false)
-    const foreignWordRef = ref<HTMLElement>(null)
-    const splashButtonRef = ref<HTMLElement>(null)
-    const savedNotifyRef = ref<HTMLElement>(null)
+    const { $i18n } = useNuxtApp();
+    const loading = ref(false);
+    const nativeWordDisplayed = ref(false);
+    const foreignWordDisplayed = ref(false);
+    const foreignWordRef = ref<HTMLElement>(null);
+    const splashButtonRef = ref<HTMLElement>(null);
+    const savedNotifyRef = ref<HTMLElement>(null);
     // TODO: find best way to import worker
 
     onMounted(() => {
-      if(process.client){
-        setupAnimation()
+      if (process.client) {
+        setupAnimation();
       }
-    })
+    });
 
     const setupAnimation = () => {
       const worker = new Worker("./assets/worker_scripts/addingPopupWorker.js");
-      worker.onmessage = function(e) {
-        const result = e.data
-        switch (result){
-            // Display native word
+      worker.onmessage = function (e) {
+        const result = e.data;
+        switch (result) {
+          // Display native word
           case 1:
-            nativeWordDisplayed.value = true
+            nativeWordDisplayed.value = true;
             break;
-            // Loading trad
+          // Loading trad
           case 2:
-            loading.value = true
+            loading.value = true;
             break;
-            // Display foreign word
+          // Display foreign word
           case 3:
-            foreignWordDisplayed.value = true
-            loading.value = false
+            foreignWordDisplayed.value = true;
+            loading.value = false;
             break;
-            // Save
+          // Save
           case 4:
-            splashEffectOnRef(splashButtonRef.value)
+            splashEffectOnRef(splashButtonRef.value);
             break;
-            // Display Notify
+          // Display Notify
           case 5:
-            savedNotifyRef.value.classList.replace("elementToFadeOut", "elementToFadeIn")
+            savedNotifyRef.value.classList.replace(
+              "elementToFadeOut",
+              "elementToFadeIn"
+            );
             break;
-            // Reload
+          // Reload
           case 6:
-            savedNotifyRef.value.classList.replace("elementToFadeIn", "elementToFadeOut")
-            foreignWordDisplayed.value = false
-            nativeWordDisplayed.value = false
-            emit("updateWord")
+            savedNotifyRef.value.classList.replace(
+              "elementToFadeIn",
+              "elementToFadeOut"
+            );
+            foreignWordDisplayed.value = false;
+            nativeWordDisplayed.value = false;
+            emit("updateWord");
             break;
         }
-      }
-    }
+      };
+    };
 
-    const splashEffectOnRef = (ref: HTMLElement) => {
+    const splashEffectOnRef = (ref: any) => {
       ref.style.width = "120%";
-      setTimeout(function(){
-        ref.style.opacity="0";
+      setTimeout(function () {
+        ref.style.opacity = "0";
       }, 400);
 
-      setTimeout(function(){
-        ref.style.transitionDuration="0s";
+      setTimeout(function () {
+        ref.style.transitionDuration = "0s";
       }, 1000);
 
-      setTimeout(function(){
-        ref.style.width="0";
-        ref.style.opacity="1";
+      setTimeout(function () {
+        ref.style.width = "0";
+        ref.style.opacity = "1";
       }, 1100);
 
-      setTimeout(function(){
-        ref.style.transitionDuration=".3s";
+      setTimeout(function () {
+        ref.style.transitionDuration = ".3s";
       }, 1200);
-    }
+    };
 
     return {
       i18n: $i18n,
+      props: props,
       loading: loading,
-      nativeWord: props.nativeWord,
-      foreignWord: props.foreignWord,
       nativeWordDisplayed: nativeWordDisplayed,
       foreignWordDisplayed: foreignWordDisplayed,
       foreignWordRef,
       splashButtonRef,
-      savedNotifyRef
+      savedNotifyRef,
     };
   },
 });
 </script>
 
 <style scoped>
-
 .loader {
   border: 5px solid #f3f3f3;
   border-radius: 50%;
@@ -190,14 +200,14 @@ export default defineComponent({
   animation: spin 1.5s linear infinite;
 }
 
-.splash{
-  content: '';
+.splash {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   width: 0;
   height: 100%;
-  background: rgba(255, 255, 255, .2);
+  background: rgba(255, 255, 255, 0.2);
   transform: translate(-50%, -50%);
   border-radius: 50%;
   transition: 0.3s ease-out;
@@ -205,13 +215,21 @@ export default defineComponent({
 
 /* Safari */
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .elementToFadeIn {
@@ -220,8 +238,12 @@ export default defineComponent({
 }
 
 @keyframes fadeIn {
-  0% { opacity: 0 }
-  100% { opacity: 1 }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .elementToFadeOut {
@@ -230,7 +252,11 @@ export default defineComponent({
 }
 
 @keyframes fadeOut {
-  0% { opacity: 1 }
-  100% { opacity: 0 }
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 </style>

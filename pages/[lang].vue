@@ -67,7 +67,6 @@
       <div class="h-full flex flex-col w-7/12">
         <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
           <AddingPopup
-            :word="currentWordInAddingPopup"
             :native-word="currentWordInAddingPopup.nativeWord"
             :foreign-word="currentWordInAddingPopup.foreignWord"
             @update-word="updateWordInAddingPopup"
