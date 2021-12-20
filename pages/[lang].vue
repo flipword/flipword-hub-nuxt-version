@@ -75,18 +75,13 @@
         <div class="w-full h-20 bg-base">
           <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
         </div>
-        <div class="flex flex-col flex-grow justify-center items-center px-32">
-          <span
-            class="font-sans text-4xl leading-normal text-black"
-            v-html="i18n('extension_promo')"
-          />
-        </div>
+        <ExtensionPromo />
       </div>
       <div
         class="h-full w-5/12 bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
       >
         <div
-          class="h-2/5 w-5/6 my-1/12 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12"
+          class="h-2/5 w-5/6 my-1/12 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12 filter drop-shadow-lg"
         >
           <span
             class="font-sans text-4xl leading-normal text-black"
@@ -144,12 +139,19 @@ import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
+import ExtensionPromo from "~/components/ExtensionPromo.vue";
 import { wordList } from "~/assets/data/words";
 import { Word } from "~/components/Card.vue";
 
 export default defineComponent({
   name: "Index",
-  components: { IsometricCards, CountrySelect, AddingPopup, ListCard },
+  components: {
+    IsometricCards,
+    CountrySelect,
+    AddingPopup,
+    ListCard,
+    ExtensionPromo,
+  },
   setup() {
     const {
       $i18n,

@@ -82,7 +82,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import { Word } from "~/components/Card.vue";
 import { useNuxtApp } from "#app";
 
 export default defineComponent({
