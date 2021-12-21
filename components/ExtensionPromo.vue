@@ -52,6 +52,7 @@
         </div>
       </div>
     </div>
+    <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
 </template>
 
@@ -70,9 +71,11 @@ export default defineComponent({
     let logoRef = ref<HTMLElement>(null);
     let addingPopupRef = ref<HTMLElement>(null);
     let submitBtnRef = ref<HTMLElement>(null);
+    let worker = null;
 
     onMounted(() => {
       if (process.client) {
+        worker = new Worker("./assets/worker_scripts/extensionPromoWorker.js");
         setupAnimation();
       }
     });
@@ -103,10 +106,25 @@ export default defineComponent({
         logoRef.value.style.display = "none";
       }
     };
+
+    const handleResize = () => {
+      if (process.client) {
+        selectedDivRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
+        selectedDivRef.value.style.top = `${abbrNode.value.offsetTop}px`;
+        cursorRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
+        cursorRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+        logoRef.value.style.left = `${
+          abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
+        }px`;
+        logoRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+        addingPopupRef.value.style.left = `${
+          abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
+        }px`;
+        addingPopupRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+      }
+    };
+
     const setupAnimation = () => {
-      const worker = new Worker(
-        "./assets/worker_scripts/extensionPromoWorker.js"
-      );
       worker.onmessage = function (e) {
         const result = e.data;
         switch (result) {
@@ -157,6 +175,7 @@ export default defineComponent({
       logoRef,
       submitBtnRef,
       i18n: $i18n,
+      handleResize,
     };
   },
 });
