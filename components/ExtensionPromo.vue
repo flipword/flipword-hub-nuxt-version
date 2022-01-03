@@ -58,7 +58,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
-import { useNuxtApp } from "nuxt3/dist/app";
+import { useNuxtApp } from "#app";
 
 export default defineComponent({
   name: "ExtensionPromo",
