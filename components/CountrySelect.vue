@@ -48,5 +48,6 @@ export default defineComponent({
 <style scoped>
 .country-select {
   background-color: transparent;
+  outline: none;
 }
 </style>
