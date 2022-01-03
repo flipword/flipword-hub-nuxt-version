@@ -59,6 +59,7 @@
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
 import { useNuxtApp } from "#app";
+import blobScriptUrl from "~/assets/worker_scripts/extensionPromoWorker.js";
 
 export default defineComponent({
   name: "ExtensionPromo",
@@ -71,11 +72,9 @@ export default defineComponent({
     let logoRef = ref<HTMLElement>(null);
     let addingPopupRef = ref<HTMLElement>(null);
     let submitBtnRef = ref<HTMLElement>(null);
-    let worker = null;
 
     onMounted(() => {
       if (process.client) {
-        worker = new Worker("./assets/worker_scripts/extensionPromoWorker.js");
         setupAnimation();
       }
     });
@@ -125,6 +124,7 @@ export default defineComponent({
     };
 
     const setupAnimation = () => {
+      const worker = new Worker(blobScriptUrl);
       worker.onmessage = function (e) {
         const result = e.data;
         switch (result) {
@@ -143,7 +143,6 @@ export default defineComponent({
             cursorRef.value.style.left = `${
               abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
             }px`;
-            console.log("start sélection");
             break;
           // End selection
           case 4:

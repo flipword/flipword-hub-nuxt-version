@@ -83,6 +83,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
 import { useNuxtApp } from "#app";
+import blobScriptUrl from "~/assets/worker_scripts/addingPopupWorker.js";
 
 export default defineComponent({
   name: "AddingPopup",
@@ -112,7 +113,7 @@ export default defineComponent({
     });
 
     const setupAnimation = () => {
-      const worker = new Worker("./assets/worker_scripts/addingPopupWorker.js");
+      const worker = new Worker(blobScriptUrl);
       worker.onmessage = function (e) {
         const result = e.data;
         switch (result) {
