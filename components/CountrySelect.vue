@@ -50,7 +50,7 @@ export default defineComponent({
   background-color: transparent;
   outline: none;
   font-size: 20px;
-  text-indent: -2px;
+  text-indent: -1px;
   border: none;
 }
 </style>

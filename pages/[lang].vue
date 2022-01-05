@@ -72,13 +72,18 @@
           <AddingPopup
             :native-word="currentWordInAddingPopup.nativeWord"
             :foreign-word="currentWordInAddingPopup.foreignWord"
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
             @update-word="updateWordInAddingPopup"
           />
         </div>
         <div class="w-full h-20 bg-base">
           <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
         </div>
-        <ExtensionPromo />
+        <ExtensionPromo
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
+        />
       </div>
       <div
         class="h-full w-5/12 bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
@@ -195,8 +200,25 @@ export default defineComponent({
       }
     };
 
+    const getNativeLanguageLabel = () => {
+      const lang = langOptions.find((x: any) => x.id == currentLang.value)
+      if(lang){
+        return lang.label
+      }
+      return ''
+    }
+
+    const getForeignLanguageLabel = () => {
+      const lang = langOptions.find((x: any) => x.id == currentLang.value)
+      let foreignLang = langOptions.find((x: any) => x.id == 'en')
+      if(lang && lang.id == 'en'){
+        foreignLang = langOptions.find((x: any) => x.id == 'fr')
+      }
+      return foreignLang.label
+    }
+
     const wordListChunk = (): Word[][] => {
-      return wordList[lang].reduce((resultArray, item, index) => {
+      return wordList[currentLang.value].reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index / 2);
 
         if (!resultArray[chunkIndex]) {
@@ -210,7 +232,7 @@ export default defineComponent({
     };
 
     const wordListWithCurrentLang = (): Word[] => {
-      return wordList[lang];
+      return wordList[currentLang.value];
     };
 
     const redirectToApp = () => {
@@ -246,6 +268,8 @@ export default defineComponent({
       updateWordInAddingPopup,
       currentWordInAddingPopup,
       openStore,
+      getNativeLanguageLabel,
+      getForeignLanguageLabel
     };
   },
 });

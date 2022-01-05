@@ -26,21 +26,27 @@
         class="w-full h-full flex flex-col items-center justify-center gap-4"
       >
         <div class="w-4/5">
-          <span class="ml-2 px-2 font-bold bg-white rounded-t-sm">French:</span>
+          <span class="ml-2 px-2 font-bold bg-white rounded-t-sm"
+            >{{ props.nativeLanguageLabel }}:</span
+          >
           <div
             class="-mt-1 pl-3 h-10 bg-white rounded-sm flex flex-col justify-center"
           >
-            <span class="text-black text-lg">Facilement</span>
+            <span class="text-black text-lg">{{
+              i18n("extension_popup_native_word")
+            }}</span>
           </div>
         </div>
         <div class="w-4/5">
           <span class="ml-2 px-2 font-bold bg-white rounded-t-sm"
-            >Anglais:</span
+            >{{ props.foreignLanguageLabel }}:</span
           >
           <div
             class="-mt-1 pl-3 h-10 bg-white rounded-sm flex flex-col justify-center"
           >
-            <span class="text-black text-lg">Easely</span>
+            <span class="text-black text-lg">{{
+              i18n("extension_popup_foreign_word")
+            }}</span>
           </div>
         </div>
 
@@ -63,7 +69,15 @@ import blobScriptUrl from "~/assets/worker_scripts/extensionPromoWorker.js";
 
 export default defineComponent({
   name: "ExtensionPromo",
-  setup() {
+  props: {
+    nativeLanguageLabel: {
+      required: true,
+    },
+    foreignLanguageLabel: {
+      required: true,
+    },
+  },
+  setup(props) {
     const { $i18n } = useNuxtApp();
     const extensionPromoRef = ref<HTMLElement>(null);
     const selectedDivRef = ref<HTMLElement>(null);
@@ -167,6 +181,7 @@ export default defineComponent({
       };
     };
     return {
+      props: props,
       extensionPromoRef,
       addingPopupRef,
       selectedDivRef,

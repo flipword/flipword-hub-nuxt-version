@@ -6,5 +6,7 @@
   "your_turn": "It's your turn ! <b> Test </b> your knowledge!",
   "launch_app": "Launch app",
   "save": "Save",
-  "saved_word": "Word Saved !"
+  "saved_word": "Word Saved !",
+  "extension_popup_native_word": "Easely",
+  "extension_popup_foreign_word": "Facilement"
 }

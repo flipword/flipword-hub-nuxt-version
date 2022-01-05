@@ -6,5 +6,7 @@
   "your_turn": "A vous de jouer ! <b>Testez</b> vos connaissances !",
   "launch_app": "Lancer l'application",
   "save": "Sauvegarder",
-  "saved_word": "Mot Sauvegardé !"
+  "saved_word": "Mot Sauvegardé !",
+  "extension_popup_native_word": "Facilement",
+  "extension_popup_foreign_word": "Easely"
 }

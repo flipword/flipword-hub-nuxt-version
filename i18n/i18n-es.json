@@ -2,9 +2,11 @@
   "greeting": "Buenos Dias !!!",
   "subtitle": "Herramientas de aprendizaje de vocabulario",
   "create_description": "<b> Cree </b> su propia lista de palabras personalizada con un traductor automático",
-  "extension_promo": "Gracias a la <b> extensión del navegador </b>, agregue <abbr> fácilmente </abbr> palabras a su lista mientras navega",
+  "extension_promo": "Gracias a la <b> extensión del navegador </b>, agregue <abbr>fácilmente</abbr> palabras a su lista mientras navega",
   "your_turn": "Es tu turno ! <b> ¡Pon a prueba </b> tus conocimientos!",
   "launch_app": "Iniciar aplicación",
   "save": "Guardar",
-  "saved_word": "Palabra guardada !"
+  "saved_word": "Palabra guardada !",
+  "extension_popup_native_word": "Con facilidad",
+  "extension_popup_foreign_word": "Easely"
 }

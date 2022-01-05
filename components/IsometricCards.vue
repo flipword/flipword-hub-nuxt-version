@@ -3,28 +3,28 @@
     class="w-full h-full flex flex-row gap-32 ml-48 md:mt-6 xl:mt-12 4xl:mt-24"
   >
     <div class="isometric flex flex-col gap-5 mt-48">
-      <Card :word="wordList[lang][0]" />
+      <Card :word="wordList[props.lang][0]" />
     </div>
     <div class="isometric flex flex-col gap-5 -ml-48">
-      <Card :word="wordList[lang][1]" />
-      <Card :word="wordList[lang][2]" />
+      <Card :word="wordList[props.lang][1]" />
+      <Card :word="wordList[props.lang][2]" />
     </div>
     <div class="isometric flex flex-col gap-5 -mt-48 -ml-48">
-      <Card :word="wordList[lang][3]" />
-      <Card :word="wordList[lang][4]" />
-      <Card :word="wordList[lang][5]" />
+      <Card :word="wordList[props.lang][3]" />
+      <Card :word="wordList[props.lang][4]" />
+      <Card :word="wordList[props.lang][5]" />
     </div>
     <div class="isometric flex flex-col gap-5 -mt-96 -ml-48">
-      <Card :word="wordList[lang][6]" />
-      <Card :word="wordList[lang][7]" />
-      <Card :word="wordList[lang][8]" />
-      <Card :word="wordList[lang][9]" />
+      <Card :word="wordList[props.lang][6]" />
+      <Card :word="wordList[props.lang][7]" />
+      <Card :word="wordList[props.lang][8]" />
+      <Card :word="wordList[props.lang][9]" />
     </div>
     <div class="isometric flex flex-col gap-5 -mt-110 -ml-12">
-      <Card :word="wordList[lang][10]" />
-      <Card :word="wordList[lang][11]" />
-      <Card :word="wordList[lang][12]" />
-      <Card :word="wordList[lang][12]" />
+      <Card :word="wordList[props.lang][10]" />
+      <Card :word="wordList[props.lang][11]" />
+      <Card :word="wordList[props.lang][12]" />
+      <Card :word="wordList[props.lang][12]" />
     </div>
   </div>
 </template>
@@ -43,8 +43,9 @@ export default defineComponent({
       required: true,
     },
   },
-  setup() {
+  setup(props) {
     return {
+      props: props,
       wordList: wordList,
     };
   },

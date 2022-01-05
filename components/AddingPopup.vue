@@ -14,11 +14,11 @@
       <div
         class="flex flex-row justify-center items-center w-3/4 h-full bg-primary rounded-b-3xl gap-2 z-20 filter drop-shadow-xl"
       >
-        <span class="text-black">French</span>
+        <span class="text-black">{{ props.nativeLanguageLabel }}</span>
         <div class="pa-5">
           <img src="assets/icons/compare_arrows.png" />
         </div>
-        <span class="text-black">English</span>
+        <span class="text-black">{{ props.foreignLanguageLabel }}</span>
       </div>
     </div>
     <div class="mt-14 flex flex-col items-center w-full px-16 gap-5">
@@ -94,6 +94,12 @@ export default defineComponent({
     foreignWord: {
       required: true,
     },
+    nativeLanguageLabel: {
+      required: true,
+    },
+    foreignLanguageLabel: {
+      required: true,
+    },
   },
   emits: ["updateWord"],
   setup(props, { emit }) {
@@ -104,7 +110,6 @@ export default defineComponent({
     const foreignWordRef = ref<HTMLElement>(null);
     const splashButtonRef = ref<HTMLElement>(null);
     const savedNotifyRef = ref<HTMLElement>(null);
-    // TODO: find best way to import worker
 
     onMounted(() => {
       if (process.client) {
