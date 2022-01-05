@@ -31,24 +31,26 @@
         </div>
         <div class="h-2/5 w-full flex flex-row justify-center gap-4">
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
-            <a
-              class="flex flex-row justify-center"
-              href="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
-              ><img
+            <div
+                class="flex flex-row justify-center cursor-pointer"
+                @click="openStore(platform.Android)"
+            ><img
                 alt="Get it on Google Play"
                 src="~/assets/images/download_android.png"
                 class="w-56 h-auto"
-            /></a>
+            /></div>
           </div>
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
-            <a
-              class="flex flex-row justify-center"
-              href="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
-              ><img
+            <div
+              class="flex flex-row justify-center cursor-pointer"
+              @click="openStore(platform.Ios)"
+            >
+              <img
                 alt="Get it on App Store"
                 src="~/assets/images/download_ios.png"
                 class="w-60 h-auto"
-            /></a>
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -144,6 +146,11 @@ import ExtensionPromo from "~/components/ExtensionPromo.vue";
 import { wordList } from "~/assets/data/words";
 import { Word } from "~/components/Card.vue";
 
+enum Platform {
+  Ios,
+  Android,
+}
+
 export default defineComponent({
   name: "Index",
   components: {
@@ -218,16 +225,27 @@ export default defineComponent({
       currentWordInAddingPopup.value = result[index];
     };
 
+    const openStore = (platform: Platform) => {
+      let url = ''
+      if(platform == Platform.Ios){
+        url = 'https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185'
+      } else {
+        url = 'https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
+      }
+      window.open(url);
+    };
     return {
       updateLang,
       langOptions,
       currentLang,
       i18n: $i18n,
+      platform: Platform,
       wordListChunked: wordListChunk(),
       wordList: wordListWithCurrentLang(),
       redirectToApp,
       updateWordInAddingPopup,
       currentWordInAddingPopup,
+      openStore,
     };
   },
 });
