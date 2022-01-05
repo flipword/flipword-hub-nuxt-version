@@ -72,8 +72,8 @@ export const wordList: { [key: string]: Word[] } = {
       foreignWord: "Clumsy",
     },
     {
-      nativeWord: "Walk",
-      foreignWord: "Marcher",
+      nativeWord: "Marcher",
+      foreignWord: "Walk",
     },
     {
       nativeWord: "Obstacle",
@@ -122,8 +122,118 @@ export const wordList: { [key: string]: Word[] } = {
   ],
   es: [
     {
-      nativeWord: "heavy",
-      foreignWord: "lourd",
+      nativeWord: "Pesado",
+      foreignWord: "Heavy",
+    },
+    {
+      nativeWord: "Torpe",
+      foreignWord: "Clumsy",
+    },
+    {
+      nativeWord: "Caminar",
+      foreignWord: "Walk",
+    },
+    {
+      nativeWord: "Obstáculo",
+      foreignWord: "Hurdle",
+    },
+    {
+      nativeWord: "Sabiduría",
+      foreignWord: "Wisdom",
+    },
+    {
+      nativeWord: "Responsabilidad",
+      foreignWord: "Liability",
+    },
+    {
+      nativeWord: "Pista",
+      foreignWord: "Clue",
+    },
+    {
+      nativeWord: "Síntoma",
+      foreignWord: "Symptom",
+    },
+    {
+      nativeWord: "Exhausto",
+      foreignWord: "Exhausted",
+    },
+    {
+      nativeWord: "Destruir",
+      foreignWord: "Destroy",
+    },
+    {
+      nativeWord: "Cita",
+      foreignWord: "Quote",
+    },
+    {
+      nativeWord: "Dolor",
+      foreignWord: "Grief",
+    },
+    {
+      nativeWord: "Offre",
+      foreignWord: "Oferta",
+    },
+    {
+      nativeWord: "Salto",
+      foreignWord: "Jump",
+    },
+  ],
+  de: [
+    {
+      nativeWord: "Schwer",
+      foreignWord: "Heavy",
+    },
+    {
+      nativeWord: "Ungeschickt",
+      foreignWord: "Clumsy",
+    },
+    {
+      nativeWord: "Gehen",
+      foreignWord: "Walk",
+    },
+    {
+      nativeWord: "Hürde",
+      foreignWord: "Hurdle",
+    },
+    {
+      nativeWord: "Weisheit",
+      foreignWord: "Wisdom",
+    },
+    {
+      nativeWord: "Haftung",
+      foreignWord: "Liability",
+    },
+    {
+      nativeWord: "Hinweis",
+      foreignWord: "Clue",
+    },
+    {
+      nativeWord: "Symptom",
+      foreignWord: "Symptom",
+    },
+    {
+      nativeWord: "Erschöpft",
+      foreignWord: "Exhausted",
+    },
+    {
+      nativeWord: "Zerstören",
+      foreignWord: "Destroy",
+    },
+    {
+      nativeWord: "Zitieren",
+      foreignWord: "Quote",
+    },
+    {
+      nativeWord: "Kummer",
+      foreignWord: "Grief",
+    },
+    {
+      nativeWord: "Gebot",
+      foreignWord: "Bid",
+    },
+    {
+      nativeWord: "Springen",
+      foreignWord: "Jump",
     },
   ],
 };

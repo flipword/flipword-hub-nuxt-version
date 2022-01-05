@@ -49,5 +49,8 @@ export default defineComponent({
 .country-select {
   background-color: transparent;
   outline: none;
+  font-size: 20px;
+  text-indent: -2px;
+  border: none;
 }
 </style>

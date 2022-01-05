@@ -20,9 +20,10 @@
                   >
                 </div>
                 <div class="w-full flex justify-center">
-                  <span class="font-sans text-subtitle text-black">{{
-                    i18n("subtitle")
-                  }}</span>
+                  <span
+                    class="font-sans text-subtitle text-black text-center"
+                    >{{ i18n("subtitle") }}</span
+                  >
                 </div>
               </div>
             </div>
@@ -84,7 +85,7 @@
           class="h-2/5 w-5/6 my-1/12 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12 filter drop-shadow-lg"
         >
           <span
-            class="font-sans text-4xl leading-normal text-black"
+            class="font-sans text-4xl leading-normal text-black text-center"
             v-html="i18n('create_description')"
           />
         </div>

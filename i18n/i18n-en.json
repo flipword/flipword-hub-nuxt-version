@@ -1,10 +1,10 @@
 {
   "greeting": "Hello Word !!!",
   "subtitle": "Vocabulary learning tool",
-  "create_description": "<b>Créer</b> votre propre liste de mot personnalisée à l’aide d’un traducteur automatique",
-  "extension_promo": "Grace à l’<b>extension navigateur</b>, ajouter <abbr>facilement</abbr> des mots à votre liste lors de votre navigation",
-  "your_turn": "A vous de jouer ! <b>Testez</b> vos connaissance !",
-  "launch_app": "Lancer l'application",
+  "create_description": "<b>Create</b> your own personalized word list using an automatic translator",
+  "extension_promo": "Thanks to the <b> browser extension </b>, add <abbr>easily</abbr> words to your list while browsing",
+  "your_turn": "It's your turn ! <b> Test </b> your knowledge!",
+  "launch_app": "Launch app",
   "save": "Save",
   "saved_word": "Word Saved !"
 }
