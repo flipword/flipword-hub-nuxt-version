@@ -21,9 +21,9 @@
         <span class="text-black">{{ props.foreignLanguageLabel }}</span>
       </div>
     </div>
-    <div class="mt-14 flex flex-col items-center w-full px-16 gap-5">
+    <div class="2xl:mt-14 mt-8 flex flex-col items-center w-full px-16 gap-5">
       <div
-        class="flex flex-col w-full h-48 bg-white rounded-3xl filter drop-shadow-xl items-center"
+        class="flex flex-col w-full 2xl:h-48 h-36 bg-white rounded-3xl filter drop-shadow-xl items-center"
       >
         <div class="flex flex-row w-full justify-end pt-3 pr-3">
           <div><img src="~/assets/icons/clear.png" /></div>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div
-        class="w-full h-48 bg-white flex flex-col rounded-3xl filter drop-shadow-xl items-center"
+        class="w-full 2xl:h-48 h-36 bg-white flex flex-col rounded-3xl filter drop-shadow-xl items-center"
       >
         <div class="flex flex-row w-full justify-end pt-3 pr-3">
           <div><img src="~/assets/icons/clear.png" /></div>

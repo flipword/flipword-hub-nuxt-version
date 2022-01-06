@@ -1,34 +1,8 @@
 <template>
   <div>
     <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
-      <div class="w-1/2 flex flex-col justify-center items-center">
-        <div class="h-3/5 w-3/4 relative">
-          <div
-            class="w-full top-0 -right-2 -bottom-1 bg-whiteShadow rounded-b-5xl absolute"
-          ></div>
-          <div
-            class="h-full w-full bg-white rounded-b-5xl relative flex justify-center items-center"
-          >
-            <div class="h-5/6 w-5/6 bg-primary rounded-b-5xl">
-              <div
-                class="w-full h-full pb-20 flex flex-col justify-center items-center"
-              >
-                <div class="w-full flex flex-row justify-center">
-                  <img src="~/assets/icons/logo.png" class="h-full w-1/4" />
-                  <span class="font-sans text-title text-black font-bold"
-                    >FlipWord</span
-                  >
-                </div>
-                <div class="w-full flex justify-center">
-                  <span
-                    class="font-sans text-subtitle text-black text-center"
-                    >{{ i18n("subtitle") }}</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="md:w-1/2 w-full flex flex-col justify-center items-center">
+        <TitleLogoElement />
         <div class="h-2/5 w-full flex flex-row justify-center gap-4">
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
             <div
@@ -54,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="w-1/2">
+      <div v-if="!isMobile" class="w-1/2">
         <div class="flex flex-col justify-end">
           <div class="flex flex-row justify-end mr-6">
             <CountrySelect
@@ -67,7 +41,7 @@
       </div>
     </div>
     <div class="screen-part2 flex flex-row bg-primary">
-      <div class="h-full flex flex-col w-7/12">
+      <div class="h-full flex flex-col w-full">
         <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
           <AddingPopup
             :native-word="currentWordInAddingPopup.nativeWord"
@@ -86,7 +60,7 @@
         />
       </div>
       <div
-        class="h-full w-5/12 bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
+        class="h-full w-full bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
       >
         <div
           class="h-2/5 w-5/6 my-1/12 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12 filter drop-shadow-lg"
@@ -147,6 +121,7 @@ import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
+import TitleLogoElement from "~/components/TitleLogoElement.vue";
 import ExtensionPromo from "~/components/ExtensionPromo.vue";
 import { wordList } from "~/assets/data/words";
 import { Word } from "~/components/Card.vue";
@@ -164,6 +139,7 @@ export default defineComponent({
     AddingPopup,
     ListCard,
     ExtensionPromo,
+    TitleLogoElement
   },
   setup() {
     const {
@@ -175,7 +151,11 @@ export default defineComponent({
         },
       },
     } = useNuxtApp();
+
+    const isMobile = ref<boolean>()
+
     onBeforeMount(() => {
+      isMobile.value = window.screen.width < 1000
       const langInUrl = $router.currentRoute.value.path.replace("/", "");
       if (
         !(
@@ -186,6 +166,7 @@ export default defineComponent({
         $router.push("/");
       }
     });
+
     const langInUrl = langOptions.find(
       (x: any) => x.id == $router.currentRoute.value.path.replace("/", "")
     );
@@ -269,7 +250,8 @@ export default defineComponent({
       currentWordInAddingPopup,
       openStore,
       getNativeLanguageLabel,
-      getForeignLanguageLabel
+      getForeignLanguageLabel,
+      isMobile
     };
   },
 });
