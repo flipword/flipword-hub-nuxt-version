@@ -1,7 +1,8 @@
 <template>
   <div>
+    <!--    Screen part 1  -->
     <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
-      <div class="md:w-1/2 w-full flex flex-col justify-center items-center">
+      <div class="lg:w-1/2 w-full flex flex-col justify-center items-center">
         <TitleLogoElement />
         <div class="h-2/5 w-full flex flex-row justify-center gap-4">
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
@@ -40,81 +41,133 @@
         </div>
       </div>
     </div>
-    <div class="screen-part2 flex flex-row bg-primary">
-      <div class="h-full flex flex-col w-full">
-        <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
-          <AddingPopup
-            :native-word="currentWordInAddingPopup.nativeWord"
-            :foreign-word="currentWordInAddingPopup.foreignWord"
-            :native-language-label="getNativeLanguageLabel()"
-            :foreign-language-label="getForeignLanguageLabel()"
-            @update-word="updateWordInAddingPopup"
+
+    <!--    Screen part 2-->
+    <div class="screen-part2">
+      {{ width }}
+      <div v-if="!isMobile" class="h-full w-full flex flex-row bg-primary">
+        <div class="h-full flex flex-col w-7/12">
+          <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
+            <AddingPopup
+              :native-word="currentWordInAddingPopup.nativeWord"
+              :foreign-word="currentWordInAddingPopup.foreignWord"
+              :native-language-label="getNativeLanguageLabel()"
+              :foreign-language-label="getForeignLanguageLabel()"
+              @update-word="updateWordInAddingPopup"
+            />
+          </div>
+          <div class="w-full h-20 bg-base">
+            <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
+          </div>
+          <ExtensionPromo
+              :native-language-label="getNativeLanguageLabel()"
+              :foreign-language-label="getForeignLanguageLabel()"
           />
         </div>
-        <div class="w-full h-20 bg-base">
-          <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
-        </div>
-        <ExtensionPromo
-            :native-language-label="getNativeLanguageLabel()"
-            :foreign-language-label="getForeignLanguageLabel()"
-        />
-      </div>
-      <div
-        class="h-full w-full bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
-      >
         <div
-          class="h-2/5 w-5/6 my-1/12 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12 filter drop-shadow-lg"
+          class="h-full w-5/12 bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
         >
-          <span
-            class="font-sans text-4xl leading-normal text-black text-center"
-            v-html="i18n('create_description')"
-          />
-        </div>
-        <div class="h-1/2 px-16 w-full">
-          <div class="w-full flex flex-col gap-5">
-            <div
-              v-for="(chunk, index) in wordListChunked"
-              :key="index"
-              class="flex flex-row justify-around"
-            >
-              <ListCard
-                :native-word="chunk[0].nativeWord"
-                :foreign-word="chunk[0].foreignWord"
-              ></ListCard>
-              <ListCard
-                :native-word="chunk[1].nativeWord"
-                :foreign-word="chunk[1].foreignWord"
-              ></ListCard>
+          <div
+            class="h-2/5 w-5/6 my-1/12 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12 filter drop-shadow-lg"
+          >
+            <span
+              class="font-sans text-4xl leading-normal text-black text-center"
+              v-html="i18n('create_description')"
+            />
+          </div>
+          <div class="h-1/2 px-16 w-full">
+            <div class="w-full flex flex-col gap-5">
+              <div
+                v-for="(chunk, index) in wordListChunked"
+                :key="index"
+                class="flex flex-row justify-around"
+              >
+                <ListCard
+                  :native-word="chunk[0].nativeWord"
+                  :foreign-word="chunk[0].foreignWord"
+                ></ListCard>
+                <ListCard
+                  :native-word="chunk[1].nativeWord"
+                  :foreign-word="chunk[1].foreignWord"
+                ></ListCard>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="screen-part3 flex flex-row bg-primary pl-24">
-      <div class="flex flex-row justify-center items-center flex-1">
-        <span
-          class="font-sans text-4xl leading-normal text-black"
-          v-html="i18n('your_turn')"
-        />
-      </div>
-      <div class="flex flex-row justify-center items-center flex-1">
-        <button
-          class="bg-base px-6 py-4 rounded-3xl filter drop-shadow-lg"
-          type="button"
-          @click="redirectToApp"
-        >
-          <div class="w-full flex flex-row items-center justify-center gap-4">
-            <span class="text-4xl font-bold">{{ i18n("launch_app") }}</span>
-            <img src="~/assets/icons/play.png" />
+      <div v-else class="h-full w-full bg-primary">
+        <div class="w-full bg-base">
+          <AddingPopup
+              :native-word="currentWordInAddingPopup.nativeWord"
+              :foreign-word="currentWordInAddingPopup.foreignWord"
+              :native-language-label="getNativeLanguageLabel()"
+              :foreign-language-label="getForeignLanguageLabel()"
+              @update-word="updateWordInAddingPopup"
+          />
+        </div>
+        <div class="w-full bg-base flex flex-row justify-center pt-10">
+          <div
+              class="h-110 w-5/6 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12 filter drop-shadow-lg"
+          >
+          <span
+              class="font-sans text-4xl leading-normal text-black text-center"
+              v-html="i18n('create_description')"
+          />
           </div>
-        </button>
+        </div>
+        <div class="py-10 w-5/6 bg-base w-full">
+            <div class="w-full flex flex-col gap-5">
+              <div
+                  v-for="(chunk, index) in wordListChunked"
+                  :key="index"
+                  class="flex flex-row justify-around"
+              >
+                <ListCard
+                    :native-word="chunk[0].nativeWord"
+                    :foreign-word="chunk[0].foreignWord"
+                ></ListCard>
+                <ListCard
+                    :native-word="chunk[1].nativeWord"
+                    :foreign-word="chunk[1].foreignWord"
+                ></ListCard>
+              </div>
+            </div>
+        </div>
+        <div class="pt-6 w-full bg-primary">
+          <ExtensionPromo
+              :native-language-label="getNativeLanguageLabel()"
+              :foreign-language-label="getForeignLanguageLabel()"
+          />
+        </div>
       </div>
     </div>
+    <!--    Screen part 3 -->
+<!--    <div class="screen-part3 flex flex-row bg-primary pl-24">-->
+<!--      <div class="flex flex-row justify-center items-center flex-1">-->
+<!--        <span-->
+<!--          class="font-sans text-4xl leading-normal text-black"-->
+<!--          v-html="i18n('your_turn')"-->
+<!--        />-->
+<!--      </div>-->
+<!--      <div class="flex flex-row justify-center items-center flex-1">-->
+<!--        <button-->
+<!--          class="bg-base px-6 py-4 rounded-3xl filter drop-shadow-lg"-->
+<!--          type="button"-->
+<!--          @click="redirectToApp"-->
+<!--        >-->
+<!--          <div class="w-full flex flex-row items-center justify-center gap-4">-->
+<!--            <span class="text-4xl font-bold">{{ i18n("launch_app") }}</span>-->
+<!--            <img src="~/assets/icons/play.png" />-->
+<!--          </div>-->
+<!--        </button>-->
+<!--      </div>-->
+<!--    </div>-->
+    <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeMount } from "vue";
+import { defineComponent, ref, onBeforeMount, onMounted } from "vue";
 import { useNuxtApp } from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
@@ -152,10 +205,9 @@ export default defineComponent({
       },
     } = useNuxtApp();
 
-    const isMobile = ref<boolean>()
+    const isMobile = ref<boolean>(() => process.client ? window.innerWidth < 1024 : false)
 
     onBeforeMount(() => {
-      isMobile.value = window.screen.width < 1000
       const langInUrl = $router.currentRoute.value.path.replace("/", "");
       if (
         !(
@@ -166,6 +218,15 @@ export default defineComponent({
         $router.push("/");
       }
     });
+
+    onMounted(() => {
+      isMobile.value = window.innerWidth < 1024
+    })
+
+    const handleResize = () => {
+      console.log("resize:", window.innerWidth)
+      isMobile.value = window.innerWidth < 1024
+    }
 
     const langInUrl = langOptions.find(
       (x: any) => x.id == $router.currentRoute.value.path.replace("/", "")
@@ -251,7 +312,8 @@ export default defineComponent({
       openStore,
       getNativeLanguageLabel,
       getForeignLanguageLabel,
-      isMobile
+      isMobile,
+      handleResize
     };
   },
 });

@@ -1,5 +1,5 @@
 <template>
-  <div class="2xl:w-60 lg:w-48 h-28 filter drop-shadow-md">
+  <div class="2xl:w-60 w-48 h-28 filter drop-shadow-md">
     <div
       class="w-full h-1/2 bg-primary flex flex-row justify-center items-center rounded-t-lg"
     >
