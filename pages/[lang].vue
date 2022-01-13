@@ -278,7 +278,7 @@ export default defineComponent({
     };
 
     const redirectToApp = () => {
-      window.open("https://app.flipword.oi");
+      window.open("https://app.flipword.io");
     };
 
     const currentWordInAddingPopup = ref<Word>(wordListWithCurrentLang()[0]);
