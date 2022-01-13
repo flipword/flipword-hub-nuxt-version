@@ -18,6 +18,7 @@ jobs:
 
       - name: Build
         run: npm run build-firebase
+
       - name: Deploy site to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:

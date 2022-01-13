@@ -142,26 +142,26 @@
       </div>
     </div>
     <!--    Screen part 3 -->
-<!--    <div class="screen-part3 flex flex-row bg-primary pl-24">-->
-<!--      <div class="flex flex-row justify-center items-center flex-1">-->
-<!--        <span-->
-<!--          class="font-sans text-4xl leading-normal text-black"-->
-<!--          v-html="i18n('your_turn')"-->
-<!--        />-->
-<!--      </div>-->
-<!--      <div class="flex flex-row justify-center items-center flex-1">-->
-<!--        <button-->
-<!--          class="bg-base px-6 py-4 rounded-3xl filter drop-shadow-lg"-->
-<!--          type="button"-->
-<!--          @click="redirectToApp"-->
-<!--        >-->
-<!--          <div class="w-full flex flex-row items-center justify-center gap-4">-->
-<!--            <span class="text-4xl font-bold">{{ i18n("launch_app") }}</span>-->
-<!--            <img src="~/assets/icons/play.png" />-->
-<!--          </div>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="screen-part3 flex flex-row bg-primary pl-24">
+      <div class="flex flex-row justify-center items-center flex-1">
+        <span
+          class="font-sans text-4xl leading-normal text-black"
+          v-html="i18n('your_turn')"
+        />
+      </div>
+      <div class="flex flex-row justify-center items-center flex-1">
+        <button
+          class="bg-base px-6 py-4 rounded-3xl filter drop-shadow-lg"
+          type="button"
+          @click="redirectToApp"
+        >
+          <div class="w-full flex flex-row items-center justify-center gap-4">
+            <span class="text-4xl font-bold">{{ i18n("launch_app") }}</span>
+            <img src="~/assets/icons/play.png" />
+          </div>
+        </button>
+      </div>
+    </div>
     <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
 </template>
