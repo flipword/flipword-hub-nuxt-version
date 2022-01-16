@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="isClient">
     <!--    Screen part 1  -->
     <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
       <div class="lg:w-1/2 w-full flex flex-col items-center">
@@ -204,6 +204,7 @@ export default defineComponent({
       },
     } = useNuxtApp();
 
+    const isClient = process.client
     const isMobile = ref<boolean>(false)
     if(process.client){
       isMobile.value = window.innerWidth < 1024
@@ -311,6 +312,7 @@ export default defineComponent({
       getNativeLanguageLabel,
       getForeignLanguageLabel,
       isMobile,
+      isClient,
       handleResize
     };
   },

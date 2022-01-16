@@ -4,7 +4,6 @@ export default defineNuxtConfig({
   app: {
     lang: "en",
   },
-  ssr: false,
   build: {
     postcss: {
       postcssOptions: {
