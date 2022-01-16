@@ -5,7 +5,7 @@
     >
       <img
         src="~/assets/images/microsoft-translate.png"
-        style="height: 80%; width: auto"
+        class="w-auto lg:h-4/5 h-2/5"
       />
       <span class="ml-3 text-4xl text-black font-bold">Microsoft</span>
       <span class="ml-1 text-4xl text-black">Translate</span>
@@ -21,7 +21,9 @@
         <span class="text-black">{{ props.foreignLanguageLabel }}</span>
       </div>
     </div>
-    <div class="2xl:mt-14 mt-8 flex flex-col items-center w-full px-16 gap-5">
+    <div
+      class="2xl:mt-14 mt-8 flex flex-col items-center w-full lg:px-16 px-6 gap-5"
+    >
       <div
         class="flex flex-col w-full 2xl:h-48 h-36 bg-white rounded-3xl filter drop-shadow-xl items-center"
       >
@@ -81,7 +83,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref, onMounted, onUnmounted } from "vue";
 import { useNuxtApp } from "#app";
 import blobScriptUrl from "~/assets/worker_scripts/addingPopupWorker.js";
 
@@ -111,14 +113,20 @@ export default defineComponent({
     const splashButtonRef = ref<HTMLElement>(null);
     const savedNotifyRef = ref<HTMLElement>(null);
 
+    let worker = null;
+
     onMounted(() => {
       if (process.client) {
         setupAnimation();
       }
     });
 
+    onUnmounted(() => {
+      worker.terminate();
+    });
+
     const setupAnimation = () => {
-      const worker = new Worker(blobScriptUrl);
+      worker = new Worker(blobScriptUrl);
       worker.onmessage = function (e) {
         const result = e.data;
         switch (result) {

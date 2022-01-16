@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col flex-grow justify-center items-center px-32">
+  <div
+    class="flex flex-col flex-grow justify-center items-center lg:px-32 px-3"
+  >
     <span
       id="extension_promo"
       ref="extensionPromoRef"
@@ -63,7 +65,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref } from "vue";
+import { defineComponent, onMounted, onUnmounted, ref } from "vue";
 import { useNuxtApp } from "#app";
 import blobScriptUrl from "~/assets/worker_scripts/extensionPromoWorker.js";
 
@@ -86,11 +88,32 @@ export default defineComponent({
     let logoRef = ref<HTMLElement>(null);
     let addingPopupRef = ref<HTMLElement>(null);
     let submitBtnRef = ref<HTMLElement>(null);
+    let worker = null;
+
+    let handleResize = () => {};
 
     onMounted(() => {
       if (process.client) {
         setupAnimation();
+        handleResize = () => {
+          selectedDivRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
+          selectedDivRef.value.style.top = `${abbrNode.value.offsetTop}px`;
+          cursorRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
+          cursorRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+          logoRef.value.style.left = `${
+            abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
+          }px`;
+          logoRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+          addingPopupRef.value.style.left = `${
+            abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
+          }px`;
+          addingPopupRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+        };
       }
+    });
+
+    onUnmounted(() => {
+      worker.terminate();
     });
 
     const initAnimationPosition = () => {
@@ -120,25 +143,8 @@ export default defineComponent({
       }
     };
 
-    const handleResize = () => {
-      if (process.client) {
-        selectedDivRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
-        selectedDivRef.value.style.top = `${abbrNode.value.offsetTop}px`;
-        cursorRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
-        cursorRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
-        logoRef.value.style.left = `${
-          abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
-        }px`;
-        logoRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
-        addingPopupRef.value.style.left = `${
-          abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
-        }px`;
-        addingPopupRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
-      }
-    };
-
     const setupAnimation = () => {
-      const worker = new Worker(blobScriptUrl);
+      worker = new Worker(blobScriptUrl);
       worker.onmessage = function (e) {
         const result = e.data;
         switch (result) {

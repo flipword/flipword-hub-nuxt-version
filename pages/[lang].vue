@@ -2,7 +2,7 @@
   <div>
     <!--    Screen part 1  -->
     <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
-      <div class="lg:w-1/2 w-full flex flex-col justify-center items-center">
+      <div class="lg:w-1/2 w-full flex flex-col items-center">
         <TitleLogoElement />
         <div class="h-2/5 w-full flex flex-row justify-center gap-4">
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
@@ -43,8 +43,7 @@
     </div>
 
     <!--    Screen part 2-->
-    <div class="screen-part2">
-      {{ width }}
+    <div :class="{'screen-part2': !isMobile}">
       <div v-if="!isMobile" class="h-full w-full flex flex-row bg-primary">
         <div class="h-full flex flex-col w-7/12">
           <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
@@ -105,9 +104,9 @@
               @update-word="updateWordInAddingPopup"
           />
         </div>
-        <div class="w-full bg-base flex flex-row justify-center pt-10">
+        <div class="w-full bg-base flex flex-row justify-center pt-10 px-6">
           <div
-              class="h-110 w-5/6 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12 filter drop-shadow-lg"
+              class="h-110 w-full rounded-t-5xl bg-primary flex flex-col justify-center items-center px-3 filter drop-shadow-lg"
           >
           <span
               class="font-sans text-4xl leading-normal text-black text-center"
@@ -115,12 +114,12 @@
           />
           </div>
         </div>
-        <div class="py-10 w-5/6 bg-base w-full">
+        <div class="py-10 px-3 w-full bg-base">
             <div class="w-full flex flex-col gap-5">
               <div
                   v-for="(chunk, index) in wordListChunked"
                   :key="index"
-                  class="flex flex-row justify-around"
+                  class="flex flex-row justify-around gap-4"
               >
                 <ListCard
                     :native-word="chunk[0].nativeWord"
@@ -142,14 +141,14 @@
       </div>
     </div>
     <!--    Screen part 3 -->
-    <div class="screen-part3 flex flex-row bg-primary pl-24">
-      <div class="flex flex-row justify-center items-center flex-1">
+    <div class="screen-part3 py-5 flex flex-row flex-wrap bg-primary 2xl:px-36 lg:px-24 px-10">
+      <div class="lg:flex-1 w-full flex flex-row lg:justify-start justify-center items-center">
         <span
-          class="font-sans text-4xl leading-normal text-black"
+          class="font-sans text-4xl leading-normal text-black text-center"
           v-html="i18n('your_turn')"
         />
       </div>
-      <div class="flex flex-row justify-center items-center flex-1">
+      <div class="lg:flex-1 w-full flex flex-row lg:justify-end justify-center lg:pt-0 pt-3 items-center">
         <button
           class="bg-base px-6 py-4 rounded-3xl filter drop-shadow-lg"
           type="button"
@@ -167,7 +166,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeMount, onMounted } from "vue";
+import { defineComponent, ref, onBeforeMount } from "vue";
 import { useNuxtApp } from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
@@ -205,7 +204,10 @@ export default defineComponent({
       },
     } = useNuxtApp();
 
-    const isMobile = ref<boolean>(() => process.client ? window.innerWidth < 1024 : false)
+    const isMobile = ref<boolean>(false)
+    if(process.client){
+      isMobile.value = window.innerWidth < 1024
+    }
 
     onBeforeMount(() => {
       const langInUrl = $router.currentRoute.value.path.replace("/", "");
@@ -219,12 +221,7 @@ export default defineComponent({
       }
     });
 
-    onMounted(() => {
-      isMobile.value = window.innerWidth < 1024
-    })
-
     const handleResize = () => {
-      console.log("resize:", window.innerWidth)
       isMobile.value = window.innerWidth < 1024
     }
 
@@ -260,7 +257,8 @@ export default defineComponent({
     }
 
     const wordListChunk = (): Word[][] => {
-      return wordList[currentLang.value].reduce((resultArray, item, index) => {
+      const nbWordToDisplay = isMobile.value ? 8 : wordList[currentLang.value].length
+      return wordList[currentLang.value].slice(0, nbWordToDisplay).reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index / 2);
 
         if (!resultArray[chunkIndex]) {
@@ -331,7 +329,6 @@ export default defineComponent({
 }
 
 .screen-part3 {
-  height: 20vh;
   width: 100%;
 }
 </style>
