@@ -7,18 +7,24 @@
         src="~/assets/images/microsoft-translate.png"
         class="w-auto lg:h-4/5 h-2/5"
       />
-      <span class="ml-3 text-4xl text-black font-bold">Microsoft</span>
-      <span class="ml-1 text-4xl text-black">Translate</span>
+      <span class="ml-3 sm:text-4xl text-3xl text-black font-bold"
+        >Microsoft</span
+      >
+      <span class="ml-1 sm:text-4xl text-3xl text-black">Translate</span>
     </div>
     <div class="w-full h-10 flex flex-row justify-center z-20">
       <div
         class="flex flex-row justify-center items-center w-3/4 h-full bg-primary rounded-b-3xl gap-2 z-20 filter drop-shadow-xl"
       >
-        <span class="text-black">{{ props.nativeLanguageLabel }}</span>
+        <span class="sm:text-xl text-sm text-black">{{
+          props.nativeLanguageLabel
+        }}</span>
         <div class="pa-5">
           <img src="assets/icons/compare_arrows.png" />
         </div>
-        <span class="text-black">{{ props.foreignLanguageLabel }}</span>
+        <span class="sm:text-xl text-sm text-black">{{
+          props.foreignLanguageLabel
+        }}</span>
       </div>
     </div>
     <div
@@ -31,7 +37,7 @@
           <div><img src="~/assets/icons/clear.png" /></div>
         </div>
         <div class="flex flex-grow flex-col justify-center">
-          <span v-if="nativeWordDisplayed" class="text-4xl">{{
+          <span v-if="nativeWordDisplayed" class="sm:text-4xl text-3xl">{{
             props.nativeWord
           }}</span>
         </div>
@@ -58,7 +64,7 @@
           <span
             v-if="foreignWordDisplayed"
             ref="foreignWordRef"
-            class="text-4xl"
+            class="sm:text-4xl text-3xl"
             >{{ props.foreignWord }}</span
           >
         </div>

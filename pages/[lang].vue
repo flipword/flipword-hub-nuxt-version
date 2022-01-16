@@ -109,7 +109,7 @@
               class="h-110 w-full rounded-t-5xl bg-primary flex flex-col justify-center items-center px-3 filter drop-shadow-lg"
           >
           <span
-              class="font-sans text-4xl leading-normal text-black text-center"
+              class="font-sans text-3xl leading-normal text-black text-center"
               v-html="i18n('create_description')"
           />
           </div>
@@ -144,7 +144,7 @@
     <div class="screen-part3 py-5 flex flex-row flex-wrap bg-primary 2xl:px-36 lg:px-24 px-10">
       <div class="lg:flex-1 w-full flex flex-row lg:justify-start justify-center items-center">
         <span
-          class="font-sans text-4xl leading-normal text-black text-center"
+          class="font-sans sm:text-4xl text-3xl leading-normal text-black text-center"
           v-html="i18n('your_turn')"
         />
       </div>
@@ -155,7 +155,7 @@
           @click="redirectToApp"
         >
           <div class="w-full flex flex-row items-center justify-center gap-4">
-            <span class="text-4xl font-bold">{{ i18n("launch_app") }}</span>
+            <span class="sm:text-4xl text-3xl font-bold">{{ i18n("launch_app") }}</span>
             <img src="~/assets/icons/play.png" />
           </div>
         </button>

@@ -5,7 +5,7 @@
     <span
       id="extension_promo"
       ref="extensionPromoRef"
-      class="z-10 font-sans text-4xl leading-normal text-black text-center"
+      class="z-10 font-sans sm:text-4xl text-3xl leading-normal text-black text-center"
       v-html="i18n('extension_promo')"
     />
     <div ref="selectedDivRef" class="absolute selected-div"></div>

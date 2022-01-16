@@ -38,15 +38,7 @@ import { useNuxtApp } from "#app";
 export default defineComponent({
   name: "TitleLogoElement",
   setup() {
-    const {
-      $i18n,
-      $router,
-      payload: {
-        config: {
-          app: { lang },
-        },
-      },
-    } = useNuxtApp();
+    const { $i18n } = useNuxtApp();
     return {
       i18n: $i18n,
     };
