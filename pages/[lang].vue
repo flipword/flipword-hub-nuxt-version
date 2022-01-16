@@ -161,6 +161,14 @@
         </button>
       </div>
     </div>
+    <!--    Footer -->
+    <div class="w-full h-10 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top">
+      <span class="text-black font-bold">Github</span>
+      <div class="flex flex-row items-center gap-2">
+        <span class="text-black font-bold">About us</span>
+        <img src="assets/icons/github.png" />
+      </div>
+    </div>
     <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
 </template>
