@@ -166,7 +166,7 @@
       <span class="text-black font-bold cursor-pointer" @click="router.push('/about-us')">About us</span>
       <div class="flex flex-row items-center gap-2 cursor-pointer" @click="openGithub">
         <span class="text-black font-bold">Github</span>
-        <img src="assets/icons/github.png" />
+        <img src="~/assets/icons/github.png" />
       </div>
     </div>
     <resize-observer :show-trigger="true" @notify="handleResize" />

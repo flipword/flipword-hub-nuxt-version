@@ -3,7 +3,6 @@
     <Profil
       name="Adrien Croquelois"
       description="Hello there, I'm 23 and I love building quality software. "
-      picture_path="assets/pictures/croquelois.jpg"
     />
   </div>
 </template>

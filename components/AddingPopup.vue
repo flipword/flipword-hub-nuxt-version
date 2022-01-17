@@ -20,7 +20,7 @@
           props.nativeLanguageLabel
         }}</span>
         <div class="pa-5">
-          <img src="assets/icons/compare_arrows.png" />
+          <img src="~/assets/icons/compare_arrows.png" />
         </div>
         <span class="sm:text-xl text-sm text-black">{{
           props.foreignLanguageLabel
@@ -73,7 +73,7 @@
         class="relative p-3 bg-primary flex flex-row gap-2 items-center rounded-lg overflow-hidden"
       >
         <span class="text-black font-semibold">{{ i18n("save") }}</span>
-        <img src="assets/icons/save.png" />
+        <img src="~/assets/icons/save.png" />
         <div ref="splashButtonRef" class="splash"></div>
       </div>
     </div>
