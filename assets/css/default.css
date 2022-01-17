@@ -1,6 +1,7 @@
 body {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    background-color: #EAEAEA;
 }
 
 body::-webkit-scrollbar {
