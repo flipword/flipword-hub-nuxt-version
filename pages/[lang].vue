@@ -163,9 +163,9 @@
     </div>
     <!--    Footer -->
     <div class="w-full h-10 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top">
-      <span class="text-black font-bold">Github</span>
-      <div class="flex flex-row items-center gap-2">
-        <span class="text-black font-bold">About us</span>
+      <span class="text-black font-bold cursor-pointer" @click="router.push('/about-us')">About us</span>
+      <div class="flex flex-row items-center gap-2 cursor-pointer" @click="openGithub">
+        <span class="text-black font-bold">Github</span>
         <img src="assets/icons/github.png" />
       </div>
     </div>
@@ -305,11 +305,17 @@ export default defineComponent({
       }
       window.open(url);
     };
+
+    const openGithub = () => {
+      window.open("https://github.com/flipword")
+    }
+
     return {
       updateLang,
       langOptions,
       currentLang,
       i18n: $i18n,
+      router: $router,
       platform: Platform,
       wordListChunked: wordListChunk(),
       wordList: wordListWithCurrentLang(),
@@ -321,7 +327,8 @@ export default defineComponent({
       getForeignLanguageLabel,
       isMobile,
       isClient,
-      handleResize
+      handleResize,
+      openGithub
     };
   },
 });
