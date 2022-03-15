@@ -341,7 +341,7 @@ export default defineComponent({
 }
 
 .screen-part2 {
-  height: 160vh;
+  height: 1350px;
   width: 100%;
 }
 
