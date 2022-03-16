@@ -1,29 +1,26 @@
-# Nuxt 3 Minimal Starter
+# FlipWord - Learn Vocabulary (Web hub)
 
-We recommend to look at the [documentation](https://v3.nuxtjs.org).
+<a href="https://www.producthunt.com/posts/flipword-2?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-flipword&#0045;2" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=309556&theme=light" alt="FlipWord - Foreign&#0032;vocabulary&#0032;learning&#0032;tool | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
 
-## Setup
+Learn foreign language vocabulary easily and quickly!
 
-Make sure to install the dependencies
+FlipWord is a flip card app that allows you to write a word on either side of a card, the system is designed to write words from different languages, an automatic translation system helps you fill out your cards.
 
-```bash
-yarn install
-```
+No predefined card list is given to you, design it yourself! It is therefore totally personalized according to what you want to learn.
 
-## Development
+Use case:
+You read a very interesting article in a foreign language but you do not understand all the words. You then open FlipWord, enter the word in the form, click on the translate button and you discover the meaning of the previously unknown word. You can then save it in your word list and come back regularly in the application to fully assimilate it.
 
-Start the development server on http://localhost:3000
+## Visit web site
 
-```bash
-yarn dev
-```
+[Flipword website](https://flipword.io)
 
-## Production
+## Download app
 
-Build the application for production:
+[Flipword android](https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
 
-```bash
-yarn build
-```
+[Flipword iOS](https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185)
 
-Checkout the [deployment documentation](https://v3.nuxtjs.org/docs/deployment).
+## Download chrome extension
+
+[FlipWord chrome extension](https://chrome.google.com/webstore/detail/flipword/hinoggfcanlhfbeddbadjjpdaeoigkbe)
