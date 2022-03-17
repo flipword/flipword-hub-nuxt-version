@@ -8,5 +8,7 @@
   "save": "Sauvegarder",
   "saved_word": "Mot Sauvegardé !",
   "extension_popup_native_word": "Facilement",
-  "extension_popup_foreign_word": "Easely"
+  "extension_popup_foreign_word": "Easely",
+  "extension_title_text": "Thank you to have downloaded Flipword extension !",
+  "extension_helping_text": "blabla"
 }
