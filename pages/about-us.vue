@@ -7,15 +7,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
 import Profil from "~/components/Profil.vue";
-export default defineComponent({
-  name: "AboutUs",
-  components: {
-    Profil,
-  },
-  setup() {},
+
+definePageMeta({
+  title: "Flipword - About-us",
 });
 </script>
 

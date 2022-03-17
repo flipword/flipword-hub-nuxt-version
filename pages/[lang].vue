@@ -1,3 +1,140 @@
+<script lang="ts" setup>
+import { ref, onBeforeMount } from "vue";
+import { useNuxtApp } from "#app";
+import { langOptions } from "~/plugins/i18n";
+import IsometricCards from "~/components/IsometricCards.vue";
+import CountrySelect from "~/components/CountrySelect.vue";
+import AddingPopup from "~/components/AddingPopup.vue";
+import ListCard from "~/components/ListCard.vue";
+import TitleLogoElement from "~/components/TitleLogoElement.vue";
+import ExtensionPromo from "~/components/ExtensionPromo.vue";
+import { wordList } from "~/assets/data/words";
+import { Word } from "~/components/Card.vue";
+
+enum Platform {
+  Ios,
+  Android,
+}
+
+const {
+  $router,
+  payload: {
+    config: {
+      app: { lang },
+    },
+  },
+} = useNuxtApp();
+
+const isClient = process.client;
+const isMobile = ref<boolean>(false);
+
+definePageMeta({
+  title: "My home page",
+});
+
+if (process.client) {
+  isMobile.value = window.innerWidth < 1024;
+}
+
+onBeforeMount(() => {
+  const langInUrl = $router.currentRoute.value.path.replace("/", "");
+  if (
+    !(
+      langOptions.findIndex((x: any) => x.id == langInUrl) != -1 ||
+      langInUrl == ""
+    )
+  ) {
+    $router.push("/");
+  }
+});
+
+const handleResize = () => {
+  isMobile.value = window.innerWidth < 1024;
+};
+
+const langInUrl = langOptions.find(
+  (x: any) => x.id == $router.currentRoute.value.path.replace("/", "")
+);
+const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
+
+const updateLang = (updatedLang: string) => {
+  currentLang.value = updatedLang;
+  if (currentLang.value == lang) {
+    $router.push("/");
+  } else {
+    $router.push(`/${currentLang.value}`);
+  }
+};
+
+const getNativeLanguageLabel = () => {
+  const lang = langOptions.find((x: any) => x.id == currentLang.value);
+  if (lang) {
+    return lang.label;
+  }
+  return "";
+};
+
+const getForeignLanguageLabel = () => {
+  const lang = langOptions.find((x: any) => x.id == currentLang.value);
+  let foreignLang = langOptions.find((x: any) => x.id == "en");
+  if (lang && lang.id == "en") {
+    foreignLang = langOptions.find((x: any) => x.id == "fr");
+  }
+  return foreignLang.label;
+};
+
+const wordListChunk = (): Word[][] => {
+  const nbWordToDisplay = isMobile.value
+    ? 8
+    : wordList[currentLang.value].length;
+  return wordList[currentLang.value]
+    .slice(0, nbWordToDisplay)
+    .reduce((resultArray, item, index) => {
+      const chunkIndex = Math.floor(index / 2);
+
+      if (!resultArray[chunkIndex]) {
+        resultArray[chunkIndex] = []; // start a new chunk
+      }
+
+      resultArray[chunkIndex].push(item);
+
+      return resultArray;
+    }, []);
+};
+
+const wordListWithCurrentLang = (): Word[] => {
+  return wordList[currentLang.value];
+};
+
+const redirectToApp = () => {
+  window.open("https://app.flipword.io");
+};
+
+const currentWordInAddingPopup = ref<Word>(wordListWithCurrentLang()[0]);
+
+const updateWordInAddingPopup = () => {
+  const result = wordListWithCurrentLang();
+  const index = Math.floor(Math.random() * (result.length - 1));
+  currentWordInAddingPopup.value = result[index];
+};
+
+const openStore = (platform: Platform) => {
+  let url = "";
+  if (platform == Platform.Ios) {
+    url =
+      "https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185";
+  } else {
+    url =
+      "https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1";
+  }
+  window.open(url);
+};
+
+const openGithub = () => {
+  window.open("https://github.com/flipword");
+};
+</script>
+
 <template>
   <div v-if="isClient">
     <!--    Screen part 1  -->
@@ -7,13 +144,15 @@
         <div class="h-2/5 w-full flex flex-row justify-center gap-4">
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
             <div
-                class="flex flex-row justify-center cursor-pointer"
-                @click="openStore(platform.Android)"
-            ><img
+              class="flex flex-row justify-center cursor-pointer"
+              @click="openStore(platform.Android)"
+            >
+              <img
                 alt="Get it on Google Play"
                 src="~/assets/images/download_android.png"
                 class="w-56 h-auto"
-            /></div>
+              />
+            </div>
           </div>
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
             <div
@@ -43,7 +182,7 @@
     </div>
 
     <!--    Screen part 2-->
-    <div :class="{'screen-part2': !isMobile}">
+    <div :class="{ 'screen-part2': !isMobile }">
       <div v-if="!isMobile" class="h-full w-full flex flex-row bg-primary">
         <div class="h-full flex flex-col w-7/12">
           <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
@@ -59,8 +198,8 @@
             <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
           </div>
           <ExtensionPromo
-              :native-language-label="getNativeLanguageLabel()"
-              :foreign-language-label="getForeignLanguageLabel()"
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
           />
         </div>
         <div
@@ -71,13 +210,13 @@
           >
             <span
               class="font-sans text-4xl leading-normal text-black text-center"
-              v-html="i18n('create_description')"
+              v-html="$i18n('create_description')"
             />
           </div>
           <div class="h-1/2 px-16 w-full">
             <div class="w-full flex flex-col gap-5">
               <div
-                v-for="(chunk, index) in wordListChunked"
+                v-for="(chunk, index) in wordListChunk()"
                 :key="index"
                 class="flex flex-row justify-around"
               >
@@ -97,74 +236,91 @@
       <div v-else class="h-full w-full bg-primary">
         <div class="w-full bg-base">
           <AddingPopup
-              :native-word="currentWordInAddingPopup.nativeWord"
-              :foreign-word="currentWordInAddingPopup.foreignWord"
-              :native-language-label="getNativeLanguageLabel()"
-              :foreign-language-label="getForeignLanguageLabel()"
-              @update-word="updateWordInAddingPopup"
+            :native-word="currentWordInAddingPopup.nativeWord"
+            :foreign-word="currentWordInAddingPopup.foreignWord"
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
+            @update-word="updateWordInAddingPopup"
           />
         </div>
         <div class="w-full bg-base flex flex-row justify-center pt-10 px-6">
           <div
-              class="h-110 w-full rounded-t-5xl bg-primary flex flex-col justify-center items-center px-3 filter drop-shadow-lg"
+            class="h-110 w-full rounded-t-5xl bg-primary flex flex-col justify-center items-center px-3 filter drop-shadow-lg"
           >
-          <span
+            <span
               class="font-sans text-3xl leading-normal text-black text-center"
-              v-html="i18n('create_description')"
-          />
+              v-html="$i18n('create_description')"
+            />
           </div>
         </div>
         <div class="py-10 px-3 w-full bg-base">
-            <div class="w-full flex flex-col gap-5">
-              <div
-                  v-for="(chunk, index) in wordListChunked"
-                  :key="index"
-                  class="flex flex-row justify-around gap-4"
-              >
-                <ListCard
-                    :native-word="chunk[0].nativeWord"
-                    :foreign-word="chunk[0].foreignWord"
-                ></ListCard>
-                <ListCard
-                    :native-word="chunk[1].nativeWord"
-                    :foreign-word="chunk[1].foreignWord"
-                ></ListCard>
-              </div>
+          <div class="w-full flex flex-col gap-5">
+            <div
+              v-for="(chunk, index) in wordListChunk()"
+              :key="index"
+              class="flex flex-row justify-around gap-4"
+            >
+              <ListCard
+                :native-word="chunk[0].nativeWord"
+                :foreign-word="chunk[0].foreignWord"
+              ></ListCard>
+              <ListCard
+                :native-word="chunk[1].nativeWord"
+                :foreign-word="chunk[1].foreignWord"
+              ></ListCard>
             </div>
+          </div>
         </div>
         <div class="pt-6 w-full bg-primary">
           <ExtensionPromo
-              :native-language-label="getNativeLanguageLabel()"
-              :foreign-language-label="getForeignLanguageLabel()"
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
           />
         </div>
       </div>
     </div>
     <!--    Screen part 3 -->
-    <div class="screen-part3 py-5 flex flex-row flex-wrap bg-primary 2xl:px-36 lg:px-24 px-10">
-      <div class="lg:flex-1 w-full flex flex-row lg:justify-start justify-center items-center">
+    <div
+      class="screen-part3 py-5 flex flex-row flex-wrap bg-primary 2xl:px-36 lg:px-24 px-10"
+    >
+      <div
+        class="lg:flex-1 w-full flex flex-row lg:justify-start justify-center items-center"
+      >
         <span
           class="font-sans sm:text-4xl text-3xl leading-normal text-black text-center"
-          v-html="i18n('your_turn')"
+          v-html="$i18n('your_turn')"
         />
       </div>
-      <div class="lg:flex-1 w-full flex flex-row lg:justify-end justify-center lg:pt-0 pt-3 items-center">
+      <div
+        class="lg:flex-1 w-full flex flex-row lg:justify-end justify-center lg:pt-0 pt-3 items-center"
+      >
         <button
           class="bg-base px-6 py-4 rounded-3xl filter drop-shadow-lg"
           type="button"
           @click="redirectToApp"
         >
           <div class="w-full flex flex-row items-center justify-center gap-4">
-            <span class="sm:text-4xl text-3xl font-bold">{{ i18n("launch_app") }}</span>
+            <span class="sm:text-4xl text-3xl font-bold">{{
+              $i18n("launch_app")
+            }}</span>
             <img src="~/assets/icons/play.png" />
           </div>
         </button>
       </div>
     </div>
     <!--    Footer -->
-    <div class="w-full h-10 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top">
-      <span class="text-black font-bold cursor-pointer" @click="router.push('/about-us')">About us</span>
-      <div class="flex flex-row items-center gap-2 cursor-pointer" @click="openGithub">
+    <div
+      class="w-full h-10 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top"
+    >
+      <span
+        class="text-black font-bold cursor-pointer"
+        @click="$router.push('/about-us')"
+        >About us</span
+      >
+      <div
+        class="flex flex-row items-center gap-2 cursor-pointer"
+        @click="openGithub"
+      >
         <span class="text-black font-bold">Github</span>
         <img src="~/assets/icons/github.png" />
       </div>
@@ -172,167 +328,6 @@
     <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref, onBeforeMount } from "vue";
-import { useNuxtApp } from "#app";
-import { langOptions } from "~/plugins/i18n";
-import IsometricCards from "~/components/IsometricCards.vue";
-import CountrySelect from "~/components/CountrySelect.vue";
-import AddingPopup from "~/components/AddingPopup.vue";
-import ListCard from "~/components/ListCard.vue";
-import TitleLogoElement from "~/components/TitleLogoElement.vue";
-import ExtensionPromo from "~/components/ExtensionPromo.vue";
-import { wordList } from "~/assets/data/words";
-import { Word } from "~/components/Card.vue";
-
-enum Platform {
-  Ios,
-  Android,
-}
-
-export default defineComponent({
-  name: "Index",
-  components: {
-    IsometricCards,
-    CountrySelect,
-    AddingPopup,
-    ListCard,
-    ExtensionPromo,
-    TitleLogoElement
-  },
-  setup() {
-    const {
-      $i18n,
-      $router,
-      payload: {
-        config: {
-          app: { lang },
-        },
-      },
-    } = useNuxtApp();
-
-    const isClient = process.client
-    const isMobile = ref<boolean>(false)
-    if(process.client){
-      isMobile.value = window.innerWidth < 1024
-    }
-
-    onBeforeMount(() => {
-      const langInUrl = $router.currentRoute.value.path.replace("/", "");
-      if (
-        !(
-          langOptions.findIndex((x: any) => x.id == langInUrl) != -1 ||
-          langInUrl == ""
-        )
-      ) {
-        $router.push("/");
-      }
-    });
-
-    const handleResize = () => {
-      isMobile.value = window.innerWidth < 1024
-    }
-
-    const langInUrl = langOptions.find(
-      (x: any) => x.id == $router.currentRoute.value.path.replace("/", "")
-    );
-    const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
-
-    const updateLang = (updatedLang: string) => {
-      currentLang.value = updatedLang;
-      if (currentLang.value == lang) {
-        $router.push("/");
-      } else {
-        $router.push(`/${currentLang.value}`);
-      }
-    };
-
-    const getNativeLanguageLabel = () => {
-      const lang = langOptions.find((x: any) => x.id == currentLang.value)
-      if(lang){
-        return lang.label
-      }
-      return ''
-    }
-
-    const getForeignLanguageLabel = () => {
-      const lang = langOptions.find((x: any) => x.id == currentLang.value)
-      let foreignLang = langOptions.find((x: any) => x.id == 'en')
-      if(lang && lang.id == 'en'){
-        foreignLang = langOptions.find((x: any) => x.id == 'fr')
-      }
-      return foreignLang.label
-    }
-
-    const wordListChunk = (): Word[][] => {
-      const nbWordToDisplay = isMobile.value ? 8 : wordList[currentLang.value].length
-      return wordList[currentLang.value].slice(0, nbWordToDisplay).reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / 2);
-
-        if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = []; // start a new chunk
-        }
-
-        resultArray[chunkIndex].push(item);
-
-        return resultArray;
-      }, []);
-    };
-
-    const wordListWithCurrentLang = (): Word[] => {
-      return wordList[currentLang.value];
-    };
-
-    const redirectToApp = () => {
-      window.open("https://app.flipword.io");
-    };
-
-    const currentWordInAddingPopup = ref<Word>(wordListWithCurrentLang()[0]);
-
-    const updateWordInAddingPopup = () => {
-      const result = wordListWithCurrentLang();
-      const index = Math.floor(Math.random() * (result.length - 1));
-      currentWordInAddingPopup.value = result[index];
-    };
-
-    const openStore = (platform: Platform) => {
-      let url = ''
-      if(platform == Platform.Ios){
-        url = 'https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185'
-      } else {
-        url = 'https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'
-      }
-      window.open(url);
-    };
-
-    const openGithub = () => {
-      window.open("https://github.com/flipword")
-    }
-
-    return {
-      updateLang,
-      langOptions,
-      currentLang,
-      i18n: $i18n,
-      router: $router,
-      platform: Platform,
-      wordListChunked: wordListChunk(),
-      wordList: wordListWithCurrentLang(),
-      redirectToApp,
-      updateWordInAddingPopup,
-      currentWordInAddingPopup,
-      openStore,
-      getNativeLanguageLabel,
-      getForeignLanguageLabel,
-      isMobile,
-      isClient,
-      handleResize,
-      openGithub
-    };
-  },
-});
-</script>
 
 <style scoped>
 .screen-part1 {
