@@ -44,6 +44,25 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       },
     },
   } = nuxtApp;
+
+  const getLanguageFromUrl = (route: string) => {
+    console.log("route: ", route);
+    const firstSlashIndex = route.indexOf("/");
+    console.log("firest: ", firstSlashIndex);
+    if (firstSlashIndex != -1) {
+      const secondSlashIndex = route.indexOf("/", firstSlashIndex + 1);
+      console.log("second: ", secondSlashIndex);
+      console.log("lang: ", lang);
+      if (secondSlashIndex != -1) {
+        return route.substring(firstSlashIndex, secondSlashIndex);
+      } else {
+        return lang;
+      }
+    } else {
+      return lang;
+    }
+  };
+
   nuxtApp.provide("i18n", (key: string) => {
     let currentLang = "";
     if (process.server) {
@@ -54,11 +73,9 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         currentLang = lang;
       }
     } else {
-      const route = $router.currentRoute.value.path.replace("/", "");
-      currentLang = route ? route : lang;
+      currentLang = $router.currentRoute.value?.params?.lang ?? lang;
     }
     const langIndex = langOptions.findIndex((x: any) => x.id == currentLang);
-    // @ts-ignore
     return langIndex != -1 ? langOptions[langIndex]["json"][key] : null;
   });
 });

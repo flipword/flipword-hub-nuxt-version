@@ -174,8 +174,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeMount } from "vue";
-import { useNuxtApp } from "#app";
+import { defineComponent, ref, onBeforeMount, computed } from "vue";
+import { useMeta, useNuxtApp } from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
@@ -183,7 +183,7 @@ import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
 import TitleLogoElement from "~/components/TitleLogoElement.vue";
 import ExtensionPromo from "~/components/ExtensionPromo.vue";
-import { wordList } from "~/assets/data/words";
+import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
 
 enum Platform {
@@ -211,6 +211,12 @@ export default defineComponent({
         },
       },
     } = useNuxtApp();
+
+    const getTitle = () => `- ${$i18n('home')}`
+
+    useMeta({
+      title: computed(() => `Flipword ${$i18n('home') ? getTitle() : ''}`)
+    });
 
     const isClient = process.client
     const isMobile = ref<boolean>(false)

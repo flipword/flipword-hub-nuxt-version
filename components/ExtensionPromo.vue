@@ -16,13 +16,13 @@
     />
     <div
       ref="logoRef"
-      class="z-20 absolute p-0.5 bg-primary filter drop-shadow-lg hidden"
+      class="z-20 absolute p-0.5 bg-primary filter specific-shadow hidden"
     >
       <img class="w-10 h-10" src="~/assets/icons/logo.png" />
     </div>
     <div
       ref="addingPopupRef"
-      class="z-20 absolute w-60 h-52 bg-base filter drop-shadow-lg hidden rounded-md"
+      class="z-20 absolute w-60 h-52 bg-base filter specific-shadow hidden rounded-md"
     >
       <div
         class="w-full h-full flex flex-col items-center justify-center gap-4"
@@ -211,5 +211,9 @@ export default defineComponent({
 .cursor {
   display: none;
   transition: left 2s, top 2s;
+}
+
+.specific-shadow {
+  box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.1);
 }
 </style>

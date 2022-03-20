@@ -8,14 +8,25 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 import Profil from "~/components/Profil.vue";
+import { useNuxtApp, useMeta } from "#app";
+
 export default defineComponent({
   name: "AboutUs",
   components: {
     Profil,
   },
-  setup() {},
+  setup() {
+    const { $i18n } = useNuxtApp();
+    const getTitle = () => `- ${$i18n("about_us")}`;
+
+    useMeta({
+      title: computed(() => `Flipword ${$i18n("about_us") ? getTitle() : ""}`),
+    });
+
+    return {};
+  },
 });
 </script>
 
