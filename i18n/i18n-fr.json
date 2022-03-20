@@ -8,5 +8,8 @@
   "save": "Sauvegarder",
   "saved_word": "Mot Sauvegardé !",
   "extension_popup_native_word": "Facilement",
-  "extension_popup_foreign_word": "Easely"
+  "extension_popup_foreign_word": "Easely",
+  "home": "Accueil",
+  "about_us": "À propos",
+  "profile_presentation": "Bonjour, j'ai 23 et je suis passionné par le développement logiciel"
 }
