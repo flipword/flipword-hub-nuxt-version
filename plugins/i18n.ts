@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from "#app";
+import { defineNuxtPlugin, addRouteMiddleware, navigateTo } from "#app";
 import * as i18nEN from "../i18n/i18n-en.json";
 import * as i18nFR from "../i18n/i18n-fr.json";
 import * as i18nES from "../i18n/i18n-es.json";
@@ -45,23 +45,18 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     },
   } = nuxtApp;
 
-  const getLanguageFromUrl = (route: string) => {
-    console.log("route: ", route);
-    const firstSlashIndex = route.indexOf("/");
-    console.log("firest: ", firstSlashIndex);
-    if (firstSlashIndex != -1) {
-      const secondSlashIndex = route.indexOf("/", firstSlashIndex + 1);
-      console.log("second: ", secondSlashIndex);
-      console.log("lang: ", lang);
-      if (secondSlashIndex != -1) {
-        return route.substring(firstSlashIndex, secondSlashIndex);
-      } else {
-        return lang;
+  addRouteMiddleware(
+    "i18nRedirect",
+    (to, from) => {
+      if (to.path != "/") {
+        if (from.params.lang && from.params.lang != to.params.lang) {
+          const replacedRoute = `/${from.params.lang}${to.fullPath}`;
+          return navigateTo(replacedRoute);
+        }
       }
-    } else {
-      return lang;
-    }
-  };
+    },
+    { global: true }
+  );
 
   nuxtApp.provide("i18n", (key: string) => {
     let currentLang = "";

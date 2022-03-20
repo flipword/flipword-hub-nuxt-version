@@ -2,7 +2,7 @@
   <div>
     <Profil
       name="Adrien Croquelois"
-      description="Hello there, I'm 23 and I love building quality software. "
+      :description="i18n('profile_presentation')"
     />
   </div>
 </template>
@@ -25,7 +25,9 @@ export default defineComponent({
       title: computed(() => `Flipword ${$i18n("about_us") ? getTitle() : ""}`),
     });
 
-    return {};
+    return {
+      i18n: $i18n,
+    };
   },
 });
 </script>
