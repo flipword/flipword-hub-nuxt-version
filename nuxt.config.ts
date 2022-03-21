@@ -30,6 +30,11 @@ export default defineNuxtConfig({
         path: "/about-us",
         file: resolve(__dirname, "pages/[lang]/about-us.vue"),
       });
+      pages.unshift({
+        name: "welcome-extension",
+        path: "/welcome-extension",
+        file: resolve(__dirname, "pages/[lang]/welcome-extension.vue"),
+      });
     },
   },
   extensions: [".js", ".mjs", ".ts", ".tsx", ".vue", ".json"],
