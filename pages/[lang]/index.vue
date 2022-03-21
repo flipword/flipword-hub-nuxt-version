@@ -163,7 +163,9 @@
     </div>
     <!--    Footer -->
     <div class="w-full h-10 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top">
-      <span class="text-black font-bold cursor-pointer" @click="router.push('/about-us')">About us</span>
+      <NuxtLink to="/about-us">
+        <span class="text-black font-bold cursor-pointer">About us</span>
+      </NuxtLink>
       <div class="flex flex-row items-center gap-2 cursor-pointer" @click="openGithub">
         <span class="text-black font-bold">Github</span>
         <img src="~/assets/icons/github.png" />
@@ -174,8 +176,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onBeforeMount } from "vue";
-import { useNuxtApp } from "#app";
+import { defineComponent, ref, computed } from "vue";
+import {useMeta, useNuxtApp, navigateTo} from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
@@ -183,7 +185,7 @@ import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
 import TitleLogoElement from "~/components/TitleLogoElement.vue";
 import ExtensionPromo from "~/components/ExtensionPromo.vue";
-import { wordList } from "~/assets/data/words";
+import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
 
 enum Platform {
@@ -212,39 +214,33 @@ export default defineComponent({
       },
     } = useNuxtApp();
 
+    const getTitle = () => `- ${$i18n('home')}`
+
+    useMeta({
+      title: computed(() => `Flipword ${$i18n('home') ? getTitle() : ''}`)
+    });
+
     const isClient = process.client
     const isMobile = ref<boolean>(false)
     if(process.client){
       isMobile.value = window.innerWidth < 1024
     }
 
-    onBeforeMount(() => {
-      const langInUrl = $router.currentRoute.value.path.replace("/", "");
-      if (
-        !(
-          langOptions.findIndex((x: any) => x.id == langInUrl) != -1 ||
-          langInUrl == ""
-        )
-      ) {
-        $router.push("/");
-      }
-    });
-
     const handleResize = () => {
       isMobile.value = window.innerWidth < 1024
     }
 
     const langInUrl = langOptions.find(
-      (x: any) => x.id == $router.currentRoute.value.path.replace("/", "")
+      (x: any) => x.id == $router.currentRoute.value.params.lang
     );
     const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
 
     const updateLang = (updatedLang: string) => {
       currentLang.value = updatedLang;
       if (currentLang.value == lang) {
-        $router.push("/");
+        navigateTo("/");
       } else {
-        $router.push(`/${currentLang.value}`);
+        navigateTo(`/${currentLang.value}`);
       }
     };
 

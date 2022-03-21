@@ -10,5 +10,9 @@
   "extension_popup_native_word": "Facilement",
   "extension_popup_foreign_word": "Easely",
   "extension_title_text": "Thank you to have downloaded Flipword extension !",
-  "extension_helping_text": "blabla"
+  "extension_helping_text": "blabla",
+  "extension_popup_foreign_word": "Easely",
+  "home": "Accueil",
+  "about_us": "À propos",
+  "profile_presentation": "Bonjour, j'ai 23 et je suis passionné par le développement logiciel"
 }
