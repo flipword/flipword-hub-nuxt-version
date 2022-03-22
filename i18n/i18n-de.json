@@ -1,9 +1,9 @@
 {
   "greeting": "Hallo Welt !!!",
   "subtitle": "Vokabellerntool",
-  "create_description": "<b> Erstellen </b> Ihre eigene personalisierte Wortliste mit einem automatischen Übersetzer",
-  "extension_promo": "Dank der <b> Browsererweiterung </b> können Sie beim Surfen <abbr>einfach</abbr> Wörter zu Ihrer Liste hinzufügen",
-  "your_turn": "Du bist dran ! <b> Testen </b> Ihr Wissen!",
+  "create_description": "<b>Erstellen</b> Ihre eigene personalisierte Wortliste mit einem automatischen Übersetzer",
+  "extension_promo": "Dank der <b>Browsererweiterung</b> können Sie beim Surfen <abbr>einfach</abbr> Wörter zu Ihrer Liste hinzufügen",
+  "your_turn": "Du bist dran ! <b>Testen</b> Ihr Wissen!",
   "launch_app": "Starten",
   "save": "Speichern",
   "saved_word": "Wort gespeichert !",
@@ -13,5 +13,6 @@
   "extension_helping_text": "blabla",
   "home": "Zuhause",
   "about_us": "Über uns",
+  "welcome": "Willkommen",
   "profile_presentation": "Hallo, ich bin 23 und liebe es, hochwertige Software zu entwickeln."
 }

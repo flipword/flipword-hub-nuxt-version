@@ -58,10 +58,15 @@
           <div class="w-full h-20 bg-base">
             <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
           </div>
-          <ExtensionPromo
-              :native-language-label="getNativeLanguageLabel()"
-              :foreign-language-label="getForeignLanguageLabel()"
-          />
+          <div class="flex flex-col flex-grow justify-center items-center lg:px-32 px-3">
+            <ExtensionPopupAnimation
+                :native-language-label="getNativeLanguageLabel()"
+                :foreign-language-label="getForeignLanguageLabel()"
+                :text="i18n('extension_promo')"
+                :native-word="i18n('extension_popup_native_word')"
+                :foreign-word="i18n('extension_popup_foreign_word')"
+            />
+          </div>
         </div>
         <div
           class="h-full w-5/12 bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
@@ -133,10 +138,15 @@
             </div>
         </div>
         <div class="pt-6 w-full bg-primary">
-          <ExtensionPromo
-              :native-language-label="getNativeLanguageLabel()"
-              :foreign-language-label="getForeignLanguageLabel()"
-          />
+          <div class="flex flex-col flex-grow justify-center items-center lg:px-32 px-3">
+            <ExtensionPopupAnimation
+                :native-language-label="getNativeLanguageLabel()"
+                :foreign-language-label="getForeignLanguageLabel()"
+                :text="i18n('extension_promo')"
+                :native-word="i18n('extension_popup_native_word')"
+                :foreign-word="i18n('extension_popup_foreign_word')"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -184,7 +194,7 @@ import CountrySelect from "~/components/CountrySelect.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
 import TitleLogoElement from "~/components/TitleLogoElement.vue";
-import ExtensionPromo from "~/components/ExtensionPromo.vue";
+import ExtensionPopupAnimation from "~/components/ExtensionPopupAnimation.vue";
 import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
 
@@ -200,7 +210,7 @@ export default defineComponent({
     CountrySelect,
     AddingPopup,
     ListCard,
-    ExtensionPromo,
+    ExtensionPopupAnimation,
     TitleLogoElement
   },
   setup() {
@@ -230,6 +240,7 @@ export default defineComponent({
       isMobile.value = window.innerWidth < 1024
     }
 
+    // TODO: Use Nuxt 3 composable
     const langInUrl = langOptions.find(
       (x: any) => x.id == $router.currentRoute.value.params.lang
     );

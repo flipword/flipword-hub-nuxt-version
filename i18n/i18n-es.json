@@ -1,9 +1,9 @@
 {
   "greeting": "Buenos Dias !!!",
   "subtitle": "Herramientas de aprendizaje de vocabulario",
-  "create_description": "<b> Cree </b> su propia lista de palabras personalizada con un traductor automático",
-  "extension_promo": "Gracias a la <b> extensión del navegador </b>, agregue <abbr>fácilmente</abbr> palabras a su lista mientras navega",
-  "your_turn": "Es tu turno ! <b> ¡Pon a prueba </b> tus conocimientos!",
+  "create_description": "<b>Cree</b> su propia lista de palabras personalizada con un traductor automático",
+  "extension_promo": "Gracias a la <b>extensión del navegador</b>, agregue <abbr>fácilmente</abbr> palabras a su lista mientras navega",
+  "your_turn": "Es tu turno ! <b>¡Pon a prueba</b> tus conocimientos!",
   "launch_app": "Iniciar aplicación",
   "save": "Guardar",
   "saved_word": "Palabra guardada !",
@@ -13,5 +13,6 @@
   "extension_helping_text": "blabla",
   "home": "Bienvenida",
   "about_us": "Sobre nosotros",
+  "welcome": "Bienvenido",
   "profile_presentation": "Hola, tengo 23 años y me encanta crear software de calidad."
 }

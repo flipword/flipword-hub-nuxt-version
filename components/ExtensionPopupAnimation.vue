@@ -1,14 +1,19 @@
 <template>
-  <div
-    class="flex flex-col flex-grow justify-center items-center lg:px-32 px-3"
-  >
-    <span
-      id="extension_promo"
-      ref="extensionPromoRef"
-      class="z-10 font-sans sm:text-4xl text-3xl leading-normal text-black text-center"
-      v-html="i18n('extension_promo')"
-    />
-    <div ref="selectedDivRef" class="absolute selected-div"></div>
+  <div>
+    <div>
+      <span
+        id="extension_promo"
+        ref="extensionPromoRef"
+        :class="isWelcomeExtension ? '' : 'sm:text-4xl text-3xl'"
+        class="font-sans leading-normal text-black text-center"
+        v-html="props.text"
+      />
+    </div>
+    <div
+      ref="selectedDivRef"
+      :class="isWelcomeExtension ? 'h-5' : 'h-10'"
+      class="absolute selected-div"
+    ></div>
     <img
       ref="cursorRef"
       src="~/assets/icons/cursor.png"
@@ -34,9 +39,7 @@
           <div
             class="-mt-1 pl-3 h-10 bg-white rounded-sm flex flex-col justify-center"
           >
-            <span class="text-black text-lg">{{
-              i18n("extension_popup_native_word")
-            }}</span>
+            <span class="text-black text-lg">{{ props.nativeWord }}</span>
           </div>
         </div>
         <div class="w-4/5">
@@ -46,9 +49,7 @@
           <div
             class="-mt-1 pl-3 h-10 bg-white rounded-sm flex flex-col justify-center"
           >
-            <span class="text-black text-lg">{{
-              i18n("extension_popup_foreign_word")
-            }}</span>
+            <span class="text-black text-lg">{{ props.foreignWord }}</span>
           </div>
         </div>
 
@@ -70,12 +71,30 @@ import { useNuxtApp } from "#app";
 import blobScriptUrl from "~/assets/worker_scripts/extensionPromoWorker.js";
 
 export default defineComponent({
-  name: "ExtensionPromo",
+  name: "ExtensionPopupAnimation",
   props: {
     nativeLanguageLabel: {
+      type: String,
       required: true,
     },
     foreignLanguageLabel: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+    nativeWord: {
+      type: String,
+      required: true,
+    },
+    foreignWord: {
+      type: String,
+      required: true,
+    },
+    isWelcomeExtension: {
+      type: Boolean,
       required: true,
     },
   },
@@ -95,19 +114,26 @@ export default defineComponent({
     onMounted(() => {
       if (process.client) {
         setupAnimation();
+        // TODO: refacto duplicate code
         handleResize = () => {
           selectedDivRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
           selectedDivRef.value.style.top = `${abbrNode.value.offsetTop}px`;
           cursorRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
-          cursorRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+          cursorRef.value.style.top = `${
+            abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
+          }px`;
           logoRef.value.style.left = `${
             abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
           }px`;
-          logoRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+          logoRef.value.style.top = `${
+            abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
+          }px`;
           addingPopupRef.value.style.left = `${
             abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
           }px`;
-          addingPopupRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+          addingPopupRef.value.style.top = `${
+            abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
+          }px`;
         };
       }
     });
@@ -126,15 +152,21 @@ export default defineComponent({
         selectedDivRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
         selectedDivRef.value.style.top = `${abbrNode.value.offsetTop}px`;
         cursorRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
-        cursorRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+        cursorRef.value.style.top = `${
+          abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
+        }px`;
         logoRef.value.style.left = `${
           abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
         }px`;
-        logoRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+        logoRef.value.style.top = `${
+          abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
+        }px`;
         addingPopupRef.value.style.left = `${
           abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
         }px`;
-        addingPopupRef.value.style.top = `${abbrNode.value.offsetTop + 36}px`;
+        addingPopupRef.value.style.top = `${
+          abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
+        }px`;
         selectedDivRef.value.style.transition = "none";
         selectedDivRef.value.style.width = "0";
         addingPopupRef.value.style.display = "none";
@@ -181,7 +213,9 @@ export default defineComponent({
             cursorRef.value.style.left = `${
               abbrNode.value.offsetLeft + abbrNode.value.offsetWidth + 105
             }px`;
-            cursorRef.value.style.top = `${abbrNode.value.offsetTop + 220}px`;
+            cursorRef.value.style.top = `${
+              abbrNode.value.offsetTop + (props.isWelcomeExtension ? 185 : 220)
+            }px`;
             break;
         }
       };
@@ -203,8 +237,14 @@ export default defineComponent({
 
 <style scoped>
 .selected-div {
-  z-index: 0;
-  height: 42px;
+  z-index: 10;
+  background-color: #3498db;
+}
+
+.selected-div-bis {
+  height: 100px;
+  width: 100px;
+  z-index: 10;
   background-color: #3498db;
 }
 
