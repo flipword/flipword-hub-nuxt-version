@@ -3,7 +3,9 @@
     <!--    TODO: use Nuxt 3 Layout boilerplate -->
     <Layout />
     <div class="w-full flex flex-row justify-center">
-      <div class="mt-32 max-w-screen-md bg-white p-6 rounded-lg">
+      <div
+        class="mt-32 xl:w-2/5 lg:w-3/5 md:w-4/5 w-10/12 bg-white p-6 rounded-lg"
+      >
         <WelcomeExtensionStep1
           v-if="step == 1"
           :foreign-language-label="getForeignLanguageLabel()"

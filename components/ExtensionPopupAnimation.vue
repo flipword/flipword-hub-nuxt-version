@@ -1,65 +1,65 @@
 <template>
   <div>
-    <div>
+    <div class="relative">
+      <div
+        ref="selectedDivRef"
+        :class="isWelcomeExtension ? 'h-5' : 'h-10'"
+        class="absolute selected-div"
+      ></div>
+      <img
+        ref="cursorRef"
+        src="~/assets/icons/cursor.png"
+        class="z-50 absolute cursor"
+      />
+      <div
+        ref="logoRef"
+        class="z-20 absolute p-0.5 bg-primary filter specific-shadow hidden"
+      >
+        <img class="w-10 h-10" src="~/assets/icons/logo.png" />
+      </div>
+      <div
+        ref="addingPopupRef"
+        class="z-20 absolute w-60 h-52 bg-base filter specific-shadow hidden rounded-md"
+      >
+        <div
+          class="w-full h-full flex flex-col items-center justify-center gap-4"
+        >
+          <div class="w-4/5">
+            <span class="ml-2 px-2 font-bold bg-white rounded-t-sm"
+              >{{ props.nativeLanguageLabel }}:</span
+            >
+            <div
+              class="-mt-1 pl-3 h-10 bg-white rounded-sm flex flex-col justify-center"
+            >
+              <span class="text-black text-lg">{{ props.nativeWord }}</span>
+            </div>
+          </div>
+          <div class="w-4/5">
+            <span class="ml-2 px-2 font-bold bg-white rounded-t-sm"
+              >{{ props.foreignLanguageLabel }}:</span
+            >
+            <div
+              class="-mt-1 pl-3 h-10 bg-white rounded-sm flex flex-col justify-center"
+            >
+              <span class="text-black text-lg">{{ props.foreignWord }}</span>
+            </div>
+          </div>
+
+          <div
+            ref="submitBtnRef"
+            class="w-1/3 h-10 bg-primary filter drop-shadow-lg flex flex-row justify-center items-center rounded-lg"
+          >
+            <span class="text-black text-lg font-bold">Submit</span>
+          </div>
+        </div>
+      </div>
       <span
         id="extension_promo"
         ref="extensionPromoRef"
         :class="isWelcomeExtension ? '' : 'sm:text-4xl text-3xl'"
-        class="font-sans leading-normal text-black text-center"
+        class="relative font-sans leading-normal text-black text-center"
         v-html="props.text"
       />
-    </div>
-    <div
-      ref="selectedDivRef"
-      :class="isWelcomeExtension ? 'h-5' : 'h-10'"
-      class="absolute selected-div"
-    ></div>
-    <img
-      ref="cursorRef"
-      src="~/assets/icons/cursor.png"
-      class="z-50 absolute cursor"
-    />
-    <div
-      ref="logoRef"
-      class="z-20 absolute p-0.5 bg-primary filter specific-shadow hidden"
-    >
-      <img class="w-10 h-10" src="~/assets/icons/logo.png" />
-    </div>
-    <div
-      ref="addingPopupRef"
-      class="z-20 absolute w-60 h-52 bg-base filter specific-shadow hidden rounded-md"
-    >
-      <div
-        class="w-full h-full flex flex-col items-center justify-center gap-4"
-      >
-        <div class="w-4/5">
-          <span class="ml-2 px-2 font-bold bg-white rounded-t-sm"
-            >{{ props.nativeLanguageLabel }}:</span
-          >
-          <div
-            class="-mt-1 pl-3 h-10 bg-white rounded-sm flex flex-col justify-center"
-          >
-            <span class="text-black text-lg">{{ props.nativeWord }}</span>
-          </div>
-        </div>
-        <div class="w-4/5">
-          <span class="ml-2 px-2 font-bold bg-white rounded-t-sm"
-            >{{ props.foreignLanguageLabel }}:</span
-          >
-          <div
-            class="-mt-1 pl-3 h-10 bg-white rounded-sm flex flex-col justify-center"
-          >
-            <span class="text-black text-lg">{{ props.foreignWord }}</span>
-          </div>
-        </div>
-
-        <div
-          ref="submitBtnRef"
-          class="w-1/3 h-10 bg-primary filter drop-shadow-lg flex flex-row justify-center items-center rounded-lg"
-        >
-          <span class="text-black text-lg font-bold">Submit</span>
-        </div>
-      </div>
     </div>
     <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
@@ -237,14 +237,6 @@ export default defineComponent({
 
 <style scoped>
 .selected-div {
-  z-index: 10;
-  background-color: #3498db;
-}
-
-.selected-div-bis {
-  height: 100px;
-  width: 100px;
-  z-index: 10;
   background-color: #3498db;
 }
 
