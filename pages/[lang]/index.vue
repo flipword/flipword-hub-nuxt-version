@@ -172,7 +172,7 @@
       </div>
     </div>
     <!--    Footer -->
-    <div class="w-full h-10 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top">
+    <div class="w-full h-8 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top">
       <NuxtLink to="/about-us">
         <span class="text-black font-bold cursor-pointer">About us</span>
       </NuxtLink>

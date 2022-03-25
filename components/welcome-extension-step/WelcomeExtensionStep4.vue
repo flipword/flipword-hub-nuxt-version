@@ -47,7 +47,7 @@ import ExtensionPopupAnimation from "~/components/ExtensionPopupAnimation.vue";
 import { useNuxtApp } from "#app";
 
 export default defineComponent({
-  name: "WelcomeExtensionStep2",
+  name: "WelcomeExtensionStep4",
   components: {
     ExtensionPopupAnimation,
   },

@@ -1,42 +1,54 @@
 <template>
-  <div>
+  <div class="h-screen flex flex-col">
     <!--    TODO: use Nuxt 3 Layout boilerplate -->
     <Layout />
-    <div class="w-full flex flex-row justify-center">
+    <div
+      class="h-auto w-full flex flex-grow flex-col justify-center items-center gap-10"
+    >
       <div
-        class="mt-32 xl:w-2/5 lg:w-3/5 md:w-4/5 w-10/12 bg-white p-6 rounded-lg"
+        class="h-3/4 2xl:w-3/12 xl:w-4/12 lg:w-5/12 md:w-8/12 w-9/12 bg-white p-6 rounded-lg shadow-lg"
       >
-        <WelcomeExtensionStep1
-          v-if="step == 1"
-          :foreign-language-label="getForeignLanguageLabel()"
-          :native-language-label="getNativeLanguageLabel()"
-          @click="nextStep"
-        />
-        <WelcomeExtensionStep2 v-else-if="step == 2" />
+        <WelcomeExtensionStep0 v-if="step == 0" />
+        <WelcomeExtensionStep1 v-else-if="step == 1" @click="nextStep" />
+        <WelcomeExtensionStep2 v-else-if="step == 2" @click="nextStep" />
         <WelcomeExtensionStep3 v-else-if="step == 3" />
+      </div>
+      <div
+        :class="`${step == 0 ? 'invisible' : 'visible'}`"
+        class="lg:w-8/12 w-10/12 h-4"
+      >
+        <WelcomeStepper :current-step="step" :nb-step="3" />
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+import { computed, defineComponent, ref, onBeforeMount } from "vue";
 import Layout from "~/components/Layout.vue";
 import { useMeta, useNuxtApp } from "#app";
-import WelcomeExtensionStep1 from "~/components/WelcomeExtensionStep1.vue";
-import WelcomeExtensionStep2 from "~/components/WelcomeExtensionStep2.vue";
-import WelcomeExtensionStep3 from "~/components/WelcomeExtensionStep3.vue";
+import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeExtensionStep0.vue";
+import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
+import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeExtensionStep2.vue";
+import WelcomeExtensionStep3 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
+import WelcomeStepper from "~/components/WelcomeStepper.vue";
 import { langOptions } from "~/plugins/i18n";
 
 export default defineComponent({
   name: "WelcomeExtension",
   components: {
+    WelcomeExtensionStep0,
     WelcomeExtensionStep1,
     WelcomeExtensionStep2,
     WelcomeExtensionStep3,
+    WelcomeStepper,
     Layout,
   },
   setup() {
+    onBeforeMount(() => {
+      countDownStep1();
+    });
+
     const {
       $i18n,
       $router,
@@ -53,7 +65,7 @@ export default defineComponent({
       title: computed(() => `Flipword ${$i18n("welcome") ? getTitle() : ""}`),
     });
 
-    const step = ref<number>(1);
+    const step = ref<number>(0);
 
     const langInUrl = langOptions.find(
       (x: any) => x.id == $router.currentRoute.value.params.lang
@@ -75,6 +87,9 @@ export default defineComponent({
         foreignLang = langOptions.find((x: any) => x.id == "fr");
       }
       return foreignLang.label;
+    };
+    const countDownStep1 = () => {
+      setTimeout(nextStep, 2000);
     };
 
     const nextStep = () => {

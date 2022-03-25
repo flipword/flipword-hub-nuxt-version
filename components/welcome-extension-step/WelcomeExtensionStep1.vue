@@ -1,11 +1,9 @@
 <template>
-  <div class="flex flex-col items-center">
+  <div
+    class="h-full w-full flex flex-col justify-center items-center gap-32 pb-32"
+  >
     <span class="text-3xl">What is your language ?</span>
-    <CountrySelect
-      class="mt-8"
-      :current-lang="currentLang"
-      @changeLang="pickLanguage"
-    />
+    <CountrySelect :current-lang="currentLang" @changeLang="pickLanguage" />
   </div>
 </template>
 
