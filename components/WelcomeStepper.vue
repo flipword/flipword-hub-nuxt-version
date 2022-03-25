@@ -3,7 +3,7 @@
     <div
       v-for="step in props.nbStep"
       :key="step"
-      class="flex-auto h-full rounded-xl"
+      class="flex-auto h-full rounded-xl shadow-md"
       :class="`${props.currentStep >= step ? 'bg-primary' : 'bg-white'}`"
     />
   </div>

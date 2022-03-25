@@ -1,24 +1,21 @@
 <template>
-  <div>
-    <Layout />
-    <Profil
+  <NuxtLayout name="base-layout">
+    <Profile
       name="Adrien Croquelois"
       :description="i18n('profile_presentation')"
     />
-  </div>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import Profil from "~/components/Profil.vue";
-import Layout from "~/components/Layout.vue";
+import Profile from "~/components/Profile.vue";
 import { useNuxtApp, useMeta } from "#app";
 
 export default defineComponent({
   name: "AboutUs",
   components: {
-    Profil,
-    Layout,
+    Profile,
   },
   setup() {
     const { $i18n } = useNuxtApp();
@@ -26,6 +23,7 @@ export default defineComponent({
 
     useMeta({
       title: computed(() => `Flipword ${$i18n("about_us") ? getTitle() : ""}`),
+      layout: "custom",
     });
 
     return {

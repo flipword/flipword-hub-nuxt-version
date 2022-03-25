@@ -1,26 +1,26 @@
 <template>
-  <div class="h-screen flex flex-col">
-    <!--    TODO: use Nuxt 3 Layout boilerplate -->
-    <Layout />
-    <div
-      class="h-auto w-full flex flex-grow flex-col justify-center items-center gap-10"
-    >
+  <NuxtLayout name="base-layout">
+    <div class="h-full flex flex-col">
       <div
-        class="h-3/4 2xl:w-3/12 xl:w-4/12 lg:w-5/12 md:w-8/12 w-9/12 bg-white p-6 rounded-lg shadow-lg"
+        class="h-auto w-full flex flex-grow flex-col justify-center items-center gap-10"
       >
-        <WelcomeExtensionStep0 v-if="step == 0" />
-        <WelcomeExtensionStep1 v-else-if="step == 1" @click="nextStep" />
-        <WelcomeExtensionStep2 v-else-if="step == 2" @click="nextStep" />
-        <WelcomeExtensionStep3 v-else-if="step == 3" />
-      </div>
-      <div
-        :class="`${step == 0 ? 'invisible' : 'visible'}`"
-        class="lg:w-8/12 w-10/12 h-4"
-      >
-        <WelcomeStepper :current-step="step" :nb-step="3" />
+        <div
+          class="h-3/4 2xl:w-3/12 xl:w-4/12 lg:w-5/12 md:w-8/12 w-9/12 bg-white p-6 rounded-lg shadow-lg"
+        >
+          <WelcomeExtensionStep0 v-if="step == 0" />
+          <WelcomeExtensionStep1 v-else-if="step == 1" @click="nextStep" />
+          <WelcomeExtensionStep2 v-else-if="step == 2" @click="nextStep" />
+          <WelcomeExtensionStep3 v-else-if="step == 3" />
+        </div>
+        <div
+          :class="`${step == 0 ? 'invisible' : 'visible'}`"
+          class="lg:w-8/12 w-10/12 h-4"
+        >
+          <WelcomeStepper :current-step="step" :nb-step="3" />
+        </div>
       </div>
     </div>
-  </div>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">

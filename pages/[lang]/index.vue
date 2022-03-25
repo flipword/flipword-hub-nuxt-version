@@ -172,15 +172,7 @@
       </div>
     </div>
     <!--    Footer -->
-    <div class="w-full h-8 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top">
-      <NuxtLink to="/about-us">
-        <span class="text-black font-bold cursor-pointer">About us</span>
-      </NuxtLink>
-      <div class="flex flex-row items-center gap-2 cursor-pointer" @click="openGithub">
-        <span class="text-black font-bold">Github</span>
-        <img src="~/assets/icons/github.png" />
-      </div>
-    </div>
+    <Footer />
     <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
 </template>
@@ -195,6 +187,7 @@ import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
 import TitleLogoElement from "~/components/TitleLogoElement.vue";
 import ExtensionPopupAnimation from "~/components/ExtensionPopupAnimation.vue";
+import Footer from "~/components/Footer.vue";
 import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
 
@@ -211,7 +204,8 @@ export default defineComponent({
     AddingPopup,
     ListCard,
     ExtensionPopupAnimation,
-    TitleLogoElement
+    TitleLogoElement,
+    Footer
   },
   setup() {
     const {
@@ -313,10 +307,6 @@ export default defineComponent({
       window.open(url);
     };
 
-    const openGithub = () => {
-      window.open("https://github.com/flipword")
-    }
-
     return {
       updateLang,
       langOptions,
@@ -335,7 +325,6 @@ export default defineComponent({
       isMobile,
       isClient,
       handleResize,
-      openGithub
     };
   },
 });

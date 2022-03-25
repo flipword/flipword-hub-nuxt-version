@@ -38,15 +38,14 @@ enum SocialNetwork {
 }
 
 export default defineComponent({
-  name: "Profil",
+  name: "Profile",
   props: {
     name: {
       type: String,
       required: true,
     },
     description: {
-      type: String,
-      required: true,
+      type: String
     }
   },
   setup(props) {
