@@ -25,14 +25,13 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, onBeforeMount } from "vue";
-import Layout from "~/components/Layout.vue";
+import { useLanguage } from "~/composables/useLanguage";
 import { useMeta, useNuxtApp } from "#app";
 import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeExtensionStep0.vue";
 import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
 import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeExtensionStep2.vue";
 import WelcomeExtensionStep3 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
 import WelcomeStepper from "~/components/WelcomeStepper.vue";
-import { langOptions } from "~/plugins/i18n";
 
 export default defineComponent({
   name: "WelcomeExtension",
@@ -42,22 +41,13 @@ export default defineComponent({
     WelcomeExtensionStep2,
     WelcomeExtensionStep3,
     WelcomeStepper,
-    Layout,
   },
   setup() {
     onBeforeMount(() => {
       countDownStep1();
     });
 
-    const {
-      $i18n,
-      $router,
-      payload: {
-        config: {
-          app: { lang },
-        },
-      },
-    } = useNuxtApp();
+    const { $i18n } = useNuxtApp();
 
     const getTitle = () => `- ${$i18n("welcome")}`;
 
@@ -67,27 +57,10 @@ export default defineComponent({
 
     const step = ref<number>(0);
 
-    const langInUrl = langOptions.find(
-      (x: any) => x.id == $router.currentRoute.value.params.lang
-    );
-    const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
+    const {
+      value: [currentLang, nativeLanguageLabel, foreignLanguageLabel],
+    } = useLanguage();
 
-    const getNativeLanguageLabel = () => {
-      const lang = langOptions.find((x: any) => x.id == currentLang.value);
-      if (lang) {
-        return lang.label;
-      }
-      return "";
-    };
-
-    const getForeignLanguageLabel = () => {
-      const lang = langOptions.find((x: any) => x.id == currentLang.value);
-      let foreignLang = langOptions.find((x: any) => x.id == "en");
-      if (lang && lang.id == "en") {
-        foreignLang = langOptions.find((x: any) => x.id == "fr");
-      }
-      return foreignLang.label;
-    };
     const countDownStep1 = () => {
       setTimeout(nextStep, 2000);
     };
@@ -100,8 +73,9 @@ export default defineComponent({
       i18n: $i18n,
       step,
       nextStep,
-      getNativeLanguageLabel,
-      getForeignLanguageLabel,
+      currentLang,
+      nativeLanguageLabel,
+      foreignLanguageLabel,
     };
   },
 });
