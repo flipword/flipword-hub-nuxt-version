@@ -14,5 +14,10 @@
   "home": "Bienvenida",
   "about_us": "Sobre nosotros",
   "welcome": "Bienvenido",
-  "profile_presentation": "Hola, tengo 23 años y me encanta crear software de calidad."
+  "profile_presentation": "Hola, tengo 23 años y me encanta crear software de calidad.",
+  "what_is_language": "Cuál es su idioma ?",
+  "which_learned_language": "Qué idioma quieres aprender?",
+  "sign_in": "Iniciar sesión",
+  "apple_auth": "Inicia sesión con Apple",
+  "google_auth": "inicia sesión con Google"
 }

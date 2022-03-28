@@ -95,7 +95,6 @@ export default defineComponent({
     },
     isWelcomeExtension: {
       type: Boolean,
-      required: true,
     },
   },
   setup(props) {

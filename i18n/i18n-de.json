@@ -14,5 +14,10 @@
   "home": "Zuhause",
   "about_us": "Über uns",
   "welcome": "Willkommen",
-  "profile_presentation": "Hallo, ich bin 23 und liebe es, hochwertige Software zu entwickeln."
+  "profile_presentation": "Hallo, ich bin 23 und liebe es, hochwertige Software zu entwickeln.",
+  "what_is_language": "Was ist deine Sprache ?",
+  "which_learned_language": "Welche Sprache möchten Sie lernen?",
+  "sign_in": "Sign in",
+  "apple_auth": "Sign in mit Apple",
+  "google_auth": "Sign in mit Google"
 }

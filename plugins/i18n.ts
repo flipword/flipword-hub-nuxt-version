@@ -48,8 +48,13 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   addRouteMiddleware(
     "i18nRedirect",
     (to, from) => {
+      // TODO: "Rework redirect if english"
       if (to.path != "/") {
-        if (from.params.lang && from.params.lang != to.params.lang) {
+        if (
+          from.params.lang &&
+          !to.params.lang &&
+          from.params.lang != to.params.lang
+        ) {
           const replacedRoute = `/${from.params.lang}${to.fullPath}`;
           return navigateTo(replacedRoute);
         }

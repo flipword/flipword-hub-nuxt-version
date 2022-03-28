@@ -2,7 +2,7 @@
   <div
     class="h-full w-full flex flex-col justify-center items-center gap-32 pb-32"
   >
-    <span class="text-3xl">What is your language ?</span>
+    <span class="text-3xl">{{ i18n("what_is_language") }}</span>
     <CountrySelect :current-lang="currentLang" @changeLang="pickLanguage" />
   </div>
 </template>
@@ -34,8 +34,8 @@ export default defineComponent({
     );
     const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
 
-    const pickLanguage = () => {
-      emit("click");
+    const pickLanguage = (lang: string) => {
+      emit("click", lang);
     };
 
     return {

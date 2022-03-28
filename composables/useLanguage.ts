@@ -35,6 +35,7 @@ export const useLanguage = () => {
   };
 
   return useState("language", () => [
+    lang,
     currentLang.value,
     getNativeLanguageLabel(),
     getForeignLanguageLabel(),
