@@ -9,10 +9,7 @@
             class="h-3/4 2xl:w-3/12 xl:w-4/12 lg:w-5/12 md:w-8/12 w-9/12 bg-white p-6 rounded-lg shadow-lg"
           >
             <WelcomeExtensionStep0 v-if="step == 0" />
-            <WelcomeExtensionStep1
-              v-else-if="step == 1"
-              @click="changeLanguage"
-            />
+            <WelcomeExtensionStep1 v-else-if="step == 1" @click="updateLang" />
             <WelcomeExtensionStep2 v-else-if="step == 2" @click="nextStep" />
             <WelcomeExtensionStep3 v-else-if="step == 3" />
           </div>
@@ -30,7 +27,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, onMounted, onBeforeMount } from "vue";
-import { navigateTo, useMeta, useNuxtApp } from "#app";
+import { useMeta, useNuxtApp } from "#app";
 import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeExtensionStep0.vue";
 import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
 import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeExtensionStep2.vue";
@@ -48,7 +45,7 @@ export default defineComponent({
   },
   setup() {
     useMeta({
-      title: computed(() => `Flipword ${$i18n("welcome") ? getTitle() : ""}`),
+      title: computed(() => `Flipword ${$t("welcome") ? getTitle() : ""}`),
     });
 
     onBeforeMount(() => {
@@ -59,9 +56,17 @@ export default defineComponent({
       countDownStep1();
     });
 
-    const { $i18n } = useNuxtApp();
+    const {
+      $i18n: {
+        $t,
+        currentLang,
+        updateLang,
+        getNativeLanguageLabel,
+        getForeignLanguageLabel,
+      },
+    } = useNuxtApp();
 
-    const getTitle = () => `- ${$i18n("welcome")}`;
+    const getTitle = () => `- ${$t("welcome")}`;
 
     const step = ref<number>(0);
 
@@ -78,16 +83,6 @@ export default defineComponent({
       }
     };
 
-    const changeLanguage = (newLang: string) => {
-      // TODO: "Rework i18n on change lang"
-      if (currentLang.value == lang) {
-        navigateTo("/welcome-extension", { replace: true });
-      } else {
-        navigateTo(`/${newLang}/welcome-extension`, { replace: true });
-      }
-      nextStep();
-    };
-
     const getCurrentStep: number = () => {
       let currentStep = 0;
       if (process.client) {
@@ -99,13 +94,13 @@ export default defineComponent({
     const isClient = process.client;
 
     return {
-      i18n: $i18n,
+      t: $t,
       step,
       nextStep,
-      changeLanguage,
+      updateLang,
       currentLang,
-      nativeLanguageLabel,
-      foreignLanguageLabel,
+      getNativeLanguageLabel,
+      getForeignLanguageLabel,
       isClient,
     };
   },

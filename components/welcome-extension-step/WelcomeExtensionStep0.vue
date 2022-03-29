@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full flex flex-col justify-center items-center">
-    <span class="text-3xl">{{ i18n("welcome") }}</span>
+    <span class="text-3xl">{{ t("welcome") }}</span>
   </div>
 </template>
 
@@ -10,9 +10,11 @@ import { useNuxtApp } from "#app";
 export default defineComponent({
   name: "WelcomeExtensionStep1",
   setup() {
-    const { $i18n } = useNuxtApp();
+    const {
+      $i18n: { $t },
+    } = useNuxtApp();
     return {
-      i18n: $i18n,
+      t: $t,
     };
   },
 });
