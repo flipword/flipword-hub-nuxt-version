@@ -62,9 +62,9 @@
             <ExtensionPopupAnimation
                 :native-language-label="getNativeLanguageLabel()"
                 :foreign-language-label="getForeignLanguageLabel()"
-                :text="i18n('extension_promo')"
-                :native-word="i18n('extension_popup_native_word')"
-                :foreign-word="i18n('extension_popup_foreign_word')"
+                :text="t('extension_promo')"
+                :native-word="t('extension_popup_native_word')"
+                :foreign-word="t('extension_popup_foreign_word')"
             />
           </div>
         </div>
@@ -76,7 +76,7 @@
           >
             <span
               class="font-sans text-4xl leading-normal text-black text-center"
-              v-html="i18n('create_description')"
+              v-html="t('create_description')"
             />
           </div>
           <div class="h-1/2 px-16 w-full">
@@ -115,7 +115,7 @@
           >
           <span
               class="font-sans text-3xl leading-normal text-black text-center"
-              v-html="i18n('create_description')"
+              v-html="t('create_description')"
           />
           </div>
         </div>
@@ -142,9 +142,9 @@
             <ExtensionPopupAnimation
                 :native-language-label="getNativeLanguageLabel()"
                 :foreign-language-label="getForeignLanguageLabel()"
-                :text="i18n('extension_promo')"
-                :native-word="i18n('extension_popup_native_word')"
-                :foreign-word="i18n('extension_popup_foreign_word')"
+                :text="t('extension_promo')"
+                :native-word="t('extension_popup_native_word')"
+                :foreign-word="t('extension_popup_foreign_word')"
             />
           </div>
         </div>
@@ -155,7 +155,7 @@
       <div class="lg:flex-1 w-full flex flex-row lg:justify-start justify-center items-center">
         <span
           class="font-sans sm:text-4xl text-3xl leading-normal text-black text-center"
-          v-html="i18n('your_turn')"
+          v-html="t('your_turn')"
         />
       </div>
       <div class="lg:flex-1 w-full flex flex-row lg:justify-end justify-center lg:pt-0 pt-3 items-center">
@@ -165,7 +165,7 @@
           @click="redirectToApp"
         >
           <div class="w-full flex flex-row items-center justify-center gap-4">
-            <span class="sm:text-4xl text-3xl font-bold">{{ i18n("launch_app") }}</span>
+            <span class="sm:text-4xl text-3xl font-bold">{{ t("launch_app") }}</span>
             <img src="~/assets/icons/play.png" />
           </div>
         </button>
@@ -209,19 +209,14 @@ export default defineComponent({
   },
   setup() {
     const {
-      $i18n,
+      $i18n: {$t, currentLang, updateLang, getNativeLanguageLabel, getForeignLanguageLabel},
       $router,
-      payload: {
-        config: {
-          app: { lang },
-        },
-      },
     } = useNuxtApp();
 
-    const getTitle = () => `- ${$i18n('home')}`
+    const getTitle = () => `- ${$t('home')}`
 
     useMeta({
-      title: computed(() => `Flipword ${$i18n('home') ? getTitle() : ''}`)
+      title: computed(() => `Flipword ${$t('home') ? getTitle() : ''}`)
     });
 
     const isClient = process.client
@@ -234,41 +229,9 @@ export default defineComponent({
       isMobile.value = window.innerWidth < 1024
     }
 
-    // TODO: Use Nuxt 3 composable
-    const langInUrl = langOptions.find(
-      (x: any) => x.id == $router.currentRoute.value.params.lang
-    );
-    const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
-
-    const updateLang = (updatedLang: string) => {
-      currentLang.value = updatedLang;
-      if (currentLang.value == lang) {
-        navigateTo("/");
-      } else {
-        navigateTo(`/${currentLang.value}`);
-      }
-    };
-
-    const getNativeLanguageLabel = () => {
-      const lang = langOptions.find((x: any) => x.id == currentLang.value)
-      if(lang){
-        return lang.label
-      }
-      return ''
-    }
-
-    const getForeignLanguageLabel = () => {
-      const lang = langOptions.find((x: any) => x.id == currentLang.value)
-      let foreignLang = langOptions.find((x: any) => x.id == 'en')
-      if(lang && lang.id == 'en'){
-        foreignLang = langOptions.find((x: any) => x.id == 'fr')
-      }
-      return foreignLang.label
-    }
-
     const wordListChunk = (): Word[][] => {
-      const nbWordToDisplay = isMobile.value ? 8 : wordList[currentLang.value].length
-      return wordList[currentLang.value].slice(0, nbWordToDisplay).reduce((resultArray, item, index) => {
+      const nbWordToDisplay = isMobile.value ? 8 : wordList[currentLang].length
+      return wordList[currentLang].slice(0, nbWordToDisplay).reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index / 2);
 
         if (!resultArray[chunkIndex]) {
@@ -282,7 +245,7 @@ export default defineComponent({
     };
 
     const wordListWithCurrentLang = (): Word[] => {
-      return wordList[currentLang.value];
+      return wordList[currentLang];
     };
 
     const redirectToApp = () => {
@@ -311,7 +274,7 @@ export default defineComponent({
       updateLang,
       langOptions,
       currentLang,
-      i18n: $i18n,
+      t: $t,
       router: $router,
       platform: Platform,
       wordListChunked: wordListChunk(),

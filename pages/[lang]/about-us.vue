@@ -2,7 +2,7 @@
   <NuxtLayout name="base-layout">
     <Profile
       name="Adrien Croquelois"
-      :description="i18n('profile_presentation')"
+      :description="t('profile_presentation')"
     />
   </NuxtLayout>
 </template>
@@ -18,16 +18,19 @@ export default defineComponent({
     Profile,
   },
   setup() {
-    const { $i18n } = useNuxtApp();
-    const getTitle = () => `- ${$i18n("about_us")}`;
+    const {
+      $i18n: { $t },
+    } = useNuxtApp();
+
+    const getTitle = () => `- ${$t("about_us")}`;
 
     useMeta({
-      title: computed(() => `Flipword ${$i18n("about_us") ? getTitle() : ""}`),
+      title: computed(() => `Flipword ${$t("about_us") ? getTitle() : ""}`),
       layout: "custom",
     });
 
     return {
-      i18n: $i18n,
+      t: $t,
     };
   },
 });

@@ -30,7 +30,6 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, onMounted, onBeforeMount } from "vue";
-import { useLanguage } from "~/composables/useLanguage";
 import { navigateTo, useMeta, useNuxtApp } from "#app";
 import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeExtensionStep0.vue";
 import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
@@ -65,10 +64,6 @@ export default defineComponent({
     const getTitle = () => `- ${$i18n("welcome")}`;
 
     const step = ref<number>(0);
-
-    const {
-      value: [lang, currentLang, nativeLanguageLabel, foreignLanguageLabel],
-    } = useLanguage();
 
     const countDownStep1 = () => {
       if (step.value == 0) {
