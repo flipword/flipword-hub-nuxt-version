@@ -5,6 +5,10 @@ import * as i18nFR from "../i18n/i18n-fr.json";
 import * as i18nES from "../i18n/i18n-es.json";
 import * as i18nDE from "../i18n/i18n-de.json";
 import { ref } from "vue";
+import {
+  RouteLocationNormalized,
+  RouteLocationNormalizedLoaded,
+} from "vue-router";
 
 export const langOptions = [
   {
@@ -68,19 +72,25 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     return langIndex != -1 ? langOptions[langIndex]["json"][key] : null;
   };
 
-  const updateLang = (newLang: string) => {
-    const langPath = newLang == lang ? "" : newLang;
+  const removeLangFromRoute = (
+    route: RouteLocationNormalized | RouteLocationNormalizedLoaded
+  ) => {
     const hasDoubleSlashInUrl =
-      $router.currentRoute.value?.fullPath?.indexOf(
-        `/${$router.currentRoute.value?.params?.lang}/`
-      ) != -1;
-    const currentRoute = $router.currentRoute.value?.path.replace(
-      `/${$router.currentRoute.value?.params?.lang}${
-        hasDoubleSlashInUrl ? "/" : ""
-      }`,
+      route.fullPath?.indexOf(`/${route.params?.lang}/`) != -1;
+    const currentRouteWithoutLang = route.path.replace(
+      `/${route.params?.lang}${hasDoubleSlashInUrl ? "/" : ""}`,
       `${hasDoubleSlashInUrl ? "/" : ""}`
     );
-    navigateTo(`${langPath != "" ? `/${langPath}` : ""}${currentRoute}`);
+    return currentRouteWithoutLang;
+  };
+  const updateLang = (newLang: string) => {
+    const langPath = newLang == lang ? "" : newLang;
+    const currentRouteWithoutLang = removeLangFromRoute(
+      $router.currentRoute.value
+    );
+    navigateTo(
+      `${langPath != "" ? `/${langPath}` : ""}${currentRouteWithoutLang}`
+    );
   };
 
   const getNativeLanguageLabel = () => {
@@ -100,18 +110,20 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     return foreignLang.label;
   };
 
-  // TODO: gérer le cas du click sur about us depuis une page fr par exemple
   addRouteMiddleware(
     "i18nRedirect",
-    (to) => {
+    (to, from) => {
+      if (currentLang.value != lang && from.params?.lang != to.params?.lang) {
+        const toRouteWithoutLang = removeLangFromRoute(to);
+        const fromRouteWithoutLang = removeLangFromRoute(from);
+        if (toRouteWithoutLang != fromRouteWithoutLang) {
+          const langPath = from.params?.lang == lang ? "" : from.params?.lang;
+          return navigateTo(
+            `${langPath != "" ? `/${langPath}` : ""}${toRouteWithoutLang}`
+          );
+        }
+      }
       currentLang.value = to.params?.lang ?? lang;
-      // console.log("ping 1, current: ", currentLang);
-      // console.log("to: ", to.params.lang);
-      // if (currentLang != to.params.lang) {
-      //   console.log("ping 2");
-      //   const langPath = currentLang == lang ? "/" : currentLang;
-      //   return navigateTo(`/${langPath}${to.fullPath}`);
-      // }
     },
     { global: true }
   );
