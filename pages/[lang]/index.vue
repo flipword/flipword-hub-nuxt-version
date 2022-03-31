@@ -230,8 +230,8 @@ export default defineComponent({
     }
 
     const wordListChunk = (): Word[][] => {
-      const nbWordToDisplay = isMobile.value ? 8 : wordList[currentLang].length
-      return wordList[currentLang].slice(0, nbWordToDisplay).reduce((resultArray, item, index) => {
+      const nbWordToDisplay = isMobile.value ? 8 : wordList[currentLang.value].length
+      return wordList[currentLang.value].slice(0, nbWordToDisplay).reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index / 2);
 
         if (!resultArray[chunkIndex]) {
@@ -245,7 +245,7 @@ export default defineComponent({
     };
 
     const wordListWithCurrentLang = (): Word[] => {
-      return wordList[currentLang];
+      return wordList[currentLang.value];
     };
 
     const redirectToApp = () => {
