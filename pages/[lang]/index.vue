@@ -179,7 +179,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
-import {useMeta, useNuxtApp, navigateTo} from "#app";
+import {useHead, useNuxtApp, navigateTo} from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
@@ -215,7 +215,7 @@ export default defineComponent({
 
     const getTitle = () => `- ${$t('home')}`
 
-    useMeta({
+    useHead({
       title: computed(() => `Flipword ${$t('home') ? getTitle() : ''}`)
     });
 
@@ -245,6 +245,7 @@ export default defineComponent({
     };
 
     const wordListWithCurrentLang = (): Word[] => {
+      console.log("lang: ", currentLang.value)
       return wordList[currentLang.value];
     };
 

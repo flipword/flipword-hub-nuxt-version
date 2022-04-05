@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent, computed } from "vue";
 import Profile from "~/components/Profile.vue";
-import { useNuxtApp, useMeta } from "#app";
+import { useNuxtApp, useHead } from "#app";
 
 export default defineComponent({
   name: "AboutUs",
@@ -24,7 +24,7 @@ export default defineComponent({
 
     const getTitle = () => `- ${$t("about_us")}`;
 
-    useMeta({
+    useHead({
       title: computed(() => `Flipword ${$t("about_us") ? getTitle() : ""}`),
       layout: "custom",
     });

@@ -9,7 +9,10 @@
             class="h-3/4 2xl:w-3/12 xl:w-4/12 lg:w-5/12 md:w-8/12 w-9/12 bg-white p-6 rounded-lg shadow-lg"
           >
             <WelcomeExtensionStep0 v-if="step == 0" />
-            <WelcomeExtensionStep1 v-else-if="step == 1" @click="updateLang" />
+            <WelcomeExtensionStep1
+              v-else-if="step == 1"
+              @click="pickNativeLang"
+            />
             <WelcomeExtensionStep2 v-else-if="step == 2" @click="nextStep" />
             <WelcomeExtensionStep3 v-else-if="step == 3" />
           </div>
@@ -27,7 +30,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, onMounted, onBeforeMount } from "vue";
-import { useMeta, useNuxtApp } from "#app";
+import { useHead, useNuxtApp } from "#app";
 import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeExtensionStep0.vue";
 import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
 import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeExtensionStep2.vue";
@@ -44,10 +47,6 @@ export default defineComponent({
     WelcomeStepper,
   },
   setup() {
-    useMeta({
-      title: computed(() => `Flipword ${$t("welcome") ? getTitle() : ""}`),
-    });
-
     onBeforeMount(() => {
       step.value = getCurrentStep();
     });
@@ -67,8 +66,12 @@ export default defineComponent({
     } = useNuxtApp();
 
     const getTitle = () => `- ${$t("welcome")}`;
+    useHead({
+      title: computed(() => `Flipword ${$t("welcome") ? getTitle() : ""}`),
+    });
 
     const step = ref<number>(0);
+    let foreignLanguage = null;
 
     const countDownStep1 = () => {
       if (step.value == 0) {
@@ -79,26 +82,37 @@ export default defineComponent({
     const nextStep = () => {
       step.value += 1;
       if (process.client) {
-        localStorage.setItem("step", step.value);
+        localStorage.setItem("step", step.value.toString());
       }
     };
 
-    const getCurrentStep: number = () => {
+    const getCurrentStep = () => {
       let currentStep = 0;
       if (process.client) {
-        currentStep = localStorage.getItem("step");
+        currentStep = Number(localStorage.getItem("step"));
       }
-      return Number(currentStep);
+      return currentStep;
     };
 
     const isClient = process.client;
+
+    const pickNativeLang = (lang: string) => {
+      updateLang(lang);
+      nextStep();
+    };
+
+    const pickForeignLang = (lang: string) => {
+      foreignLanguage = lang;
+      nextStep();
+    };
 
     return {
       t: $t,
       step,
       nextStep,
-      updateLang,
       currentLang,
+      pickNativeLang,
+      pickForeignLang,
       getNativeLanguageLabel,
       getForeignLanguageLabel,
       isClient,

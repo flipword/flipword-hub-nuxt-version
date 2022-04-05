@@ -1,4 +1,4 @@
-import { defineNuxtPlugin, addRouteMiddleware, navigateTo } from "#app";
+import { defineNuxtPlugin, navigateTo, addRouteMiddleware } from "#app";
 
 import * as i18nEN from "../i18n/i18n-en.json";
 import * as i18nFR from "../i18n/i18n-fr.json";
@@ -42,8 +42,8 @@ export const flagPaths: { [key: string]: string } = {
 
 export default defineNuxtPlugin(async (nuxtApp) => {
   const {
-    $router,
     ssrContext,
+    $router,
     payload: {
       config: {
         app: { lang },
