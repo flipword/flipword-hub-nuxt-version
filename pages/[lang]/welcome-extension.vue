@@ -114,7 +114,7 @@ export default defineComponent({
         });
         document.dispatchEvent(event);
         document.addEventListener("loginSuccessful", () => {
-          console.log("login success");
+          nextStep();
         });
       }
     };
