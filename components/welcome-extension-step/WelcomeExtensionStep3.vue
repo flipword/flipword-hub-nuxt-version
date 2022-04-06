@@ -6,12 +6,14 @@
     <div class="flex flex-col gap-8">
       <button
         class="bg-primary flex flex-row items-center gap-2 px-10 py-3 rounded-xl"
+        @click="signInWith(authMethod.GOOGLE)"
       >
         <img src="/assets/icons/google.svg" />
         <span class="text-black font-bold">{{ t("google_auth") }}</span>
       </button>
       <button
         class="bg-black flex flex-row items-center gap-2 px-10 py-3 rounded-xl"
+        @click="signInWith(authMethod.APPLE)"
       >
         <div>
           <img src="/assets/icons/apple.svg" />
@@ -25,11 +27,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useNuxtApp } from "#app";
+import { AuthMethod } from "~/plugins/auth.client";
 
 export default defineComponent({
   name: "WelcomeExtensionStep2",
   components: {},
-  emits: ["click"],
+  emits: ["click", "signIn"],
   setup(props, { emit }) {
     const {
       $i18n: { $t, currentLang },
@@ -39,11 +42,17 @@ export default defineComponent({
       emit("click");
     };
 
+    const signInWith = (auth: AuthMethod) => {
+      emit("signIn", auth);
+    };
+
     return {
       props: props,
       t: $t,
       currentLang,
+      authMethod: AuthMethod,
       pickLanguage,
+      signInWith,
     };
   },
 });

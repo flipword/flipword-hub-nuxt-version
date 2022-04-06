@@ -245,7 +245,6 @@ export default defineComponent({
     };
 
     const wordListWithCurrentLang = (): Word[] => {
-      console.log("lang: ", currentLang.value)
       return wordList[currentLang.value];
     };
 

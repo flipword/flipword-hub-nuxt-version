@@ -4,9 +4,6 @@ import { createCommonJS } from "mlly";
 const { __dirname } = createCommonJS(import.meta.url);
 
 export default defineNuxtConfig({
-  app: {
-    lang: "en",
-  },
   build: {
     postcss: {
       postcssOptions: {

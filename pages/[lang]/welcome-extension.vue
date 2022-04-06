@@ -14,7 +14,7 @@
               @click="pickNativeLang"
             />
             <WelcomeExtensionStep2 v-else-if="step == 2" @click="nextStep" />
-            <WelcomeExtensionStep3 v-else-if="step == 3" />
+            <WelcomeExtensionStep3 v-else-if="step == 3" @sign-in="signIn" />
           </div>
           <div
             :class="`${step == 0 ? 'invisible' : 'visible'}`"
@@ -29,13 +29,14 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, onMounted, onBeforeMount } from "vue";
+import { computed, defineComponent, onBeforeMount, onMounted, ref } from "vue";
 import { useHead, useNuxtApp } from "#app";
 import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeExtensionStep0.vue";
 import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
 import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeExtensionStep2.vue";
 import WelcomeExtensionStep3 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
 import WelcomeStepper from "~/components/WelcomeStepper.vue";
+import { AuthMethod } from "~/plugins/auth.client";
 
 export default defineComponent({
   name: "WelcomeExtension",
@@ -106,6 +107,15 @@ export default defineComponent({
       nextStep();
     };
 
+    const signIn = (authMethod: AuthMethod) => {
+      if (process.client) {
+        const event = new CustomEvent("flipwordAuthRequest", {
+          detail: { authMethod: authMethod },
+        });
+        document.dispatchEvent(event);
+      }
+    };
+
     return {
       t: $t,
       step,
@@ -113,6 +123,7 @@ export default defineComponent({
       currentLang,
       pickNativeLang,
       pickForeignLang,
+      signIn,
       getNativeLanguageLabel,
       getForeignLanguageLabel,
       isClient,

@@ -33,6 +33,8 @@ export const langOptions = [
   },
 ];
 
+export const defaultLang: string = "en";
+
 export const flagPaths: { [key: string]: string } = {
   en: "english.png",
   fr: "french.png",
@@ -41,30 +43,24 @@ export const flagPaths: { [key: string]: string } = {
 };
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const {
-    ssrContext,
-    $router,
-    payload: {
-      config: {
-        app: { lang },
-      },
-    },
-  } = nuxtApp;
+  const { ssrContext, $router } = nuxtApp;
 
-  let currentLang = ref(lang);
+  let currentLang = ref(defaultLang);
 
   const t = (key: string) => {
     if (process.server) {
       if (ssrContext) {
         // TODO: revoir le calcul de lang en ssr
         currentLang.value =
-          ssrContext["url"] == "/" ? lang : ssrContext["url"].replace("/", "");
-        console.log("current: ", currentLang.value);
+          ssrContext["url"] == "/"
+            ? defaultLang
+            : ssrContext["url"].replace("/", "");
       } else {
-        currentLang.value = lang;
+        currentLang.value = defaultLang;
       }
     } else {
-      currentLang.value = $router.currentRoute.value?.params?.lang ?? lang;
+      currentLang.value =
+        $router.currentRoute.value?.params?.lang ?? defaultLang;
     }
     const langIndex = langOptions.findIndex(
       (x: any) => x.id == currentLang.value
@@ -84,7 +80,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     return currentRouteWithoutLang;
   };
   const updateLang = (newLang: string) => {
-    const langPath = newLang == lang ? "" : newLang;
+    const langPath = newLang == defaultLang ? "" : newLang;
     const currentRouteWithoutLang = removeLangFromRoute(
       $router.currentRoute.value
     );
@@ -113,17 +109,21 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   addRouteMiddleware(
     "i18nRedirect",
     (to, from) => {
-      if (currentLang.value != lang && from.params?.lang != to.params?.lang) {
+      if (
+        currentLang.value != defaultLang &&
+        from.params?.lang != to.params?.lang
+      ) {
         const toRouteWithoutLang = removeLangFromRoute(to);
         const fromRouteWithoutLang = removeLangFromRoute(from);
         if (toRouteWithoutLang != fromRouteWithoutLang) {
-          const langPath = from.params?.lang == lang ? "" : from.params?.lang;
+          const langPath =
+            from.params?.lang == defaultLang ? "" : from.params?.lang;
           return navigateTo(
             `${langPath != "" ? `/${langPath}` : ""}${toRouteWithoutLang}`
           );
         }
       }
-      currentLang.value = to.params?.lang ?? lang;
+      currentLang.value = to.params?.lang?.toString() ?? defaultLang;
     },
     { global: true }
   );
