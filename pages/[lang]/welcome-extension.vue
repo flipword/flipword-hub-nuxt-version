@@ -109,10 +109,12 @@ export default defineComponent({
 
     const signIn = (authMethod: AuthMethod) => {
       if (process.client) {
+        // Create custom event that will be catch by web extension to sign in
         const event = new CustomEvent("flipwordAuthRequest", {
           detail: { authMethod: authMethod },
         });
         document.dispatchEvent(event);
+        // Catch event emit by extension when login success
         document.addEventListener("loginSuccessful", () => {
           nextStep();
         });
