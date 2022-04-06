@@ -8,7 +8,7 @@
         class="bg-primary flex flex-row items-center gap-2 px-10 py-3 rounded-xl"
         @click="signInWith(authMethod.GOOGLE)"
       >
-        <img src="/assets/icons/google.svg" />
+        <img src="~/assets/icons/google.svg" />
         <span class="text-black font-bold">{{ t("google_auth") }}</span>
       </button>
       <button
@@ -16,7 +16,7 @@
         @click="signInWith(authMethod.APPLE)"
       >
         <div>
-          <img src="/assets/icons/apple.svg" />
+          <img src="~/assets/icons/apple.svg" />
         </div>
         <span class="text-white font-bold">{{ t("apple_auth") }}</span>
       </button>

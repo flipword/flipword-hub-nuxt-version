@@ -113,6 +113,9 @@ export default defineComponent({
           detail: { authMethod: authMethod },
         });
         document.dispatchEvent(event);
+        document.addEventListener("loginSuccessful", () => {
+          console.log("login success");
+        });
       }
     };
 
