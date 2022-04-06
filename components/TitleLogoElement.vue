@@ -22,7 +22,7 @@
           <div class="w-full flex justify-center">
             <span
               class="font-sans 2xl:text-4xl xl:text-3xl lg:text-2xl text-xl text-black text-center"
-              >{{ i18n("subtitle") }}</span
+              >{{ t("subtitle") }}</span
             >
           </div>
         </div>
@@ -38,9 +38,11 @@ import { useNuxtApp } from "#app";
 export default defineComponent({
   name: "TitleLogoElement",
   setup() {
-    const { $i18n } = useNuxtApp();
+    const {
+      $i18n: { $t },
+    } = useNuxtApp();
     return {
-      i18n: $i18n,
+      t: $t,
     };
   },
 });

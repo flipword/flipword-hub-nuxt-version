@@ -1,15 +1,23 @@
 {
   "greeting": "Hallo Welt !!!",
   "subtitle": "Vokabellerntool",
-  "create_description": "<b> Erstellen </b> Ihre eigene personalisierte Wortliste mit einem automatischen Übersetzer",
-  "extension_promo": "Dank der <b> Browsererweiterung </b> können Sie beim Surfen <abbr>einfach</abbr> Wörter zu Ihrer Liste hinzufügen",
-  "your_turn": "Du bist dran ! <b> Testen </b> Ihr Wissen!",
+  "create_description": "<b>Erstellen</b> Ihre eigene personalisierte Wortliste mit einem automatischen Übersetzer",
+  "extension_promo": "Dank der <b>Browsererweiterung</b> können Sie beim Surfen <abbr>einfach</abbr> Wörter zu Ihrer Liste hinzufügen",
+  "your_turn": "Du bist dran ! <b>Testen</b> Ihr Wissen!",
   "launch_app": "Starten",
   "save": "Speichern",
   "saved_word": "Wort gespeichert !",
   "extension_popup_native_word": "Einfach",
   "extension_popup_foreign_word": "Easely",
+  "extension_title_text": "Thank you to have downloaded Flipword extension !",
+  "extension_helping_text": "blabla",
   "home": "Zuhause",
   "about_us": "Über uns",
-  "profile_presentation": "Hallo, ich bin 23 und liebe es, hochwertige Software zu entwickeln."
+  "welcome": "Willkommen",
+  "profile_presentation": "Hallo, ich bin 23 und liebe es, hochwertige Software zu entwickeln.",
+  "what_is_language": "Was ist deine Sprache ?",
+  "which_learned_language": "Welche Sprache möchten Sie lernen?",
+  "sign_in": "Sign in",
+  "apple_auth": "Sign in mit Apple",
+  "google_auth": "Sign in mit Google"
 }

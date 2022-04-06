@@ -4,9 +4,6 @@ import { createCommonJS } from "mlly";
 const { __dirname } = createCommonJS(import.meta.url);
 
 export default defineNuxtConfig({
-  app: {
-    lang: "en",
-  },
   build: {
     postcss: {
       postcssOptions: {
@@ -29,6 +26,11 @@ export default defineNuxtConfig({
         name: "about-us",
         path: "/about-us",
         file: resolve(__dirname, "pages/[lang]/about-us.vue"),
+      });
+      pages.unshift({
+        name: "welcome-extension",
+        path: "/welcome-extension",
+        file: resolve(__dirname, "pages/[lang]/welcome-extension.vue"),
       });
     },
   },

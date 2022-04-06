@@ -72,7 +72,7 @@
       <div
         class="relative p-3 bg-primary flex flex-row gap-2 items-center rounded-lg overflow-hidden"
       >
-        <span class="text-black font-semibold">{{ i18n("save") }}</span>
+        <span class="text-black font-semibold">{{ t("save") }}</span>
         <img src="~/assets/icons/save.png" />
         <div ref="splashButtonRef" class="splash"></div>
       </div>
@@ -82,7 +82,7 @@
         ref="savedNotifyRef"
         class="p-3 bg-positive rounded-lg elementToFadeOut"
       >
-        <span class="text-white font-semibold">{{ i18n("saved_word") }}</span>
+        <span class="text-white font-semibold">{{ t("saved_word") }}</span>
       </div>
     </div>
   </div>
@@ -111,7 +111,9 @@ export default defineComponent({
   },
   emits: ["updateWord"],
   setup(props, { emit }) {
-    const { $i18n } = useNuxtApp();
+    const {
+      $i18n: { $t },
+    } = useNuxtApp();
     const loading = ref(false);
     const nativeWordDisplayed = ref(false);
     const foreignWordDisplayed = ref(false);
@@ -195,7 +197,7 @@ export default defineComponent({
     };
 
     return {
-      i18n: $i18n,
+      t: $t,
       props: props,
       loading: loading,
       nativeWordDisplayed: nativeWordDisplayed,

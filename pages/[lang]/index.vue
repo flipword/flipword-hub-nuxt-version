@@ -58,10 +58,15 @@
           <div class="w-full h-20 bg-base">
             <div class="w-full h-full bg-primary rounded-tr-5xl"></div>
           </div>
-          <ExtensionPromo
-              :native-language-label="getNativeLanguageLabel()"
-              :foreign-language-label="getForeignLanguageLabel()"
-          />
+          <div class="flex flex-col flex-grow justify-center items-center lg:px-32 px-3">
+            <ExtensionPopupAnimation
+                :native-language-label="getNativeLanguageLabel()"
+                :foreign-language-label="getForeignLanguageLabel()"
+                :text="t('extension_promo')"
+                :native-word="t('extension_popup_native_word')"
+                :foreign-word="t('extension_popup_foreign_word')"
+            />
+          </div>
         </div>
         <div
           class="h-full w-5/12 bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"
@@ -71,7 +76,7 @@
           >
             <span
               class="font-sans text-4xl leading-normal text-black text-center"
-              v-html="i18n('create_description')"
+              v-html="t('create_description')"
             />
           </div>
           <div class="h-1/2 px-16 w-full">
@@ -110,7 +115,7 @@
           >
           <span
               class="font-sans text-3xl leading-normal text-black text-center"
-              v-html="i18n('create_description')"
+              v-html="t('create_description')"
           />
           </div>
         </div>
@@ -133,10 +138,15 @@
             </div>
         </div>
         <div class="pt-6 w-full bg-primary">
-          <ExtensionPromo
-              :native-language-label="getNativeLanguageLabel()"
-              :foreign-language-label="getForeignLanguageLabel()"
-          />
+          <div class="flex flex-col flex-grow justify-center items-center lg:px-32 px-3">
+            <ExtensionPopupAnimation
+                :native-language-label="getNativeLanguageLabel()"
+                :foreign-language-label="getForeignLanguageLabel()"
+                :text="t('extension_promo')"
+                :native-word="t('extension_popup_native_word')"
+                :foreign-word="t('extension_popup_foreign_word')"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -145,7 +155,7 @@
       <div class="lg:flex-1 w-full flex flex-row lg:justify-start justify-center items-center">
         <span
           class="font-sans sm:text-4xl text-3xl leading-normal text-black text-center"
-          v-html="i18n('your_turn')"
+          v-html="t('your_turn')"
         />
       </div>
       <div class="lg:flex-1 w-full flex flex-row lg:justify-end justify-center lg:pt-0 pt-3 items-center">
@@ -155,36 +165,29 @@
           @click="redirectToApp"
         >
           <div class="w-full flex flex-row items-center justify-center gap-4">
-            <span class="sm:text-4xl text-3xl font-bold">{{ i18n("launch_app") }}</span>
+            <span class="sm:text-4xl text-3xl font-bold">{{ t("launch_app") }}</span>
             <img src="~/assets/icons/play.png" />
           </div>
         </button>
       </div>
     </div>
     <!--    Footer -->
-    <div class="w-full h-10 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top">
-      <NuxtLink to="/about-us">
-        <span class="text-black font-bold cursor-pointer">About us</span>
-      </NuxtLink>
-      <div class="flex flex-row items-center gap-2 cursor-pointer" @click="openGithub">
-        <span class="text-black font-bold">Github</span>
-        <img src="~/assets/icons/github.png" />
-      </div>
-    </div>
+    <Footer />
     <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
-import {useMeta, useNuxtApp, navigateTo} from "#app";
+import {useHead, useNuxtApp, navigateTo} from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
 import ListCard from "~/components/ListCard.vue";
 import TitleLogoElement from "~/components/TitleLogoElement.vue";
-import ExtensionPromo from "~/components/ExtensionPromo.vue";
+import ExtensionPopupAnimation from "~/components/ExtensionPopupAnimation.vue";
+import Footer from "~/components/Footer.vue";
 import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
 
@@ -200,24 +203,20 @@ export default defineComponent({
     CountrySelect,
     AddingPopup,
     ListCard,
-    ExtensionPromo,
-    TitleLogoElement
+    ExtensionPopupAnimation,
+    TitleLogoElement,
+    Footer
   },
   setup() {
     const {
-      $i18n,
+      $i18n: {$t, currentLang, updateLang, getNativeLanguageLabel, getForeignLanguageLabel},
       $router,
-      payload: {
-        config: {
-          app: { lang },
-        },
-      },
     } = useNuxtApp();
 
-    const getTitle = () => `- ${$i18n('home')}`
+    const getTitle = () => `- ${$t('home')}`
 
-    useMeta({
-      title: computed(() => `Flipword ${$i18n('home') ? getTitle() : ''}`)
+    useHead({
+      title: computed(() => `Flipword ${$t('home') ? getTitle() : ''}`)
     });
 
     const isClient = process.client
@@ -228,37 +227,6 @@ export default defineComponent({
 
     const handleResize = () => {
       isMobile.value = window.innerWidth < 1024
-    }
-
-    const langInUrl = langOptions.find(
-      (x: any) => x.id == $router.currentRoute.value.params.lang
-    );
-    const currentLang = ref(langInUrl ? langInUrl["id"] : lang);
-
-    const updateLang = (updatedLang: string) => {
-      currentLang.value = updatedLang;
-      if (currentLang.value == lang) {
-        navigateTo("/");
-      } else {
-        navigateTo(`/${currentLang.value}`);
-      }
-    };
-
-    const getNativeLanguageLabel = () => {
-      const lang = langOptions.find((x: any) => x.id == currentLang.value)
-      if(lang){
-        return lang.label
-      }
-      return ''
-    }
-
-    const getForeignLanguageLabel = () => {
-      const lang = langOptions.find((x: any) => x.id == currentLang.value)
-      let foreignLang = langOptions.find((x: any) => x.id == 'en')
-      if(lang && lang.id == 'en'){
-        foreignLang = langOptions.find((x: any) => x.id == 'fr')
-      }
-      return foreignLang.label
     }
 
     const wordListChunk = (): Word[][] => {
@@ -302,15 +270,11 @@ export default defineComponent({
       window.open(url);
     };
 
-    const openGithub = () => {
-      window.open("https://github.com/flipword")
-    }
-
     return {
       updateLang,
       langOptions,
       currentLang,
-      i18n: $i18n,
+      t: $t,
       router: $router,
       platform: Platform,
       wordListChunked: wordListChunk(),
@@ -324,7 +288,6 @@ export default defineComponent({
       isMobile,
       isClient,
       handleResize,
-      openGithub
     };
   },
 });

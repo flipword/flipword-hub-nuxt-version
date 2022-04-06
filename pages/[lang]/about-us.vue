@@ -1,32 +1,36 @@
 <template>
-  <div>
-    <Profil
+  <NuxtLayout name="base-layout">
+    <Profile
       name="Adrien Croquelois"
-      :description="i18n('profile_presentation')"
+      :description="t('profile_presentation')"
     />
-  </div>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed } from "vue";
-import Profil from "~/components/Profil.vue";
-import { useNuxtApp, useMeta } from "#app";
+import Profile from "~/components/Profile.vue";
+import { useNuxtApp, useHead } from "#app";
 
 export default defineComponent({
   name: "AboutUs",
   components: {
-    Profil,
+    Profile,
   },
   setup() {
-    const { $i18n } = useNuxtApp();
-    const getTitle = () => `- ${$i18n("about_us")}`;
+    const {
+      $i18n: { $t },
+    } = useNuxtApp();
 
-    useMeta({
-      title: computed(() => `Flipword ${$i18n("about_us") ? getTitle() : ""}`),
+    const getTitle = () => `- ${$t("about_us")}`;
+
+    useHead({
+      title: computed(() => `Flipword ${$t("about_us") ? getTitle() : ""}`),
+      layout: "custom",
     });
 
     return {
-      i18n: $i18n,
+      t: $t,
     };
   },
 });

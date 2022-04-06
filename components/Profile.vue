@@ -1,12 +1,4 @@
 <template>
-  <div>
-    <div
-      class="h-14 flex flex-row w-full pl-3 gap-2 justify-start items-center bg-primary filter drop-shadow-md cursor-pointer"
-      @click="router.push('/')"
-    >
-      <img src="~/assets/icons/logo.png" class="h-10 w-auto" />
-      <span class="text-2xl text-black font-bold">FlipWord</span>
-    </div>
     <div class="flex flex-row w-full justify-center mt-32">
       <div class="flex flex-col items-center w-80">
         <div
@@ -34,7 +26,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script lang="ts">
@@ -47,15 +38,14 @@ enum SocialNetwork {
 }
 
 export default defineComponent({
-  name: "Profil",
+  name: "Profile",
   props: {
     name: {
       type: String,
       required: true,
     },
     description: {
-      type: String,
-      required: true,
+      type: String
     }
   },
   setup(props) {
