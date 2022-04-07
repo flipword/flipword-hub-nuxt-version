@@ -19,5 +19,8 @@
   "which_learned_language": "Which language you want to learn ?",
   "sign_in": "Sign in",
   "apple_auth": "Sign in with Apple",
-  "google_auth": "Sign in with Google"
+  "google_auth": "Sign in with Google",
+  "congratulation": "Congratulations You are ready to use Flipword! \uD83C\uDF89",
+  "this_is_an_example": "Here is an example of a foreign language text that you may encounter when browsing:",
+  "send_word_explication": "Select the word that is a problem, so an Apparetra translation button and you will be able to send this word to your vocabulary list."
 }

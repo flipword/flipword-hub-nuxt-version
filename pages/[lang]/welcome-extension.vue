@@ -6,6 +6,7 @@
           class="h-auto w-full flex flex-grow flex-col justify-center items-center gap-10"
         >
           <div
+            v-if="step < 4"
             class="h-3/4 2xl:w-3/12 xl:w-4/12 lg:w-5/12 md:w-8/12 w-9/12 bg-white p-6 rounded-lg shadow-lg"
           >
             <WelcomeExtensionStep0 v-if="step == 0" />
@@ -17,6 +18,13 @@
             <WelcomeExtensionStep3 v-else-if="step == 3" @sign-in="signIn" />
           </div>
           <div
+            v-else
+            class="2xl:w-6/12 xl:w-8/12 lg:w-9/12 md:w-10/12 w-11/12 bg-white p-6 rounded-lg shadow-lg"
+          >
+            <WelcomeExtensionStep4 />
+          </div>
+          <div
+            v-if="step < 4"
             :class="`${step == 0 ? 'invisible' : 'visible'}`"
             class="lg:w-8/12 w-10/12 h-4"
           >
@@ -35,6 +43,7 @@ import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeEx
 import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
 import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeExtensionStep2.vue";
 import WelcomeExtensionStep3 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
+import WelcomeExtensionStep4 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
 import WelcomeStepper from "~/components/WelcomeStepper.vue";
 import { AuthMethod } from "~/plugins/auth.client";
 
@@ -45,6 +54,7 @@ export default defineComponent({
     WelcomeExtensionStep1,
     WelcomeExtensionStep2,
     WelcomeExtensionStep3,
+    WelcomeExtensionStep4,
     WelcomeStepper,
   },
   setup() {
