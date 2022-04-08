@@ -7,15 +7,32 @@
         >
           <div
             v-if="step < 4"
-            class="h-3/4 2xl:w-3/12 xl:w-4/12 lg:w-5/12 md:w-8/12 w-9/12 bg-white p-6 rounded-lg shadow-lg"
+            class="h-3/4 2xl:w-3/12 xl:w-4/12 lg:w-5/12 md:w-8/12 w-9/12 p-6 rotate-card-parent"
           >
-            <WelcomeExtensionStep0 v-if="step == 0" />
-            <WelcomeExtensionStep1
-              v-else-if="step == 1"
-              @click="pickNativeLang"
-            />
-            <WelcomeExtensionStep2 v-else-if="step == 2" @click="nextStep" />
-            <WelcomeExtensionStep3 v-else-if="step == 3" @sign-in="signIn" />
+            <div
+              class="h-full w-full bg-white rounded-lg shadow-lg rotate-card-inner"
+              :style="step > 0 ? 'transform: rotateY(180deg)' : ''"
+            >
+              <WelcomeExtensionStep0 v-if="step == 0" />
+              <div
+                v-else-if="displayContentCard"
+                class="h-full w-full bg-white rounded-lg shadow-lg"
+                :style="step > 0 ? 'transform: rotateY(-180deg)' : ''"
+              >
+                <WelcomeExtensionStep1
+                  v-if="step == 1"
+                  @click="pickNativeLang"
+                />
+                <WelcomeExtensionStep2
+                  v-else-if="step == 2"
+                  @click="nextStep"
+                />
+                <WelcomeExtensionStep3
+                  v-else-if="step == 3"
+                  @sign-in="signIn"
+                />
+              </div>
+            </div>
           </div>
           <div
             v-else
@@ -60,6 +77,7 @@ export default defineComponent({
   setup() {
     onBeforeMount(() => {
       step.value = getCurrentStep();
+      displayContentCard.value = step.value != 0;
     });
 
     onMounted(() => {
@@ -82,6 +100,7 @@ export default defineComponent({
     });
 
     const step = ref<number>(0);
+    const displayContentCard = ref<boolean>(false);
     let foreignLanguage = null;
 
     const countDownStep1 = () => {
@@ -91,6 +110,9 @@ export default defineComponent({
     };
 
     const nextStep = () => {
+      if (step.value == 0) {
+        setTimeout(() => (displayContentCard.value = true), 500);
+      }
       step.value += 1;
       if (process.client) {
         localStorage.setItem("step", step.value.toString());
@@ -142,9 +164,22 @@ export default defineComponent({
       getNativeLanguageLabel,
       getForeignLanguageLabel,
       isClient,
+      displayContentCard,
     };
   },
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.rotate-card-parent {
+  background-color: transparent;
+  transition: 0.4s ease-in-out transform, 0.3s ease-in-out box-shadow;
+  perspective: 1000px;
+}
+
+.rotate-card-inner {
+  position: relative;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+</style>
