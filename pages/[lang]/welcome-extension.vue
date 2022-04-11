@@ -1,6 +1,6 @@
 <template>
   <div v-if="isClient">
-    <NuxtLayout name="base-layout">
+    <NuxtLayout name="light-layout">
       <div class="h-full flex flex-col">
         <div
           class="h-auto w-full flex flex-grow flex-col justify-center items-center gap-10"

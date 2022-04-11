@@ -1,5 +1,5 @@
 <template>
-  <NuxtLayout name="base-layout">
+  <NuxtLayout name="light-layout">
     <Profile
       name="Adrien Croquelois"
       :description="t('profile_presentation')"
