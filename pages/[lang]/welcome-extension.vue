@@ -25,7 +25,7 @@
                 />
                 <WelcomeExtensionStep2
                   v-else-if="step == 2"
-                  @click="nextStep"
+                  @click="pickForeignLang"
                 />
                 <WelcomeExtensionStep3
                   v-else-if="step == 3"
@@ -143,7 +143,11 @@ export default defineComponent({
       if (process.client) {
         // Create custom event that will be catch by web extension to sign in
         const event = new CustomEvent("flipwordAuthRequest", {
-          detail: { authMethod: authMethod },
+          detail: {
+            authMethod: authMethod,
+            nativeLanguage: currentLang,
+            foreignLanguage: foreignLanguage,
+          },
         });
         document.dispatchEvent(event);
         // Catch event emit by extension when login success
