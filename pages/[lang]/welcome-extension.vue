@@ -122,11 +122,7 @@ export default defineComponent({
     const getCurrentStep = () => {
       let currentStep = 0;
       if (process.client) {
-        const stepInLocalStorage = Number(localStorage.getItem("step"));
-        // If user didn't pass sign in screen, he restart onBoarding if refresh
-        if (stepInLocalStorage > 3) {
-          currentStep = stepInLocalStorage;
-        }
+        currentStep = Number(localStorage.getItem("step"));
       }
       return currentStep;
     };
