@@ -164,6 +164,7 @@ export default defineComponent({
         document.dispatchEvent(event);
         // Catch event emit by extension when login success
         document.addEventListener("loginSuccessful", () => {
+          console.log("Login successs !!!!");
           nextStep();
         });
       }
