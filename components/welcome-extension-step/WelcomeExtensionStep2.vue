@@ -23,8 +23,8 @@ export default defineComponent({
       $i18n: { $t, currentLang },
     } = useNuxtApp();
 
-    const pickLanguage = () => {
-      emit("click");
+    const pickLanguage = (lang: string) => {
+      emit("click", lang);
     };
 
     return {

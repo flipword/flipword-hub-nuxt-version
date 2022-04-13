@@ -119,6 +119,11 @@ export default defineComponent({
       }
     };
 
+    const setStep = (newStep: number) => {
+      step.value = newStep;
+      localStorage.setItem("step", step.value.toString());
+    };
+
     const getCurrentStep = () => {
       let currentStep = 0;
       if (process.client) {
@@ -141,11 +146,16 @@ export default defineComponent({
 
     const signIn = (authMethod: AuthMethod) => {
       if (process.client) {
+        // If you try to log but you don't have foreign language set
+        if (!foreignLanguage) {
+          // TODO: Add notify or store foreign in localStorage
+          setStep(2);
+        }
         // Create custom event that will be catch by web extension to sign in
         const event = new CustomEvent("flipwordAuthRequest", {
           detail: {
             authMethod: authMethod,
-            nativeLanguage: currentLang,
+            nativeLanguage: currentLang.value,
             foreignLanguage: foreignLanguage,
           },
         });
