@@ -150,6 +150,7 @@ export default defineComponent({
         if (!foreignLanguage) {
           // TODO: Add notify or store foreign in localStorage
           setStep(2);
+          return;
         }
         // Create custom event that will be catch by web extension to sign in
         const event = new CustomEvent("flipwordAuthRequest", {
