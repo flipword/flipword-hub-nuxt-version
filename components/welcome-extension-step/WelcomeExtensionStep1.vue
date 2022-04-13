@@ -3,7 +3,19 @@
     class="h-full w-full flex flex-col justify-center items-center gap-32 pb-32"
   >
     <span class="text-3xl">{{ t("what_is_language") }}</span>
-    <CountrySelect :current-lang="currentLang" @changeLang="pickLanguage" />
+    <div class="w-full flex flex-col items-center gap-10">
+      <CountrySelect :current-lang="currentLang" @changeLang="pickLanguage" />
+      <button
+        class="flex flex-row gap-3 bg-positive px-4 py-1 rounded-xl items-center"
+        @click="
+          {
+          }
+        "
+      >
+        <span>{{ t("next") }}</span>
+        <img src="~/assets/icons/arrow_right.svg" />
+      </button>
+    </div>
   </div>
 </template>
 
