@@ -16,12 +16,13 @@
   "about_us": "À propos",
   "welcome": "Bienvenue",
   "profile_presentation": "Bonjour, j'ai 23 ans et je suis passionné par le développement logiciel. J'adore également les moments de partage autour d'une petite mousse de qualité",
-  "what_is_language": "Quel est votre langue ?",
+  "what_is_language": "Quelle est votre langue ?",
   "which_learned_language": "Quelle langue voulez-vous apprendre ?",
   "sign_in":"S'identifier",
   "apple_auth": "S'identifier avec Apple",
   "google_auth": "S'identifier avec Google",
   "congratulation": "Félicitation vous êtes prêt à utiliser FlipWord ! \uD83C\uDF89",
   "this_is_an_example": "Voici un exemple de texte en langue étrangère que vous pouvez rencontrer lors de votre navigation:",
-  "send_word_explication": "Sélectionnez le mot qui vous pose problème, ainsi un bouton de traduction apparetra et vous pourrez envoyer ce mot dans votre liste de vocabulaire."
+  "send_word_explication": "Sélectionnez le mot qui vous pose problème, ainsi un bouton de traduction apparetra et vous pourrez envoyer ce mot dans votre liste de vocabulaire.",
+  "next": "Suivant"
 }
