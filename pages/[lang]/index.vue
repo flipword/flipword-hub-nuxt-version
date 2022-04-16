@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isClient">
+  <div>
     <!--    Screen part 1  -->
     <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
       <div class="lg:w-1/2 w-full flex flex-col items-center">
@@ -29,7 +29,7 @@
           </div>
         </div>
       </div>
-      <div v-if="!isMobile" class="w-1/2">
+      <div class="is-desktop w-1/2">
         <div class="flex flex-col justify-end">
           <div class="flex flex-row justify-end mr-6">
             <CountrySelect
@@ -43,8 +43,8 @@
     </div>
 
     <!--    Screen part 2-->
-    <div :class="{'screen-part2': !isMobile}">
-      <div v-if="!isMobile" class="h-full w-full flex flex-row bg-primary">
+    <div class="screen-part2">
+      <div class="is-desktop h-full w-full flex flex-row bg-primary">
         <div class="h-full flex flex-col w-7/12">
           <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
             <AddingPopup
@@ -82,7 +82,7 @@
           <div class="h-1/2 px-16 w-full">
             <div class="w-full flex flex-col gap-5">
               <div
-                v-for="(chunk, index) in wordListChunked"
+                v-for="(chunk, index) in wordListChunk"
                 :key="index"
                 class="flex flex-row justify-around"
               >
@@ -99,7 +99,7 @@
           </div>
         </div>
       </div>
-      <div v-else class="h-full w-full bg-primary">
+      <div class="is-mobile h-full w-full bg-primary">
         <div class="w-full bg-base">
           <AddingPopup
               :native-word="currentWordInAddingPopup.nativeWord"
@@ -122,7 +122,7 @@
         <div class="py-10 px-3 w-full bg-base">
             <div class="w-full flex flex-col gap-5">
               <div
-                  v-for="(chunk, index) in wordListChunked"
+                  v-for="(chunk, index) in wordListChunk"
                   :key="index"
                   class="flex flex-row justify-around gap-4"
               >
@@ -178,7 +178,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from "vue";
+import {defineComponent, ref, computed, onMounted} from "vue";
 import {useHead, useNuxtApp, navigateTo} from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
@@ -213,6 +213,10 @@ export default defineComponent({
       $router,
     } = useNuxtApp();
 
+    onMounted(() => {
+      setWordListChunk()
+    })
+
     const getTitle = () => `- ${$t('home')}`
 
     useHead({
@@ -229,19 +233,25 @@ export default defineComponent({
       isMobile.value = window.innerWidth < 1024
     }
 
-    const wordListChunk = (): Word[][] => {
-      const nbWordToDisplay = isMobile.value ? 8 : wordList[currentLang.value].length
-      return wordList[currentLang.value].slice(0, nbWordToDisplay).reduce((resultArray, item, index) => {
-        const chunkIndex = Math.floor(index / 2);
+    const wordListChunk = ref<Word[][]>([])
 
-        if (!resultArray[chunkIndex]) {
-          resultArray[chunkIndex] = []; // start a new chunk
-        }
+    const setWordListChunk = () => {
+      if(wordList[currentLang.value]){
+        const nbWordToDisplay = isMobile.value ? 8 : wordList[currentLang.value].length
+        wordListChunk.value = wordList[currentLang.value].slice(0, nbWordToDisplay).reduce((resultArray, item, index) => {
+          const chunkIndex = Math.floor(index / 2);
 
-        resultArray[chunkIndex].push(item);
+          if (!resultArray[chunkIndex]) {
+            resultArray[chunkIndex] = []; // start a new chunk
+          }
 
-        return resultArray;
-      }, []);
+          resultArray[chunkIndex].push(item);
+
+          return resultArray;
+        }, []);
+      } else {
+        wordListChunk.value = []
+      }
     };
 
     const wordListWithCurrentLang = (): Word[] => {
@@ -252,7 +262,16 @@ export default defineComponent({
       window.open("https://app.flipword.io");
     };
 
-    const currentWordInAddingPopup = ref<Word>(wordListWithCurrentLang()[0]);
+    const firstWordListWithCurrentLang = (): Word | null => {
+      const list = wordListWithCurrentLang()
+      if(list && list.length){
+        return list[0]
+      } else {
+        return null
+      }
+    }
+
+    const currentWordInAddingPopup = ref<Word>(firstWordListWithCurrentLang());
 
     const updateWordInAddingPopup = () => {
       const result = wordListWithCurrentLang();
@@ -277,7 +296,7 @@ export default defineComponent({
       t: $t,
       router: $router,
       platform: Platform,
-      wordListChunked: wordListChunk(),
+      wordListChunk,
       wordList: wordListWithCurrentLang(),
       redirectToApp,
       updateWordInAddingPopup,
@@ -285,7 +304,6 @@ export default defineComponent({
       openStore,
       getNativeLanguageLabel,
       getForeignLanguageLabel,
-      isMobile,
       isClient,
       handleResize,
     };
@@ -306,5 +324,29 @@ export default defineComponent({
 
 .screen-part3 {
   width: 100%;
+}
+
+.is-mobile {
+  display: none;
+}
+
+.is-desktop {
+  display: flex;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .is-mobile {
+    display: block;
+  }
+
+  .is-desktop {
+    display: none;
+  }
+
+  .screen-part2 {
+    height: unset;
+    width: unset;
+  }
 }
 </style>

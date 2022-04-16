@@ -27,7 +27,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useNuxtApp } from "#app";
-import { AuthMethod } from "~/plugins/auth.client";
+
+enum AuthMethod {
+  GOOGLE = 1,
+  APPLE = 2,
+}
 
 export default defineComponent({
   name: "WelcomeExtensionStep2",
