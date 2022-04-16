@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="w-full h-full flex flex-row gap-32 ml-48 md:mt-6 xl:mt-12 4xl:mt-24"
-  >
+  <div class="w-full h-full flex flex-row gap-32 ml-48 4xl:ml-60">
     <div class="isometric flex flex-col gap-5 mt-48">
       <Card :word="wordList[props.lang][0]" />
     </div>

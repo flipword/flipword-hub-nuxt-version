@@ -3,7 +3,7 @@
     <!--    Screen part 1  -->
     <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
       <div class="lg:w-1/2 w-full flex flex-col items-center">
-        <TitleLogoElement />
+        <TitleLogoElement class="z-50"/>
         <div class="h-2/5 w-full flex flex-row justify-center gap-4">
           <div class="w-1/3 h-1/2 flex flex-col justify-center">
             <div
@@ -29,16 +29,14 @@
           </div>
         </div>
       </div>
-      <div class="is-desktop w-1/2">
-        <div class="flex flex-col justify-end">
-          <div class="flex flex-row justify-end mr-6">
+      <div class="is-desktop w-1/2 flex flex-col justify-end md:gap-6 xl:gap-12 4xl:gap-20">
+        <div class="w-full flex flex-shrink flex-row justify-end mr-6">
             <CountrySelect
               :current-lang="currentLang"
               @changeLang="updateLang"
             />
-          </div>
-          <IsometricCards :lang="currentLang" />
         </div>
+        <IsometricCards class="flex-auto w-full" :lang="currentLang" />
       </div>
     </div>
 
