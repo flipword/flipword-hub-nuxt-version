@@ -29,14 +29,15 @@
           </div>
         </div>
       </div>
-      <div class="is-desktop w-1/2 flex flex-col justify-end md:gap-6 xl:gap-12 4xl:gap-20">
-        <div class="w-full flex flex-shrink flex-row justify-end mr-6">
+      <div class="is-desktop w-1/2 flex flex-col justify-end relative">
             <CountrySelect
+                class="absolute z-50 top-0 right-0"
               :current-lang="currentLang"
               @changeLang="updateLang"
             />
+        <div class="h-full w-full mt-20">
+          <IsometricCards :lang="currentLang" />
         </div>
-        <IsometricCards class="flex-auto w-full" :lang="currentLang" />
       </div>
     </div>
 
