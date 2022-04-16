@@ -5,28 +5,29 @@
       <div class="lg:w-1/2 w-full flex flex-col items-center">
         <TitleLogoElement class="z-50"/>
         <div class="h-2/5 w-full flex flex-row justify-center gap-4">
-          <div class="w-1/3 h-1/2 flex flex-col justify-center">
-            <div
-                class="flex flex-row justify-center cursor-pointer"
-                @click="openStore(platform.Android)"
-            ><img
-                alt="Get it on Google Play"
-                src="~/assets/images/download_android.png"
-                class="w-56 h-auto"
-            /></div>
-          </div>
-          <div class="w-1/3 h-1/2 flex flex-col justify-center">
-            <div
-              class="flex flex-row justify-center cursor-pointer"
-              @click="openStore(platform.Ios)"
-            >
-              <img
-                alt="Get it on App Store"
-                src="~/assets/images/download_ios.png"
-                class="w-60 h-auto"
-              />
-            </div>
-          </div>
+          <ButtonStore store="Apple" platform="iPhone, iPad" store-path="apple.svg" />
+<!--          <div class="w-1/3 h-1/2 flex flex-col justify-center">-->
+<!--            <div-->
+<!--                class="flex flex-row justify-center cursor-pointer"-->
+<!--                @click="openStore(platform.Android)"-->
+<!--            ><img-->
+<!--                alt="Get it on Google Play"-->
+<!--                src="~/assets/images/download_android.png"-->
+<!--                class="w-56 h-auto"-->
+<!--            /></div>-->
+<!--          </div>-->
+<!--          <div class="w-1/3 h-1/2 flex flex-col justify-center">-->
+<!--            <div-->
+<!--              class="flex flex-row justify-center cursor-pointer"-->
+<!--              @click="openStore(platform.Ios)"-->
+<!--            >-->
+<!--              <img-->
+<!--                alt="Get it on App Store"-->
+<!--                src="~/assets/images/download_ios.png"-->
+<!--                class="w-60 h-auto"-->
+<!--              />-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
       <div class="is-desktop w-1/2 flex flex-col justify-end relative">
@@ -189,6 +190,7 @@ import ExtensionPopupAnimation from "~/components/ExtensionPopupAnimation.vue";
 import Footer from "~/components/Footer.vue";
 import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
+import ButtonStore from "~/components/ButtonStore.vue";
 
 enum Platform {
   Ios,
@@ -198,6 +200,7 @@ enum Platform {
 export default defineComponent({
   name: "Index",
   components: {
+    ButtonStore,
     IsometricCards,
     CountrySelect,
     AddingPopup,
