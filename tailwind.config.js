@@ -21,6 +21,7 @@ module.exports = {
       primary: "#FF9100",
       base: "#EAEAEA",
       white: "#FFFFFF",
+      whiteShadow: "#C1C1C1",
     },
     fontFamily: {
       sans: ["Roboto", "sans-serif"],
