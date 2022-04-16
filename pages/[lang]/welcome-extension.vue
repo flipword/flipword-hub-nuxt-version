@@ -1,5 +1,5 @@
 <template>
-  <div v-if="isClient">
+  <ClientOnly>
     <NuxtLayout name="light-layout">
       <div class="h-full flex flex-col">
         <div
@@ -50,7 +50,7 @@
         </div>
       </div>
     </NuxtLayout>
-  </div>
+  </ClientOnly>
 </template>
 
 <script lang="ts">
@@ -132,8 +132,6 @@ export default defineComponent({
       return currentStep;
     };
 
-    const isClient = process.client;
-
     const pickNativeLang = (lang: string) => {
       updateLang(lang);
       nextStep();
@@ -164,7 +162,6 @@ export default defineComponent({
         document.dispatchEvent(event);
         // Catch event emit by extension when login success
         document.addEventListener("loginSuccessful", () => {
-          console.log("Login successs !!!!");
           nextStep();
         });
       }
@@ -180,7 +177,6 @@ export default defineComponent({
       signIn,
       getNativeLanguageLabel,
       getForeignLanguageLabel,
-      isClient,
       displayContentCard,
     };
   },

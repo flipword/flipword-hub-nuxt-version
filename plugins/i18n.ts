@@ -48,17 +48,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   let currentLang = ref(defaultLang);
 
   const t = (key: string) => {
-    if (process.server) {
-      if (ssrContext) {
-        // TODO: revoir le calcul de lang en ssr
-        currentLang.value =
-          ssrContext["url"] == "/"
-            ? defaultLang
-            : ssrContext["url"].replace("/", "");
-      } else {
-        currentLang.value = defaultLang;
-      }
-    } else {
+    if (process.client) {
       currentLang.value =
         $router.currentRoute.value?.params?.lang ?? defaultLang;
     }
@@ -124,7 +114,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
           );
         }
       }
-      currentLang.value = to.params?.lang?.toString() ?? defaultLang;
+      const newCurrentLang = to.params?.lang?.toString() ?? defaultLang;
+      if (langOptions.find((x: any) => x.id == newCurrentLang)) {
+        currentLang.value = newCurrentLang;
+      }
     },
     { global: true }
   );
