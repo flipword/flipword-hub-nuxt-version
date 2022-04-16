@@ -1,7 +1,7 @@
 <template>
   <div class="md:h-3/5 h-2/5 md:3/4 w-4/5 relative">
     <div
-      class="w-full top-0 -right-2 -bottom-1 bg-whiteShadow md:rounded-b-5xl rounded-b-3xl absolute"
+      class="w-full top-0 -right-2 -bottom-1 bg-whiteShadow md:rounded-b-5xl rounded-b-3xl absolute shadow-md"
     ></div>
     <div
       class="h-full w-full bg-white md:rounded-b-5xl rounded-b-3xl relative flex justify-center items-center"

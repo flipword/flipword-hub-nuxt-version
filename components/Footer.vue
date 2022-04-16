@@ -8,6 +8,7 @@
     <NuxtLink
       class="flex flex-row items-center gap-2 cursor-pointer"
       to="https://github.com/flipword"
+      target="_blank"
     >
       <span class="text-black font-bold">Github</span>
       <img src="~/assets/icons/github.png" />

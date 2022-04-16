@@ -4,30 +4,12 @@
     <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
       <div class="lg:w-1/2 w-full flex flex-col items-center">
         <TitleLogoElement class="z-50"/>
-        <div class="h-2/5 w-full flex flex-row justify-center gap-4">
-          <ButtonStore store="Apple" platform="iPhone, iPad" store-path="apple.svg" />
-<!--          <div class="w-1/3 h-1/2 flex flex-col justify-center">-->
-<!--            <div-->
-<!--                class="flex flex-row justify-center cursor-pointer"-->
-<!--                @click="openStore(platform.Android)"-->
-<!--            ><img-->
-<!--                alt="Get it on Google Play"-->
-<!--                src="~/assets/images/download_android.png"-->
-<!--                class="w-56 h-auto"-->
-<!--            /></div>-->
-<!--          </div>-->
-<!--          <div class="w-1/3 h-1/2 flex flex-col justify-center">-->
-<!--            <div-->
-<!--              class="flex flex-row justify-center cursor-pointer"-->
-<!--              @click="openStore(platform.Ios)"-->
-<!--            >-->
-<!--              <img-->
-<!--                alt="Get it on App Store"-->
-<!--                src="~/assets/images/download_ios.png"-->
-<!--                class="w-60 h-auto"-->
-<!--              />-->
-<!--            </div>-->
-<!--          </div>-->
+        <div class="h-2/5 w-full pt-10 flex flex-col justify-start">
+          <div class="w-full flex flex-row flex-wrap justify-center items-start gap-4">
+          <ButtonStore store="Apple" platform="iPhone, iPad" store-path="apple.svg" store-link="https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185"/>
+          <ButtonStore store="Google Play" platform="Android" store-path="android.svg" store-link="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"/>
+          <ButtonStore store="Chrome Store" platform="chrome.google.com" store-path="chrome.svg" store-link="https://chrome.google.com/webstore/detail/flipword/hinoggfcanlhfbeddbadjjpdaeoigkbe"/>
+          </div>
         </div>
       </div>
       <div class="is-desktop w-1/2 flex flex-col justify-end relative">
@@ -341,7 +323,7 @@ export default defineComponent({
 .isometric-card-transition {
   margin-top: 150px;
   opacity: 0;
-  transition: opacity 500ms, margin 500ms;
+  transition: opacity 500ms, margin-top 500ms;
 }
 
 .isometric-card-final {
