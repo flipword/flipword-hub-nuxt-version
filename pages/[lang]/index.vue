@@ -36,7 +36,7 @@
               @changeLang="updateLang"
             />
         <div class="h-full w-full mt-20">
-          <IsometricCards :lang="currentLang" />
+          <IsometricCards ref="isometricCard" :class="{'isometric-card-final': isMounted}" class="isometric-card-transition" :lang="currentLang" />
         </div>
       </div>
     </div>
@@ -178,7 +178,7 @@
 
 <script lang="ts">
 import {defineComponent, ref, computed, onMounted} from "vue";
-import {useHead, useNuxtApp, navigateTo} from "#app";
+import {useHead, useNuxtApp} from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
@@ -209,11 +209,12 @@ export default defineComponent({
   setup() {
     const {
       $i18n: {$t, currentLang, updateLang, getNativeLanguageLabel, getForeignLanguageLabel},
-      $router,
+      $router
     } = useNuxtApp();
 
     onMounted(() => {
       setWordListChunk()
+      isMounted.value = true
     })
 
     const getTitle = () => `- ${$t('home')}`
@@ -231,8 +232,8 @@ export default defineComponent({
     const handleResize = () => {
       isMobile.value = window.innerWidth < 1024
     }
-
     const wordListChunk = ref<Word[][]>([])
+    const isMounted = ref(false)
 
     const setWordListChunk = () => {
       if(wordList[currentLang.value]){
@@ -296,6 +297,7 @@ export default defineComponent({
       router: $router,
       platform: Platform,
       wordListChunk,
+      isMounted,
       wordList: wordListWithCurrentLang(),
       redirectToApp,
       updateWordInAddingPopup,
@@ -331,6 +333,17 @@ export default defineComponent({
 
 .is-desktop {
   display: flex;
+}
+
+.isometric-card-transition {
+  margin-top: 150px;
+  opacity: 0;
+  transition: opacity 500ms, margin 500ms;
+}
+
+.isometric-card-final {
+  margin-top: 0;
+  opacity: 1;
 }
 
 
