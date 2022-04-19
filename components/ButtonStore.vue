@@ -4,7 +4,11 @@
     :to="storeLink"
     target="_blank"
   >
-    <img :src="`/stores/${props.storePath}`" class="w-auto h-10" />
+    <img
+      :src="require(`~/assets/icons/${props.storePath}`)"
+      class="w-auto h-10"
+      :alt="props.store"
+    />
     <div class="flex flex-col">
       <span class="font-bold">{{ props.store }}</span>
       <span>{{ props.platform }}</span>
@@ -14,6 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import require
 
 export default defineComponent({
   name: "ButtonStore",
@@ -26,7 +31,7 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    storePath: {
+    storeImgPath: {
       type: String,
       required: true,
     },

@@ -43,7 +43,7 @@ export const flagPaths: { [key: string]: string } = {
 };
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const { ssrContext, $router } = nuxtApp;
+  const { $router } = nuxtApp;
 
   let currentLang = ref(defaultLang);
 

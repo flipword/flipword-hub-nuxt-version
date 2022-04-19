@@ -20,7 +20,7 @@
           props.nativeLanguageLabel
         }}</span>
         <div class="pa-5">
-          <img src="~/assets/icons/compare_arrows.png" />
+          <img src="~/assets/icons/compare_arrows.svg" />
         </div>
         <span class="sm:text-xl text-sm text-black">{{
           props.foreignLanguageLabel
@@ -34,7 +34,7 @@
         class="flex flex-col w-full h-40 bg-white rounded-3xl filter drop-shadow-xl items-center"
       >
         <div class="flex flex-row w-full justify-end pt-3 pr-3">
-          <div><img src="~/assets/icons/clear.png" /></div>
+          <div><img src="~/assets/icons/clear.svg" /></div>
         </div>
         <div class="flex flex-grow flex-col justify-center">
           <span v-if="nativeWordDisplayed" class="sm:text-4xl text-3xl">{{
@@ -49,7 +49,7 @@
           <div
             class="flex flex-row items-center justify-center h-full w-full transform -rotate-45"
           >
-            <img v-if="!loading" src="~/assets/icons/g_translate.png" />
+            <img v-if="!loading" src="~/assets/icons/g_translate.svg" />
             <div v-else class="loader"></div>
           </div>
         </div>
@@ -58,7 +58,7 @@
         class="w-full h-40 bg-white flex flex-col rounded-3xl filter drop-shadow-xl items-center"
       >
         <div class="flex flex-row w-full justify-end pt-3 pr-3">
-          <div><img src="~/assets/icons/clear.png" /></div>
+          <div><img src="~/assets/icons/clear.svg" /></div>
         </div>
         <div class="flex flex-grow flex-col justify-center">
           <span
@@ -73,7 +73,7 @@
         class="relative p-3 bg-primary flex flex-row gap-2 items-center rounded-lg overflow-hidden"
       >
         <span class="text-black font-semibold">{{ t("save") }}</span>
-        <img src="~/assets/icons/save.png" />
+        <img src="~/assets/icons/save.svg" />
         <div ref="splashButtonRef" class="splash"></div>
       </div>
     </div>
@@ -97,15 +97,19 @@ export default defineComponent({
   name: "AddingPopup",
   props: {
     nativeWord: {
+      type: String,
       required: true,
     },
     foreignWord: {
+      type: String,
       required: true,
     },
     nativeLanguageLabel: {
+      type: String,
       required: true,
     },
     foreignLanguageLabel: {
+      type: String,
       required: true,
     },
   },

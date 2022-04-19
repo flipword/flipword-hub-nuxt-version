@@ -3,7 +3,7 @@
     <div class="flip-card-inner">
       <div class="flip-card-front flex flex-col justify-between">
         <div class="flex flex-row justify-end pr-3 pt-3">
-          <img src="~/assets/icons/volume.png" />
+          <img src="~/assets/icons/volume.svg" />
         </div>
         <div class="flex flex-row mb-7 justify-center">
           <span class="font-sans text-4xl text-black">{{
@@ -14,7 +14,7 @@
       </div>
       <div class="flip-card-back flex flex-col justify-between">
         <div class="flex flex-row justify-end pr-3 pt-3">
-          <img src="~/assets/icons/volume.png" />
+          <img src="~/assets/icons/volume.svg" />
         </div>
         <div class="flex flex-row mb-7 justify-center">
           <span class="font-sans text-4xl text-black">{{

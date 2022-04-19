@@ -1,6 +1,7 @@
 import { defineNuxtConfig } from "nuxt3";
 import { resolve } from "path";
 import { createCommonJS } from "mlly";
+
 const { __dirname } = createCommonJS(import.meta.url);
 
 export default defineNuxtConfig({
