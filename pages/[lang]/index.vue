@@ -13,11 +13,11 @@
         </div>
       </div>
       <div class="is-desktop w-1/2 flex flex-col justify-end relative">
-            <CountrySelect
+        <CountrySelect
                 class="absolute z-50 top-0 right-0"
-              :current-lang="currentLang"
-              @changeLang="updateLang"
-            />
+                :current-lang="currentLang"
+                @changeLang="updateLang"
+        />
         <div class="h-full w-full mt-20">
           <IsometricCards ref="isometricCard" :class="{'isometric-card-final': isMounted}" class="isometric-card-transition" :lang="currentLang" />
         </div>
@@ -321,7 +321,7 @@ export default defineComponent({
 }
 
 .isometric-card-transition {
-  margin-top: 150px;
+  margin-top: 100px;
   opacity: 0;
   transition: opacity 500ms, margin-top 500ms;
 }
