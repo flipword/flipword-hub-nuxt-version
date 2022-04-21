@@ -11,7 +11,7 @@
       target="_blank"
     >
       <span class="text-black font-bold">Github</span>
-      <img src="~/assets/icons/github.svg" />
+      <img src="~/assets/icons/github.svg" class="h-7 w-auto" />
     </NuxtLink>
   </div>
 </template>

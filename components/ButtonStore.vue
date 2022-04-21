@@ -5,7 +5,7 @@
     target="_blank"
   >
     <img
-      :src="require(`~/assets/icons/${props.storePath}`)"
+      :src="`/icons/stores/${props.storeImgPath}`"
       class="w-auto h-10"
       :alt="props.store"
     />
@@ -18,7 +18,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import require
 
 export default defineComponent({
   name: "ButtonStore",

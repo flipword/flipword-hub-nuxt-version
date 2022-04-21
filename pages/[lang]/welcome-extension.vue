@@ -158,7 +158,7 @@ export default defineComponent({
             foreignLanguage: foreignLanguage,
           },
         });
-        console.log("event send: ", event);
+
         document.dispatchEvent(event);
         // Catch event emit by extension when login success
         document.addEventListener("loginSuccessful", () => {

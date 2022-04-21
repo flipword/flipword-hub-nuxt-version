@@ -1,7 +1,11 @@
 <template>
   <div class="flex flex-row gap-2">
     <div class="flex flex-col pt-2">
-      <img :src="`/${flagPath}`" style="height: 100%; width: 40px" />
+      <div
+        class="flex flex-col justify-center h-12 w-12 rounded-full overflow-hidden"
+      >
+        <img :src="`/icons/flags/${flagPath}`" class="h-14 w-auto" />
+      </div>
     </div>
     <select
       v-if="currentLang"

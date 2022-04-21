@@ -198,8 +198,6 @@ export default defineComponent({
       payload
     } = useNuxtApp();
 
-    console.log("CDN URL :", payload)
-
     onMounted(() => {
       setWordListChunk()
       isMounted.value = true
