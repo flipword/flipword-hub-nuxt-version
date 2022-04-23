@@ -2,9 +2,9 @@
   <div class="flex flex-row gap-2">
     <div class="flex flex-col pt-2">
       <div
-        class="flex flex-col justify-center h-12 w-12 rounded-full overflow-hidden"
+        class="flex flex-col justify-center h-12 w-12 rounded-lg overflow-hidden"
       >
-        <img :src="`/icons/flags/${flagPath}`" class="h-14 w-auto" />
+        <img :src="`/icons/flags/${flagPath}`" class="h-full w-full" />
       </div>
     </div>
     <select
