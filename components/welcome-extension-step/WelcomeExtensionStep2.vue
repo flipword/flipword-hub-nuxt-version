@@ -4,7 +4,7 @@
       class="flex-auto w-full flex flex-col justify-center items-center gap-32 pb-32"
     >
       <span class="text-3xl text-center">{{
-        t("which_learned_language")
+        $t("which_learned_language")
       }}</span>
       <div class="w-full flex flex-col items-center gap-10">
         <CountrySelect :current-lang="currentLang" @changeLang="pickLanguage" />
@@ -15,48 +15,32 @@
         class="flex flex-row gap-3 bg-positive px-4 py-1 rounded-xl items-center"
         @click="saveLanguage"
       >
-        <span>{{ t("next") }}</span>
+        <span>{{ $t("next") }}</span>
         <img src="~/assets/icons/arrow_right.svg" />
       </button>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineEmits } from "vue";
 import { useNuxtApp } from "#app";
 import CountrySelect from "~/components/CountrySelect.vue";
 
-export default defineComponent({
-  name: "WelcomeExtensionStep2 ",
-  components: {
-    CountrySelect,
-  },
-  emits: ["click"],
-  setup(props, { emit }) {
-    const {
-      $i18n: { $t, currentLang },
-    } = useNuxtApp();
+const emit = defineEmits(["click"]);
+const {
+  $i18n: { $t, currentLang },
+} = useNuxtApp();
 
-    let selectedLanguage = null;
+let selectedLanguage = null;
 
-    const pickLanguage = (lang: string) => {
-      selectedLanguage = lang;
-    };
+const pickLanguage = (lang: string) => {
+  selectedLanguage = lang;
+};
 
-    const saveLanguage = () => {
-      emit("click", selectedLanguage);
-    };
-
-    return {
-      props: props,
-      t: $t,
-      currentLang,
-      pickLanguage,
-      saveLanguage,
-    };
-  },
-});
+const saveLanguage = () => {
+  emit("click", selectedLanguage);
+};
 </script>
 
 <style scoped></style>

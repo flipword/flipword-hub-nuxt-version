@@ -16,33 +16,25 @@
   </NuxtLink>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineProps } from "vue";
 
-export default defineComponent({
-  name: "ButtonStore",
-  props: {
-    store: {
-      type: String,
-      required: true,
-    },
-    platform: {
-      type: String,
-      required: true,
-    },
-    storeImgPath: {
-      type: String,
-      required: true,
-    },
-    storeLink: {
-      type: String,
-      required: true,
-    },
+const props = defineProps({
+  store: {
+    type: String,
+    required: true,
   },
-  setup(props) {
-    return {
-      props,
-    };
+  platform: {
+    type: String,
+    required: true,
+  },
+  storeImgPath: {
+    type: String,
+    required: true,
+  },
+  storeLink: {
+    type: String,
+    required: true,
   },
 });
 </script>

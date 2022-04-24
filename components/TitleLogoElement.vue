@@ -22,7 +22,7 @@
           <div class="w-full flex justify-center">
             <span
               class="font-sans 2xl:text-4xl xl:text-3xl lg:text-2xl text-xl text-black text-center"
-              >{{ t("subtitle") }}</span
+              >{{ $t("subtitle") }}</span
             >
           </div>
         </div>
@@ -31,19 +31,10 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useNuxtApp } from "#app";
 
-export default defineComponent({
-  name: "TitleLogoElement",
-  setup() {
-    const {
-      $i18n: { $t },
-    } = useNuxtApp();
-    return {
-      t: $t,
-    };
-  },
-});
+const {
+  $i18n: { $t },
+} = useNuxtApp();
 </script>

@@ -9,31 +9,17 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import { useNuxtApp } from "#app";
+<script setup lang="ts">
+import { defineProps } from "vue";
 
-export default defineComponent({
-  name: "WelcomeStepper",
-  props: {
-    nbStep: {
-      type: Number,
-      required: true,
-    },
-    currentStep: {
-      type: Number,
-      required: true,
-    },
+const props = defineProps({
+  nbStep: {
+    type: Number,
+    required: true,
   },
-  setup(props) {
-    const { $router } = useNuxtApp();
-
-    return {
-      router: $router,
-      props: props,
-    };
+  currentStep: {
+    type: Number,
+    required: true,
   },
 });
 </script>
-
-<style scoped></style>

@@ -76,7 +76,7 @@
       <div
         class="relative p-3 bg-primary flex flex-row gap-2 items-center rounded-lg overflow-hidden"
       >
-        <span class="text-black font-semibold">{{ t("save") }}</span>
+        <span class="text-black font-semibold">{{ $t("save") }}</span>
         <img src="~/assets/icons/save.svg" class="h-8 w-auto" />
         <div ref="splashButtonRef" class="splash"></div>
       </div>
@@ -86,136 +86,120 @@
         ref="savedNotifyRef"
         class="p-3 bg-positive rounded-lg elementToFadeOut"
       >
-        <span class="text-white font-semibold">{{ t("saved_word") }}</span>
+        <span class="text-white font-semibold">{{ $t("saved_word") }}</span>
       </div>
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref, onMounted, onUnmounted } from "vue";
+<script setup lang="ts">
+import { defineEmits, defineProps, ref, onMounted, onUnmounted } from "vue";
 import { useNuxtApp } from "#app";
 import blobScriptUrl from "~/assets/worker_scripts/addingPopupWorker.js";
 
-export default defineComponent({
-  name: "AddingPopup",
-  props: {
-    nativeWord: {
-      type: String,
-      required: true,
-    },
-    foreignWord: {
-      type: String,
-      required: true,
-    },
-    nativeLanguageLabel: {
-      type: String,
-      required: true,
-    },
-    foreignLanguageLabel: {
-      type: String,
-      required: true,
-    },
+const emit = defineEmits(["updateWord"]);
+const props = defineProps({
+  nativeWord: {
+    type: String,
+    required: true,
   },
-  emits: ["updateWord"],
-  setup(props, { emit }) {
-    const {
-      $i18n: { $t },
-    } = useNuxtApp();
-    const loading = ref(false);
-    const nativeWordDisplayed = ref(false);
-    const foreignWordDisplayed = ref(false);
-    const foreignWordRef = ref<HTMLElement>(null);
-    const splashButtonRef = ref<HTMLElement>(null);
-    const savedNotifyRef = ref<HTMLElement>(null);
-
-    let worker = null;
-
-    onMounted(() => {
-      if (process.client) {
-        setupAnimation();
-      }
-    });
-
-    onUnmounted(() => {
-      worker.terminate();
-    });
-
-    const setupAnimation = () => {
-      worker = new Worker(blobScriptUrl);
-      worker.onmessage = function (e) {
-        const result = e.data;
-        switch (result) {
-          // Display native word
-          case 1:
-            nativeWordDisplayed.value = true;
-            break;
-          // Loading trad
-          case 2:
-            loading.value = true;
-            break;
-          // Display foreign word
-          case 3:
-            foreignWordDisplayed.value = true;
-            loading.value = false;
-            break;
-          // Save
-          case 4:
-            splashEffectOnRef(splashButtonRef.value);
-            break;
-          // Display Notify
-          case 5:
-            savedNotifyRef.value.classList.replace(
-              "elementToFadeOut",
-              "elementToFadeIn"
-            );
-            break;
-          // Reload
-          case 6:
-            savedNotifyRef.value.classList.replace(
-              "elementToFadeIn",
-              "elementToFadeOut"
-            );
-            foreignWordDisplayed.value = false;
-            nativeWordDisplayed.value = false;
-            emit("updateWord");
-            break;
-        }
-      };
-    };
-
-    const splashEffectOnRef = (ref: any) => {
-      ref.style.width = "120%";
-      setTimeout(function () {
-        ref.style.opacity = "0";
-      }, 400);
-
-      setTimeout(function () {
-        ref.style.transitionDuration = "0s";
-      }, 1000);
-
-      setTimeout(function () {
-        ref.style.width = "0";
-        ref.style.opacity = "1";
-      }, 1100);
-
-      setTimeout(function () {
-        ref.style.transitionDuration = ".3s";
-      }, 1200);
-    };
-
-    return {
-      t: $t,
-      props: props,
-      loading: loading,
-      nativeWordDisplayed: nativeWordDisplayed,
-      foreignWordDisplayed: foreignWordDisplayed,
-      foreignWordRef,
-      splashButtonRef,
-      savedNotifyRef,
-    };
+  foreignWord: {
+    type: String,
+    required: true,
+  },
+  nativeLanguageLabel: {
+    type: String,
+    required: true,
+  },
+  foreignLanguageLabel: {
+    type: String,
+    required: true,
   },
 });
+const {
+  $i18n: { $t },
+} = useNuxtApp();
+const loading = ref(false);
+const nativeWordDisplayed = ref(false);
+const foreignWordDisplayed = ref(false);
+const foreignWordRef = ref<HTMLElement>(null);
+const splashButtonRef = ref<HTMLElement>(null);
+const savedNotifyRef = ref<HTMLElement>(null);
+
+let worker = null;
+
+onMounted(() => {
+  if (process.client) {
+    setupAnimation();
+  }
+});
+
+onUnmounted(() => {
+  worker.terminate();
+});
+
+const setupAnimation = () => {
+  worker = new Worker(blobScriptUrl);
+  worker.onmessage = function (e) {
+    const result = e.data;
+    switch (result) {
+      // Display native word
+      case 1:
+        nativeWordDisplayed.value = true;
+        break;
+      // Loading trad
+      case 2:
+        loading.value = true;
+        break;
+      // Display foreign word
+      case 3:
+        foreignWordDisplayed.value = true;
+        loading.value = false;
+        break;
+      // Save
+      case 4:
+        splashEffectOnRef(splashButtonRef.value);
+        break;
+      // Display Notify
+      case 5:
+        savedNotifyRef.value.classList.replace(
+          "elementToFadeOut",
+          "elementToFadeIn"
+        );
+        break;
+      // Reload
+      case 6:
+        savedNotifyRef.value.classList.replace(
+          "elementToFadeIn",
+          "elementToFadeOut"
+        );
+        foreignWordDisplayed.value = false;
+        nativeWordDisplayed.value = false;
+        emit("updateWord");
+        break;
+    }
+  };
+};
+
+const splashEffectOnRef = (ref: any) => {
+  ref.style.width = "120%";
+  setTimeout(function () {
+    ref.style.opacity = "0";
+  }, 400);
+
+  setTimeout(function () {
+    ref.style.transitionDuration = "0s";
+  }, 1000);
+
+  setTimeout(function () {
+    ref.style.width = "0";
+    ref.style.opacity = "1";
+  }, 1100);
+
+  setTimeout(function () {
+    ref.style.transitionDuration = ".3s";
+  }, 1200);
+};
 </script>
 
 <style scoped>

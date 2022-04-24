@@ -3,22 +3,22 @@
     <div class="flip-card-inner">
       <div class="flip-card-front flex flex-col justify-between">
         <div class="flex flex-row justify-end pr-3 pt-3">
-          <img src="~/assets/icons/volume.svg" class="h-8 w-auto"/>
+          <img src="~/assets/icons/volume.svg" class="h-8 w-auto" />
         </div>
         <div class="flex flex-row mb-7 justify-center">
           <span class="font-sans text-4xl text-black">{{
-            word.foreignWord
+            props.word.foreignWord
           }}</span>
         </div>
         <div></div>
       </div>
       <div class="flip-card-back flex flex-col justify-between">
         <div class="flex flex-row justify-end pr-3 pt-3">
-          <img src="~/assets/icons/volume.svg" class="h-8 w-auto"/>
+          <img src="~/assets/icons/volume.svg" class="h-8 w-auto" />
         </div>
         <div class="flex flex-row mb-7 justify-center">
           <span class="font-sans text-4xl text-black">{{
-            word.nativeWord
+            props.word.nativeWord
           }}</span>
         </div>
         <div></div>
@@ -27,8 +27,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineProps } from "vue";
 
 // TODO: declare in specific ts file
 export interface Word {
@@ -36,16 +36,10 @@ export interface Word {
   foreignWord: string;
 }
 
-export default defineComponent({
-  name: "Card",
-  props: {
-    word: {
-      type: Object as PropType<Word>,
-      required: true,
-    },
-  },
-  setup() {
-    return {};
+const props = defineProps({
+  word: {
+    type: Object,
+    required: true,
   },
 });
 </script>

@@ -25,31 +25,20 @@
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref } from "vue";
+<script setup lang="ts">
+import { computed, defineProps, defineEmits, ref } from "vue";
 import { langOptions, flagPaths } from "~/plugins/i18n";
 
-export default defineComponent({
-  name: "CountrySelect",
-  props: {
-    currentLang: { default: "", type: String },
-  },
-  emits: ["changeLang"],
-  setup(props, { emit }) {
-    let selectedLang = ref(props.currentLang);
-    const flagPath = computed(() => flagPaths[selectedLang.value]);
-
-    const updateLang = () => {
-      emit("changeLang", selectedLang.value);
-    };
-    return {
-      selectedLang,
-      langOptions,
-      updateLang,
-      flagPath,
-    };
-  },
+const emit = defineEmits(["changeLang"]);
+const props = defineProps({
+  currentLang: { default: "", type: String },
 });
+let selectedLang = ref(props.currentLang);
+const flagPath = computed(() => flagPaths[selectedLang.value]);
+
+const updateLang = () => {
+  emit("changeLang", selectedLang.value);
+};
 </script>
 
 <style scoped>
