@@ -5,7 +5,7 @@
     >
       <div
         class="flex flex-row items-center gap-2 pl-3 cursor-pointer"
-        @click="router.push('/')"
+        @click="$router.push('/')"
       >
         <img src="~/assets/icons/logo.svg" class="h-10 w-auto" />
         <span class="text-2xl text-black font-bold">FlipWord</span>
@@ -18,24 +18,11 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import { useNuxtApp } from "#app";
 import Footer from "~/components/Footer.vue";
 
-export default defineComponent({
-  name: "BaseLayout",
-  components: {
-    Footer,
-  },
-  setup() {
-    const { $router } = useNuxtApp();
-
-    return {
-      router: $router,
-    };
-  },
-});
+const { $router } = useNuxtApp();
 </script>
 
 <style scoped></style>

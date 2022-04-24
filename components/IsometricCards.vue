@@ -27,25 +27,15 @@
   </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { defineProps } from "vue";
 import Card from "../components/Card.vue";
 import { wordList } from "assets/data/words";
 
-export default defineComponent({
-  name: "IsometricCards",
-  components: { Card },
-  props: {
-    lang: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    return {
-      props: props,
-      wordList: wordList,
-    };
+const props = defineProps({
+  lang: {
+    type: String,
+    required: true,
   },
 });
 </script>

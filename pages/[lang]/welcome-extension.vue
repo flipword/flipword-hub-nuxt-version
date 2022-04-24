@@ -50,8 +50,8 @@
   </NuxtLayout>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, onBeforeMount, onMounted, ref } from "vue";
+<script setup lang="ts">
+import { computed, onBeforeMount, onMounted, ref } from "vue";
 import { useHead, useNuxtApp } from "#app";
 import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeExtensionStep0.vue";
 import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
@@ -60,131 +60,99 @@ import WelcomeExtensionStep3 from "~/components/welcome-extension-step/WelcomeEx
 import WelcomeExtensionStep4 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
 import WelcomeStepper from "~/components/WelcomeStepper.vue";
 
+// TODO: clear double declaration
 enum AuthMethod {
   GOOGLE = 1,
   APPLE = 2,
 }
 
-export default defineComponent({
-  name: "WelcomeExtension",
-  components: {
-    WelcomeExtensionStep0,
-    WelcomeExtensionStep1,
-    WelcomeExtensionStep2,
-    WelcomeExtensionStep3,
-    WelcomeExtensionStep4,
-    WelcomeStepper,
-  },
-  setup() {
-    onBeforeMount(() => {
-      step.value = getCurrentStep();
-      displayContentCard.value = step.value != 0;
-    });
-
-    onMounted(() => {
-      countDownStep1();
-    });
-
-    const {
-      $i18n: {
-        $t,
-        currentLang,
-        updateLang,
-        getNativeLanguageLabel,
-        getForeignLanguageLabel,
-      },
-    } = useNuxtApp();
-
-    const getTitle = () => `- ${$t("welcome")}`;
-    useHead({
-      title: computed(() => `Flipword ${$t("welcome") ? getTitle() : ""}`),
-    });
-
-    const isClient = process.client;
-
-    const step = ref<number>(0);
-    const displayContentCard = ref<boolean>(false);
-    let foreignLanguage = null;
-
-    const countDownStep1 = () => {
-      if (step.value == 0) {
-        setTimeout(nextStep, 2000);
-      }
-    };
-
-    const nextStep = () => {
-      if (step.value == 0) {
-        setTimeout(() => (displayContentCard.value = true), 500);
-      }
-      step.value += 1;
-      if (isClient) {
-        localStorage.setItem("step", step.value.toString());
-      }
-    };
-
-    const setStep = (newStep: number) => {
-      step.value = newStep;
-      localStorage.setItem("step", step.value.toString());
-    };
-
-    const getCurrentStep = () => {
-      let currentStep = 0;
-      if (isClient) {
-        currentStep = Number(localStorage.getItem("step"));
-      }
-      return currentStep;
-    };
-
-    const pickForeignLang = (lang: string) => {
-      foreignLanguage = lang;
-      nextStep();
-    };
-
-    const signIn = (authMethod: AuthMethod) => {
-      if (isClient) {
-        // If you try to log but you don't have foreign language set
-        if (!foreignLanguage) {
-          // TODO: Add notify or store foreign in localStorage
-          setStep(2);
-          return;
-        }
-        // Create custom event that will be catch by web extension to sign in
-        const event = new CustomEvent("flipwordAuthRequest", {
-          detail: {
-            authMethod: authMethod,
-            nativeLanguage: currentLang.value,
-            foreignLanguage: foreignLanguage,
-          },
-        });
-
-        console.log("send: ", {
-          authMethod: authMethod,
-          nativeLanguage: currentLang.value,
-          foreignLanguage: foreignLanguage,
-        });
-        document.dispatchEvent(event);
-        // Catch event emit by extension when login success
-        document.addEventListener("loginSuccessful", () => {
-          nextStep();
-        });
-      }
-    };
-
-    return {
-      t: $t,
-      step,
-      nextStep,
-      isClient,
-      currentLang,
-      updateLang,
-      pickForeignLang,
-      signIn,
-      getNativeLanguageLabel,
-      getForeignLanguageLabel,
-      displayContentCard,
-    };
-  },
+onBeforeMount(() => {
+  step.value = getCurrentStep();
+  displayContentCard.value = step.value != 0;
 });
+
+onMounted(() => {
+  countDownStep1();
+});
+
+const {
+  $i18n: { $t, currentLang },
+} = useNuxtApp();
+
+const getTitle = () => `- ${$t("welcome")}`;
+useHead({
+  title: computed(() => `Flipword ${$t("welcome") ? getTitle() : ""}`),
+});
+
+const isClient = process.client;
+
+const step = ref<number>(0);
+const displayContentCard = ref<boolean>(false);
+let foreignLanguage = null;
+
+const countDownStep1 = () => {
+  if (step.value == 0) {
+    setTimeout(nextStep, 2000);
+  }
+};
+
+const nextStep = () => {
+  if (step.value == 0) {
+    setTimeout(() => (displayContentCard.value = true), 500);
+  }
+  step.value += 1;
+  if (isClient) {
+    localStorage.setItem("step", step.value.toString());
+  }
+};
+
+const setStep = (newStep: number) => {
+  step.value = newStep;
+  localStorage.setItem("step", step.value.toString());
+};
+
+const getCurrentStep = () => {
+  let currentStep = 0;
+  if (isClient) {
+    currentStep = Number(localStorage.getItem("step"));
+  }
+  return currentStep;
+};
+
+const pickForeignLang = (lang: string) => {
+  foreignLanguage = lang;
+  nextStep();
+};
+
+const signIn = (authMethod: AuthMethod) => {
+  if (isClient) {
+    // If you try to log but you don't have foreign language set
+    if (!foreignLanguage) {
+      // TODO: Add notify or store foreign in localStorage
+      setStep(2);
+      return;
+    }
+    // Create custom event that will be catch by web extension to sign in
+    const event = new CustomEvent("flipwordAuthRequest", {
+      detail: {
+        authMethod: authMethod,
+        nativeLanguage: currentLang.value,
+        foreignLanguage: foreignLanguage,
+      },
+    });
+
+    console.log("send: ", {
+      authMethod: authMethod,
+      nativeLanguage: currentLang.value,
+      foreignLanguage: foreignLanguage,
+    });
+    document.dispatchEvent(event);
+    // Catch event emit by extension when login success
+    document.addEventListener("loginSuccessful", () => {
+      nextStep();
+    });
+  }
+};
 </script>
 
 <style scoped>
