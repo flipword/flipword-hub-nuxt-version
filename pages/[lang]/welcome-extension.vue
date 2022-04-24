@@ -1,6 +1,6 @@
 <template>
-  <ClientOnly>
-    <NuxtLayout name="light-layout">
+  <NuxtLayout name="light-layout">
+    <ClientOnly>
       <div class="h-full flex flex-col">
         <div
           class="h-auto w-full flex flex-grow flex-col justify-center items-center gap-10"
@@ -19,10 +19,7 @@
                 class="h-full w-full bg-white rounded-lg shadow-lg"
                 :style="step > 0 ? 'transform: rotateY(-180deg)' : ''"
               >
-                <WelcomeExtensionStep1
-                  v-if="step == 1"
-                  @click="pickNativeLang"
-                />
+                <WelcomeExtensionStep1 v-if="step == 1" @save="nextStep" />
                 <WelcomeExtensionStep2
                   v-else-if="step == 2"
                   @click="pickForeignLang"
@@ -49,8 +46,8 @@
           </div>
         </div>
       </div>
-    </NuxtLayout>
-  </ClientOnly>
+    </ClientOnly>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">
@@ -62,7 +59,11 @@ import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeEx
 import WelcomeExtensionStep3 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
 import WelcomeExtensionStep4 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
 import WelcomeStepper from "~/components/WelcomeStepper.vue";
-import { AuthMethod } from "~/plugins/auth.client";
+
+enum AuthMethod {
+  GOOGLE = 1,
+  APPLE = 2,
+}
 
 export default defineComponent({
   name: "WelcomeExtension",
@@ -99,6 +100,8 @@ export default defineComponent({
       title: computed(() => `Flipword ${$t("welcome") ? getTitle() : ""}`),
     });
 
+    const isClient = process.client;
+
     const step = ref<number>(0);
     const displayContentCard = ref<boolean>(false);
     let foreignLanguage = null;
@@ -114,7 +117,7 @@ export default defineComponent({
         setTimeout(() => (displayContentCard.value = true), 500);
       }
       step.value += 1;
-      if (process.client) {
+      if (isClient) {
         localStorage.setItem("step", step.value.toString());
       }
     };
@@ -126,15 +129,10 @@ export default defineComponent({
 
     const getCurrentStep = () => {
       let currentStep = 0;
-      if (process.client) {
+      if (isClient) {
         currentStep = Number(localStorage.getItem("step"));
       }
       return currentStep;
-    };
-
-    const pickNativeLang = (lang: string) => {
-      updateLang(lang);
-      nextStep();
     };
 
     const pickForeignLang = (lang: string) => {
@@ -143,7 +141,7 @@ export default defineComponent({
     };
 
     const signIn = (authMethod: AuthMethod) => {
-      if (process.client) {
+      if (isClient) {
         // If you try to log but you don't have foreign language set
         if (!foreignLanguage) {
           // TODO: Add notify or store foreign in localStorage
@@ -158,7 +156,12 @@ export default defineComponent({
             foreignLanguage: foreignLanguage,
           },
         });
-        console.log("event send: ", event);
+
+        console.log("send: ", {
+          authMethod: authMethod,
+          nativeLanguage: currentLang.value,
+          foreignLanguage: foreignLanguage,
+        });
         document.dispatchEvent(event);
         // Catch event emit by extension when login success
         document.addEventListener("loginSuccessful", () => {
@@ -171,8 +174,9 @@ export default defineComponent({
       t: $t,
       step,
       nextStep,
+      isClient,
       currentLang,
-      pickNativeLang,
+      updateLang,
       pickForeignLang,
       signIn,
       getNativeLanguageLabel,

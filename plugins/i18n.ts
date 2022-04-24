@@ -36,14 +36,14 @@ export const langOptions = [
 export const defaultLang: string = "en";
 
 export const flagPaths: { [key: string]: string } = {
-  en: "english.png",
-  fr: "french.png",
-  es: "spain.png",
-  de: "german.png",
+  en: "en.svg",
+  fr: "fr.svg",
+  es: "es.svg",
+  de: "de.svg",
 };
 
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const { ssrContext, $router } = nuxtApp;
+  const { $router } = nuxtApp;
 
   let currentLang = ref(defaultLang);
 

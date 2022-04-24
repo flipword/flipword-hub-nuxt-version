@@ -6,9 +6,9 @@
         <TitleLogoElement class="z-50"/>
         <div class="h-2/5 w-full pt-10 flex flex-col justify-start">
           <div class="w-full flex flex-row flex-wrap justify-center items-start gap-4">
-          <ButtonStore store="Apple" platform="iPhone, iPad" store-path="apple.svg" store-link="https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185"/>
-          <ButtonStore store="Google Play" platform="Android" store-path="android.svg" store-link="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"/>
-          <ButtonStore store="Chrome Store" platform="chrome.google.com" store-path="chrome.svg" store-link="https://chrome.google.com/webstore/detail/flipword/hinoggfcanlhfbeddbadjjpdaeoigkbe"/>
+          <ButtonStore store="Apple" platform="iPhone, iPad" store-img-path="apple.svg" store-link="https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185"/>
+          <ButtonStore store="Google Play" platform="Android" store-img-path="android.svg" store-link="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"/>
+          <ButtonStore store="Chrome Store" platform="chrome.google.com" store-img-path="chrome.svg" store-link="https://chrome.google.com/webstore/detail/flipword/hinoggfcanlhfbeddbadjjpdaeoigkbe"/>
           </div>
         </div>
       </div>
@@ -148,7 +148,7 @@
         >
           <div class="w-full flex flex-row items-center justify-center gap-4">
             <span class="sm:text-4xl text-3xl font-bold">{{ t("launch_app") }}</span>
-            <img src="~/assets/icons/play.png" />
+<!--            <img src="~/assets/icons/play.png" />-->
           </div>
         </button>
       </div>
@@ -161,7 +161,7 @@
 
 <script lang="ts">
 import {defineComponent, ref, computed, onMounted} from "vue";
-import {useHead, useNuxtApp} from "#app";
+import {useHead, useNuxtApp,} from "#app";
 import { langOptions } from "~/plugins/i18n";
 import IsometricCards from "~/components/IsometricCards.vue";
 import CountrySelect from "~/components/CountrySelect.vue";
@@ -194,7 +194,8 @@ export default defineComponent({
   setup() {
     const {
       $i18n: {$t, currentLang, updateLang, getNativeLanguageLabel, getForeignLanguageLabel},
-      $router
+      $router,
+      payload
     } = useNuxtApp();
 
     onMounted(() => {

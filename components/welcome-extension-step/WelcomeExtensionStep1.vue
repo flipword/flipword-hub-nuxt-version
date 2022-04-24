@@ -5,7 +5,7 @@
     >
       <span class="text-3xl text-center">{{ t("what_is_language") }}</span>
       <div class="w-full flex flex-col items-center gap-10">
-        <CountrySelect :current-lang="currentLang" @changeLang="pickLanguage" />
+        <CountrySelect :current-lang="currentLang" @changeLang="updateLang" />
       </div>
     </div>
     <div class="flex flex-shrink flex-row w-full justify-end">
@@ -30,27 +30,21 @@ export default defineComponent({
   components: {
     CountrySelect,
   },
-  emits: ["click"],
+  emits: ["save"],
   setup(props, { emit }) {
     const {
-      $i18n: { $t, currentLang },
+      $i18n: { $t, currentLang, updateLang },
     } = useNuxtApp();
 
-    let selectedLanguage = null;
-
-    const pickLanguage = (lang: string) => {
-      selectedLanguage = lang;
-    };
-
     const saveLanguage = () => {
-      emit("click", selectedLanguage);
+      emit("save");
     };
 
     return {
       props: props,
       t: $t,
       currentLang,
-      pickLanguage,
+      updateLang,
       saveLanguage,
     };
   },

@@ -8,14 +8,14 @@
       ></div>
       <img
         ref="cursorRef"
-        src="~/assets/icons/cursor.png"
+        src="~/assets/icons/cursor.svg"
         class="z-50 absolute cursor"
       />
       <div
         ref="logoRef"
         class="z-20 absolute p-0.5 bg-primary filter specific-shadow hidden"
       >
-        <img class="w-10 h-10" src="~/assets/icons/logo.png" />
+        <img class="w-10 h-10" src="~/assets/icons/logo.svg" />
       </div>
       <div
         ref="addingPopupRef"

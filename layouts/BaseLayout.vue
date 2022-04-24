@@ -7,7 +7,7 @@
         class="flex flex-row items-center gap-2 pl-3 cursor-pointer"
         @click="router.push('/')"
       >
-        <img src="~/assets/icons/logo.png" class="h-10 w-auto" />
+        <img src="~/assets/icons/logo.svg" class="h-10 w-auto" />
         <span class="text-2xl text-black font-bold">FlipWord</span>
       </div>
       <CountrySelect

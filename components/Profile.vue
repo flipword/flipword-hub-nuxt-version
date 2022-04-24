@@ -4,7 +4,7 @@
         <div
           class="h-52 w-52 bg-primary rounded-full overflow-hidden border-primary border-4 z-20"
         >
-          <img src="~/assets/pictures/croquelois.jpg" />
+          <img src="~/assets/images/pictures/croquelois.jpg" />
         </div>
         <div
           class="flex flex-col w-full rounded-lg bg-primary px-5 pt-8 pb-4 -mt-8 gap-4"
