@@ -8,7 +8,7 @@
       </div>
     </div>
     <select
-      v-if="currentLang"
+      v-model="selectedLang"
       class="mr-5 mt-2 country-select"
       name="lang"
       @change="updateLang"
@@ -17,7 +17,7 @@
         v-for="(lang, index) in langOptions"
         :key="index"
         :value="lang.id"
-        :selected="currentLang == lang.id"
+        :selected="selectedLang == lang.id"
       >
         {{ lang.label }}
       </option>
@@ -26,7 +26,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { computed, defineComponent, ref } from "vue";
 import { langOptions, flagPaths } from "~/plugins/i18n";
 
 export default defineComponent({
@@ -36,11 +36,14 @@ export default defineComponent({
   },
   emits: ["changeLang"],
   setup(props, { emit }) {
-    const flagPath = ref(flagPaths[props.currentLang]);
-    const updateLang = (event: any) => {
-      emit("changeLang", event.target.value);
+    let selectedLang = ref(props.currentLang);
+    const flagPath = computed(() => flagPaths[selectedLang.value]);
+
+    const updateLang = () => {
+      emit("changeLang", selectedLang.value);
     };
     return {
+      selectedLang,
       langOptions,
       updateLang,
       flagPath,

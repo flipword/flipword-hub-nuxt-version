@@ -1,6 +1,6 @@
 <template>
-  <ClientOnly>
-    <NuxtLayout name="light-layout">
+  <NuxtLayout name="light-layout">
+    <ClientOnly>
       <div class="h-full flex flex-col">
         <div
           class="h-auto w-full flex flex-grow flex-col justify-center items-center gap-10"
@@ -46,8 +46,8 @@
           </div>
         </div>
       </div>
-    </NuxtLayout>
-  </ClientOnly>
+    </ClientOnly>
+  </NuxtLayout>
 </template>
 
 <script lang="ts">
@@ -59,7 +59,6 @@ import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeEx
 import WelcomeExtensionStep3 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
 import WelcomeExtensionStep4 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
 import WelcomeStepper from "~/components/WelcomeStepper.vue";
-import ClientOnly from "#app/components/client-only.mjs";
 
 enum AuthMethod {
   GOOGLE = 1,
@@ -75,7 +74,6 @@ export default defineComponent({
     WelcomeExtensionStep3,
     WelcomeExtensionStep4,
     WelcomeStepper,
-    ClientOnly,
   },
   setup() {
     onBeforeMount(() => {
@@ -159,6 +157,11 @@ export default defineComponent({
           },
         });
 
+        console.log("send: ", {
+          authMethod: authMethod,
+          nativeLanguage: currentLang.value,
+          foreignLanguage: foreignLanguage,
+        });
         document.dispatchEvent(event);
         // Catch event emit by extension when login success
         document.addEventListener("loginSuccessful", () => {
