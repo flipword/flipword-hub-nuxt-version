@@ -100,12 +100,12 @@ export default defineNuxtPlugin(async (nuxtApp) => {
   addRouteMiddleware(
     "i18nRedirect",
     (to, from) => {
+      const toRouteWithoutLang = removeLangFromRoute(to);
+      const fromRouteWithoutLang = removeLangFromRoute(from);
       if (
         currentLang.value != defaultLang &&
         from.params?.lang != to.params?.lang
       ) {
-        const toRouteWithoutLang = removeLangFromRoute(to);
-        const fromRouteWithoutLang = removeLangFromRoute(from);
         if (toRouteWithoutLang != fromRouteWithoutLang) {
           const langPath =
             from.params?.lang == defaultLang ? "" : from.params?.lang;
@@ -117,6 +117,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       const newCurrentLang = to.params?.lang?.toString() ?? defaultLang;
       if (langOptions.find((x: any) => x.id == newCurrentLang)) {
         currentLang.value = newCurrentLang;
+      } else {
+        return navigateTo(!toRouteWithoutLang ? "/" : toRouteWithoutLang);
       }
     },
     { global: true }
