@@ -10,7 +10,6 @@
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^4.2.1",
-    "@nuxt/webpack-builder": "latest",
     "autoprefixer": "^10.3.7",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.32.0",
