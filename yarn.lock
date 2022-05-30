@@ -835,15 +835,6 @@
     vite "^2.9.1"
     vite-node "^0.8.4"
 
-"@nuxtjs/firebase@^8.2.2":
-  version "8.2.2"
-  resolved "https://registry.yarnpkg.com/@nuxtjs/firebase/-/firebase-8.2.2.tgz#a449a1b0d289d8907145f62a8a2503bc2ae31b20"
-  integrity sha512-j+kW0utwq23w71D0I4RyOc9/eYGe8WpsoI2GD9PT744rMWmj4MFHASjmgyDPk2KdZGxsknxUW6yq29aLd0E2ow==
-  dependencies:
-    consola "^2.15.3"
-  optionalDependencies:
-    firebase-admin "^10.0.0"
-
 "@nuxtjs/tailwindcss@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@nuxtjs/tailwindcss/-/tailwindcss-4.2.1.tgz#bd0dc5e0d7f02aebe15bc2384c003687e6e5d508"
@@ -3284,7 +3275,7 @@ finalhandler@1.2.0:
     statuses "2.0.1"
     unpipe "~1.0.0"
 
-firebase-admin@^10.0.0, firebase-admin@^10.1.0:
+firebase-admin@^10.1.0:
   version "10.2.0"
   resolved "https://registry.yarnpkg.com/firebase-admin/-/firebase-admin-10.2.0.tgz#e5a97d35819b5872e3e29384b48f67dab59ede04"
   integrity sha512-6ehn5J9UEFgi4+naqYvozmGpnZae3cJLdwSkSsDc8/Y0eTBjVMFdf9N2ft7N81UNHA0N5DknOyXhlsdAdyBLCA==
