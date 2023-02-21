@@ -35,6 +35,9 @@ module.exports = {
       white: "#FFFFFF",
     },
     extend: {
+      fontFamily: {
+        sans: ['QuicksandCustom'],
+      },
       borderRadius: {
         "5xl": "5rem",
       },

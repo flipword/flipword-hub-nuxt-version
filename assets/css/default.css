@@ -17,3 +17,10 @@ body::-webkit-scrollbar-thumb {
     background-color: #c1c1c1;
     border-radius: 1rem;
 }
+
+@layer base {
+    @font-face {
+        font-family: 'QuicksandCustom';
+        src: url('/fonts/Quicksand-Custom.ttf') format('truetype');
+    }
+}
