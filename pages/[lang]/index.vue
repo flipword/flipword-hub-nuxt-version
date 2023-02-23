@@ -4,30 +4,6 @@
     <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
       <div class="lg:w-1/2 w-full flex flex-col items-center">
         <TitleLogoElement class="z-50" />
-        <div class="h-2/5 w-full pt-10 flex flex-col justify-start">
-          <div
-            class="w-full flex flex-row flex-wrap justify-center items-start gap-4"
-          >
-            <ButtonStore
-              store="Apple"
-              platform="iPhone, iPad"
-              store-img-path="apple.svg"
-              store-link="https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185"
-            />
-            <ButtonStore
-              store="Google Play"
-              platform="Android"
-              store-img-path="android.svg"
-              store-link="https://play.google.com/store/apps/details?id=com.flutter_flip_card&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
-            />
-            <ButtonStore
-              store="Chrome Store"
-              platform="chrome.google.com"
-              store-img-path="chrome.svg"
-              store-link="https://chrome.google.com/webstore/detail/flipword/hinoggfcanlhfbeddbadjjpdaeoigkbe"
-            />
-          </div>
-        </div>
       </div>
       <div class="is-desktop w-1/2 flex flex-col justify-end relative">
         <CountrySelect
@@ -290,7 +266,7 @@ const updateWordInAddingPopup = () => {
 
 <style scoped>
 .screen-part1 {
-  height: 120vh;
+  height: 100vh;
   width: 100%;
 }
 
