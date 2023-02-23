@@ -1,13 +1,13 @@
 <template>
-  <div class="w-full h-full flex flex-row gap-32 ml-48">
-    <div class="isometric flex flex-col gap-5 mt-48">
+  <div class="w-full h-full flex flex-row gap-40 ml-48">
+    <div class="isometric flex flex-col mt-48">
       <Card :word="wordList[props.lang][0]" />
     </div>
-    <div class="isometric flex flex-col gap-5 -ml-48">
+    <div class="isometric flex flex-col gap-5 -mt-28 -ml-72">
       <Card :word="wordList[props.lang][1]" />
       <Card :word="wordList[props.lang][2]" />
     </div>
-    <div class="isometric flex flex-col gap-5 -mt-48 -ml-48">
+    <div class="isometric flex flex-col gap-5 -mt-72 -ml-40">
       <Card :word="wordList[props.lang][3]" />
       <Card :word="wordList[props.lang][4]" />
       <Card :word="wordList[props.lang][5]" />

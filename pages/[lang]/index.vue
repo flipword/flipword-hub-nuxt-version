@@ -1,29 +1,47 @@
 <template>
   <div>
     <!--    Screen part 1  -->
-    <div class="screen-part1 bg-primary flex flex-row overflow-hidden">
-      <div class="lg:w-1/2 w-full flex flex-col items-center">
-        <TitleLogoElement class="z-50" />
-      </div>
-      <div class="is-desktop w-1/2 flex flex-col justify-end relative">
-        <CountrySelect
-          class="absolute z-50 top-0 right-0"
-          :current-lang="currentLang"
-          @changeLang="updateLang"
-        />
-        <div class="h-full w-full mt-20">
-          <IsometricCards
-            ref="isometricCard"
-            :class="{ 'isometric-card-final': isMounted }"
-            class="isometric-card-transition"
-            :lang="currentLang"
-          />
+    <div class="screen-part overflow-hidden relative">
+      <div class="w-full h-1/2 bg-primary absolute top-0 z-behind" />
+      <div class="w-full h-full flex flex-row">
+        <div
+          class="w-5/12 h-full bg-base rounded-tr-4xl mt-14 flex flex-col items-center"
+        >
+          <TitleLogoElement />
+        </div>
+        <div class="w-7/12 h-full bg-primary rounded-bl-4xl">
+          <div class="w-full h-full mt-56 ml-24">
+            <IsometricCards
+              ref="isometricCard"
+              :class="{ 'isometric-card-final': isMounted }"
+              class="isometric-card-transition"
+              :lang="currentLang"
+            />
+          </div>
         </div>
       </div>
+      <!--      <div class="lg:w-1/2 w-full flex flex-col items-center">-->
+      <!--        <TitleLogoElement class="z-50" />-->
+      <!--      </div>-->
+      <!--      <div class="is-desktop w-1/2 flex flex-col justify-end relative">-->
+      <!--        <CountrySelect-->
+      <!--          class="absolute z-50 top-0 right-0"-->
+      <!--          :current-lang="currentLang"-->
+      <!--          @changeLang="updateLang"-->
+      <!--        />-->
+      <!--        <div class="h-full w-full mt-20">-->
+      <!--          <IsometricCards-->
+      <!--            ref="isometricCard"-->
+      <!--            :class="{ 'isometric-card-final': isMounted }"-->
+      <!--            class="isometric-card-transition"-->
+      <!--            :lang="currentLang"-->
+      <!--          />-->
+      <!--        </div>-->
+      <!--      </div>-->
     </div>
 
     <!--    Screen part 2-->
-    <div class="screen-part2">
+    <div class="screen-part">
       <div class="is-desktop h-full w-full flex flex-row bg-primary">
         <div class="h-full flex flex-col w-7/12">
           <div class="h-1/2 w-full bg-base mt-20 pl-1/12">
@@ -136,7 +154,7 @@
     </div>
     <!--    Screen part 3 -->
     <div
-      class="screen-part3 py-5 flex flex-row flex-wrap bg-primary 2xl:px-36 lg:px-24 px-10"
+      class="screen-part py-5 flex flex-row flex-wrap bg-primary 2xl:px-36 lg:px-24 px-10"
     >
       <div
         class="lg:flex-1 w-full flex flex-row lg:justify-start justify-center items-center"
@@ -265,17 +283,8 @@ const updateWordInAddingPopup = () => {
 </script>
 
 <style scoped>
-.screen-part1 {
+.screen-part {
   height: 100vh;
-  width: 100%;
-}
-
-.screen-part2 {
-  height: 1350px;
-  width: 100%;
-}
-
-.screen-part3 {
   width: 100%;
 }
 

@@ -47,8 +47,8 @@ const props = defineProps({
 <style scoped>
 .flip-card {
   background-color: transparent;
-  width: 240px;
-  height: 320px;
+  width: 270px;
+  height: 380px;
   transition: 0.4s ease-in-out transform, 0.3s ease-in-out box-shadow;
   perspective: 1000px;
 }

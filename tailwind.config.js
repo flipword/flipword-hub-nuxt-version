@@ -36,9 +36,10 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['QuicksandCustom'],
+        sans: ["QuicksandCustom"],
       },
       borderRadius: {
+        "4xl": "4rem",
         "5xl": "5rem",
       },
       fontSize: {
@@ -57,6 +58,9 @@ module.exports = {
       },
       padding: {
         "1/12": "8.33%",
+      },
+      zIndex: {
+        behind: "-1",
       },
     },
   },
