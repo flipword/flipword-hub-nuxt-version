@@ -1,10 +1,10 @@
 <template>
   <div class="w-full flex flex-col justify-center items-center">
     <div class="w-full flex flex-row justify-center">
-      <img src="~/assets/icons/logo_dark.svg" class="h-full w-32" />
+      <img src="~/assets/icons/logo_dark.svg" class="h-auto xl:w-32 w-24" />
       <div class="flex flex-col justify-center">
         <span
-          class="font-sans 2xl:text-9xl xl:text-8xl lg:text-8xl xs:text-8xl text-4xl text-black font-bold"
+          class="font-sans 2xl:text-9xl xl:text-8xl lg:text-7xl text-4xl text-black font-bold"
           >FlipWord</span
         >
       </div>

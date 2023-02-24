@@ -25,167 +25,57 @@
           />
         </div>
       </div>
-      <!--      <div class="lg:w-1/2 w-full flex flex-col items-center">-->
-      <!--        <TitleLogoElement class="z-50" />-->
-      <!--      </div>-->
-      <!--      <div class="is-desktop w-1/2 flex flex-col justify-end relative">-->
-      <!--        <CountrySelect-->
-      <!--          class="absolute z-50 top-0 right-0"-->
-      <!--          :current-lang="currentLang"-->
-      <!--          @changeLang="updateLang"-->
-      <!--        />-->
-      <!--        <div class="h-full w-full mt-20">-->
-      <!--          <IsometricCards-->
-      <!--            ref="isometricCard"-->
-      <!--            :class="{ 'isometric-card-final': isMounted }"-->
-      <!--            class="isometric-card-transition"-->
-      <!--            :lang="currentLang"-->
-      <!--          />-->
-      <!--        </div>-->
-      <!--      </div>-->
     </div>
 
     <!--    Screen part 2-->
-    <!--    <div class="screen-part">-->
-    <!--      <div class="is-desktop h-full w-full flex flex-row bg-primary">-->
-    <!--        <div class="h-full flex flex-col w-7/12">-->
-    <!--          <div class="h-1/2 w-full bg-base mt-20 pl-1/12">-->
-    <!--            <AddingPopup-->
-    <!--              :native-word="currentWordInAddingPopup.nativeWord"-->
-    <!--              :foreign-word="currentWordInAddingPopup.foreignWord"-->
-    <!--              :native-language-label="getNativeLanguageLabel()"-->
-    <!--              :foreign-language-label="getForeignLanguageLabel()"-->
-    <!--              @update-word="updateWordInAddingPopup"-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--          <div class="w-full h-20 bg-base">-->
-    <!--            <div class="w-full h-full bg-primary rounded-tr-5xl"></div>-->
-    <!--          </div>-->
-    <!--          <div-->
-    <!--            class="flex flex-col flex-grow justify-center items-center lg:px-32 px-3"-->
-    <!--          >-->
-    <!--            <ExtensionPopupAnimation-->
-    <!--              :native-language-label="getNativeLanguageLabel()"-->
-    <!--              :foreign-language-label="getForeignLanguageLabel()"-->
-    <!--              :text="$t('extension_promo')"-->
-    <!--              :native-word="$t('extension_popup_native_word')"-->
-    <!--              :foreign-word="$t('extension_popup_foreign_word')"-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div-->
-    <!--          class="h-full w-5/12 bg-base rounded-tl-5xl rounded-bl-5xl flex flex-col justify-center items-center overflow-hidden"-->
-    <!--        >-->
-    <!--          <div-->
-    <!--            class="h-2/5 w-5/6 my-1/12 rounded-t-5xl bg-primary flex flex-col justify-center items-center px-12 filter drop-shadow-lg"-->
-    <!--          >-->
-    <!--            <span-->
-    <!--              class="font-sans text-4xl leading-normal text-black text-center"-->
-    <!--              v-html="$t('create_description')"-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--          <div class="h-1/2 px-16 w-full">-->
-    <!--            <div class="w-full flex flex-col gap-5">-->
-    <!--              <div-->
-    <!--                v-for="(chunk, index) in wordListChunk"-->
-    <!--                :key="index"-->
-    <!--                class="flex flex-row justify-around"-->
-    <!--              >-->
-    <!--                <ListCard-->
-    <!--                  :native-word="chunk[0].nativeWord"-->
-    <!--                  :foreign-word="chunk[0].foreignWord"-->
-    <!--                ></ListCard>-->
-    <!--                <ListCard-->
-    <!--                  :native-word="chunk[1].nativeWord"-->
-    <!--                  :foreign-word="chunk[1].foreignWord"-->
-    <!--                ></ListCard>-->
-    <!--              </div>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <div class="is-mobile h-full w-full bg-primary">-->
-    <!--        <div class="w-full bg-base">-->
-    <!--          <AddingPopup-->
-    <!--            :native-word="currentWordInAddingPopup.nativeWord"-->
-    <!--            :foreign-word="currentWordInAddingPopup.foreignWord"-->
-    <!--            :native-language-label="getNativeLanguageLabel()"-->
-    <!--            :foreign-language-label="getForeignLanguageLabel()"-->
-    <!--            @update-word="updateWordInAddingPopup"-->
-    <!--          />-->
-    <!--        </div>-->
-    <!--        <div class="w-full bg-base flex flex-row justify-center pt-10 px-6">-->
-    <!--          <div-->
-    <!--            class="h-110 w-full rounded-t-5xl bg-primary flex flex-col justify-center items-center px-3 filter drop-shadow-lg"-->
-    <!--          >-->
-    <!--            <span-->
-    <!--              class="font-sans text-3xl leading-normal text-black text-center"-->
-    <!--              v-html="$t('create_description')"-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="py-10 px-3 w-full bg-base">-->
-    <!--          <div class="w-full flex flex-col gap-5">-->
-    <!--            <div-->
-    <!--              v-for="(chunk, index) in wordListChunk"-->
-    <!--              :key="index"-->
-    <!--              class="flex flex-row justify-around gap-4"-->
-    <!--            >-->
-    <!--              <ListCard-->
-    <!--                :native-word="chunk[0].nativeWord"-->
-    <!--                :foreign-word="chunk[0].foreignWord"-->
-    <!--              ></ListCard>-->
-    <!--              <ListCard-->
-    <!--                :native-word="chunk[1].nativeWord"-->
-    <!--                :foreign-word="chunk[1].foreignWord"-->
-    <!--              ></ListCard>-->
-    <!--            </div>-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--        <div class="pt-6 w-full bg-primary">-->
-    <!--          <div-->
-    <!--            class="flex flex-col flex-grow justify-center items-center lg:px-32 px-3"-->
-    <!--          >-->
-    <!--            <ExtensionPopupAnimation-->
-    <!--              :native-language-label="getNativeLanguageLabel()"-->
-    <!--              :foreign-language-label="getForeignLanguageLabel()"-->
-    <!--              :text="$t('extension_promo')"-->
-    <!--              :native-word="$t('extension_popup_native_word')"-->
-    <!--              :foreign-word="$t('extension_popup_foreign_word')"-->
-    <!--            />-->
-    <!--          </div>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <div class="screen-part flex flex-row overflow-hidden">
+      <div class="w-5/12 h-full flex flex-col">
+        <div class="w-full bg-primary px-20 py-20 rounded-r-3xl mt-14">
+          <span
+            class="font-sans text-4xl leading-normal text-black text-center"
+            v-html="$t('create_description')"
+          />
+        </div>
+        <div class="w-full flex flex-col gap-8 mt-20">
+          <div
+            v-for="(chunk, index) in wordListChunk"
+            :key="index"
+            class="flex flex-row justify-around"
+          >
+            <ListCard
+              :native-word="chunk[0].nativeWord"
+              :foreign-word="chunk[0].foreignWord"
+            ></ListCard>
+            <ListCard
+              :native-word="chunk[1].nativeWord"
+              :foreign-word="chunk[1].foreignWord"
+            ></ListCard>
+          </div>
+        </div>
+      </div>
+      <div class="w-7/12 h-full">
+        <div class="w-full px-32">
+          <AddingPopup
+            :native-word="currentWordInAddingPopup.nativeWord"
+            :foreign-word="currentWordInAddingPopup.foreignWord"
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
+            @update-word="updateWordInAddingPopup"
+          />
+        </div>
+        <div class="w-full bg-primary px-20 py-20 rounded-l-3xl mt-14">
+          <ExtensionPopupAnimation
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
+            :text="$t('extension_promo')"
+            :native-word="$t('extension_popup_native_word')"
+            :foreign-word="$t('extension_popup_foreign_word')"
+          />
+        </div>
+      </div>
+    </div>
     <!--    Screen part 3 -->
-    <!--    <div-->
-    <!--      class="screen-part py-5 flex flex-row flex-wrap bg-primary 2xl:px-36 lg:px-24 px-10"-->
-    <!--    >-->
-    <!--      <div-->
-    <!--        class="lg:flex-1 w-full flex flex-row lg:justify-start justify-center items-center"-->
-    <!--      >-->
-    <!--        <span-->
-    <!--          class="font-sans sm:text-4xl text-3xl leading-normal text-black text-center"-->
-    <!--          v-html="$t('your_turn')"-->
-    <!--        />-->
-    <!--      </div>-->
-    <!--      <div-->
-    <!--        class="lg:flex-1 w-full flex flex-row lg:justify-end justify-center lg:pt-0 pt-3 items-center"-->
-    <!--      >-->
-    <!--        <button-->
-    <!--          class="bg-base px-6 py-4 rounded-3xl filter drop-shadow-lg"-->
-    <!--          type="button"-->
-    <!--          @click="redirectToApp"-->
-    <!--        >-->
-    <!--          <div class="w-full flex flex-row items-center justify-center gap-4">-->
-    <!--            <span class="sm:text-4xl text-3xl font-bold">{{-->
-    <!--              $t("launch_app")-->
-    <!--            }}</span>-->
-    <!--            &lt;!&ndash;            <img src="~/assets/icons/play.png" />&ndash;&gt;-->
-    <!--          </div>-->
-    <!--        </button>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <div class="screen-part"></div>
     <!--    Footer -->
     <Footer />
     <resize-observer :show-trigger="true" @notify="handleResize" />

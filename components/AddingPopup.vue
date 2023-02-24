@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div
-      class="w-full h-20 bg-primary rounded-b-3xl flex flex-row justify-center items-center filter drop-shadow-xl z-10"
+      class="w-full h-14 bg-primary rounded-b-4xl flex flex-row justify-center items-center filter drop-shadow-xl z-10"
     >
       <img
         src="~/assets/images/microsoft-translate.png"
@@ -14,33 +14,29 @@
     </div>
     <div class="w-full h-10 flex flex-row justify-center z-20">
       <div
-        class="flex flex-row justify-center items-center w-3/4 h-full bg-primary rounded-b-3xl gap-2 z-20 filter drop-shadow-xl"
+        class="flex flex-row justify-center items-center w-3/4 h-full bg-primary rounded-b-4xl gap-2 z-20 filter drop-shadow-xl"
       >
         <span class="sm:text-xl text-sm text-black">{{
           props.nativeLanguageLabel
         }}</span>
         <div class="pa-5">
-          <img src="~/assets/icons/compare_arrows.svg" class="h-6 w-auto" />
+          <img src="~/assets/icons/compare_arrows.svg" class="h-4 w-auto" />
         </div>
         <span class="sm:text-xl text-sm text-black">{{
           props.foreignLanguageLabel
         }}</span>
       </div>
     </div>
-    <div
-      class="2xl:mt-14 mt-8 flex flex-col items-center w-full lg:px-16 px-6 gap-5"
-    >
+    <div class="mt-8 flex flex-col items-center w-full px-24 gap-5">
       <div
-        class="flex flex-col w-full h-40 bg-white rounded-3xl filter drop-shadow-xl items-center"
+        class="flex flex-col w-full h-28 bg-white rounded-3xl filter drop-shadow-xl items-center"
       >
         <div class="flex flex-row w-full justify-end pt-3 pr-3">
-          <div><img src="~/assets/icons/clear.svg" class="h-6 w-auto" /></div>
+          <div><img src="~/assets/icons/clear.svg" class="h-4 w-auto" /></div>
         </div>
-        <div class="flex flex-grow flex-col justify-center">
-          <span v-if="nativeWordDisplayed" class="sm:text-4xl text-3xl">{{
-            props.nativeWord
-          }}</span>
-        </div>
+        <span v-if="nativeWordDisplayed" class="sm:text-4xl text-3xl mt-3">{{
+          props.nativeWord
+        }}</span>
       </div>
       <div class="h-12 w-12 transform rotate-45 filter drop-shadow-xl">
         <div
@@ -52,32 +48,30 @@
             <img
               v-if="!loading"
               src="~/assets/icons/g_translate.svg"
-              class="h-8 w-auto"
+              class="h-6 w-auto"
             />
             <div v-else class="loader"></div>
           </div>
         </div>
       </div>
       <div
-        class="w-full h-40 bg-white flex flex-col rounded-3xl filter drop-shadow-xl items-center"
+        class="w-full h-28 bg-white flex flex-col rounded-3xl filter drop-shadow-xl items-center"
       >
         <div class="flex flex-row w-full justify-end pt-3 pr-3">
-          <div><img src="~/assets/icons/clear.svg" class="h-6 w-auto" /></div>
+          <div><img src="~/assets/icons/clear.svg" class="h-4 w-auto" /></div>
         </div>
-        <div class="flex flex-grow flex-col justify-center">
-          <span
-            v-if="foreignWordDisplayed"
-            ref="foreignWordRef"
-            class="sm:text-4xl text-3xl"
-            >{{ props.foreignWord }}</span
-          >
-        </div>
+        <span
+          v-if="foreignWordDisplayed"
+          ref="foreignWordRef"
+          class="sm:text-4xl text-3xl mt-3"
+          >{{ props.foreignWord }}</span
+        >
       </div>
       <div
         class="relative p-3 bg-primary flex flex-row gap-2 items-center rounded-lg overflow-hidden"
       >
         <span class="text-black font-semibold">{{ $t("save") }}</span>
-        <img src="~/assets/icons/save.svg" class="h-8 w-auto" />
+        <img src="~/assets/icons/save.svg" class="h-6 w-auto" />
         <div ref="splashButtonRef" class="splash"></div>
       </div>
     </div>
