@@ -1,0 +1,51 @@
+<template>
+  <button class="flex flex-row start-button">
+    <div class="bg-primary p-4 start-button-icon">
+      <img class="icon-start" src="~/assets/icons/play.svg" />
+    </div>
+    <div class="bg-primary text-3xl text-white py-4 px-5 start-button-label">
+      {{ $t("start") }}
+    </div>
+  </button>
+</template>
+
+<script setup lang="ts">
+import { useNuxtApp } from "#app";
+
+const {
+  $i18n: { $t },
+} = useNuxtApp();
+</script>
+
+<style scoped>
+.start-button {
+  gap: 0.75rem;
+  transition: 0.3s ease-in-out gap;
+}
+.start-button:hover {
+  gap: 0;
+}
+
+.start-button-icon {
+  border-radius: 0.75rem;
+  transition: 0.3s ease-in-out border-radius;
+}
+
+.start-button:hover .start-button-icon {
+  border-radius: 0.75rem 0 0 0.75rem;
+}
+
+.start-button-label {
+  border-radius: 0.75rem;
+  transition: 0.3s ease-in-out border-radius;
+}
+
+.start-button:hover .start-button-label {
+  border-radius: 0 0.75rem 0.75rem 0;
+}
+
+.icon-start {
+  width: 2.2rem;
+  height: auto;
+}
+</style>
