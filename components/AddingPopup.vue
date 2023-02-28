@@ -87,7 +87,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { useNuxtApp } from "#app";
 import blobScriptUrl from "~/assets/worker_scripts/addingPopupWorker.js";
 

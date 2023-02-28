@@ -9,9 +9,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
-import { defineProps } from "vue";
-
+<script lang="ts" setup>
 const props = defineProps({
   nbStep: {
     type: Number,

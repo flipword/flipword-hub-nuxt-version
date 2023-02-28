@@ -33,7 +33,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
 import Card from "../components/Card.vue";
 import EmptyCard from "../components/EmptyCard.vue";
 import { wordList } from "assets/data/words";

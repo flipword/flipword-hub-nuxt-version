@@ -28,8 +28,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 // TODO: declare in specific ts file
 export interface Word {
   nativeWord: string;

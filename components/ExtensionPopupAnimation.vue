@@ -66,8 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, onUnmounted, ref } from "vue";
-import { useNuxtApp } from "#app";
+import { onMounted, onUnmounted, ref } from "vue";
 import blobScriptUrl from "~/assets/worker_scripts/extensionPromoWorker.js";
 
 const props = defineProps({

@@ -16,8 +16,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 const props = defineProps({
   nativeWord: { default: "" },
   foreignWord: { default: "" },

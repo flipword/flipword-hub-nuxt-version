@@ -29,9 +29,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
-import { useNuxtApp } from "#app";
-
 enum SocialNetwork {
   Linkedin,
   Twitter,

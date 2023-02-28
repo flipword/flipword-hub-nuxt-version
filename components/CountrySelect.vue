@@ -26,7 +26,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineProps, defineEmits, ref } from "vue";
+import { computed, defineEmits, ref } from "vue";
 import { langOptions, flagPaths } from "~/plugins/i18n";
 
 const emit = defineEmits(["changeLang"]);
