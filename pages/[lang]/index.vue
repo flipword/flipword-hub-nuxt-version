@@ -36,18 +36,20 @@
             v-html="$t('create_description')"
           />
         </div>
-        <div class="w-full flex flex-col gap-8 mt-20">
+        <div class="w-full flex flex-col gap-8 mt-20 px-14">
           <div
             v-for="(chunk, index) in wordListChunk"
             :key="index"
-            class="flex flex-row justify-around"
+            class="flex flex-row justify-between"
           >
             <ListCard
+              v-if="chunk[0]"
               :native-word="chunk[0].nativeWord"
               :foreign-word="chunk[0].foreignWord"
             ></ListCard>
             <ListCard
-              :native-word="chunk[1].nativeWord"
+                v-if="chunk[1]"
+                :native-word="chunk[1].nativeWord"
               :foreign-word="chunk[1].foreignWord"
             ></ListCard>
           </div>
@@ -135,9 +137,7 @@ const isMounted = ref(false);
 
 const setWordListChunk = () => {
   if (wordList[currentLang.value]) {
-    const nbWordToDisplay = isMobile.value
-      ? 8
-      : wordList[currentLang.value].length;
+    const nbWordToDisplay = 5;
     wordListChunk.value = wordList[currentLang.value]
       .slice(0, nbWordToDisplay)
       .reduce((resultArray, item, index) => {
