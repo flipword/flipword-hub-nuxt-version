@@ -75,7 +75,13 @@
       </div>
     </div>
     <!--    Screen part 3 -->
-    <div class="screen-part"></div>
+    <div class="py-10 flex flex-row justify-center items-center">
+      <div class="trailer-container relative rounded-2xl overflow-hidden">
+        <img src="~/assets/images/trailer.png" class="h-full w-full" />
+        <div class="absolute w-full h-full top-0 trailer-shadow"/>
+        <img class="play-button" src="~/assets/icons/play.svg" />
+      </div>
+    </div>
     <!--    Footer -->
     <Footer />
     <resize-observer :show-trigger="true" @notify="handleResize" />
@@ -200,6 +206,28 @@ const updateWordInAddingPopup = () => {
   margin-top: -30rem;
   margin-left: -20rem;
   opacity: 1;
+}
+
+.trailer-container {
+  width: 80%;
+  height: auto;
+  aspect-ratio: 16/9;
+}
+
+.trailer-shadow {
+  background-color: rgba(0, 0, 0, 0.50);
+  cursor: pointer;
+}
+
+.play-button {
+  position: absolute;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 2.2rem;
+  height: auto;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
