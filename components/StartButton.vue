@@ -1,5 +1,5 @@
 <template>
-  <button class="flex flex-row start-button">
+  <button class="flex flex-row start-button" @click="emit('click')">
     <div class="bg-primary p-4 start-button-icon">
       <img class="icon-start" src="~/assets/icons/play.svg" />
     </div>
@@ -11,6 +11,8 @@
 
 <script setup lang="ts">
 import { useNuxtApp } from "#app";
+
+const emit = defineEmits(["click"]);
 
 const {
   $i18n: { $t },

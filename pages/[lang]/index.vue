@@ -8,7 +8,7 @@
           class="w-5/12 h-full bg-base rounded-tr-4xl mt-14 flex flex-col items-center justify-center pb-28 z-10"
         >
           <TitleLogoElement />
-          <StartButton class="mt-10" />
+          <StartButton class="mt-10" @click="openStore" />
           <NuxtLink class="mt-3" to="/" @click="openTrailer">
             <span
               class="text-black text-xl font-bold cursor-pointer underline underline-offset-4"
@@ -204,6 +204,11 @@ const updateWordInAddingPopup = () => {
   const index = Math.floor(Math.random() * (result.length - 1));
   currentWordInAddingPopup.value = result[index];
 };
+
+const openStore = () =>
+  window.open(
+    "https://chrome.google.com/webstore/detail/flipword/hinoggfcanlhfbeddbadjjpdaeoigkbe?hl=fr"
+  );
 
 onKeyUp("Escape", () => {
   if (isTrailerPlaying.value) {
