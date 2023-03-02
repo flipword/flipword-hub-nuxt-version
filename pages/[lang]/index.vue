@@ -78,13 +78,32 @@
     </div>
     <!--    Screen part 3 -->
     <div class="pb-10 flex flex-row justify-center items-center relative mb-10">
-      <div class="trailer-container overflow-hidden">
-        <iframe
-          class="w-full h-full -ml-0.5"
-          src="https://www.youtube.com/embed/jBNjdik0eCs"
-          allowfullscreen
+      <div
+        class="trailer-container relative rounded-2xl overflow-hidden"
+        @click="openTrailer"
+      >
+        <img src="~/assets/images/trailer.png" class="h-full w-full" />
+        <div
+          class="absolute w-full h-full top-0 trailer-shadow cursor-pointer"
         />
+        <img class="play-button" src="~/assets/icons/play.svg" />
       </div>
+      <teleport to="body">
+        <div
+          v-if="isTrailerPlaying"
+          class="fixed top-0 w-screen h-screen trailer-shadow z-50 flex flex-row justify-center items-center"
+          tabindex="0"
+          @click="isTrailerPlaying = false"
+        >
+          <iframe
+            class="trailer-video"
+            src="https://www.youtube.com/embed/jBNjdik0eCs?autoplay=1"
+            allow="autoplay"
+            allowfullscreen
+            @keydown.esc="isTrailerPlaying = false"
+          />
+        </div>
+      </teleport>
     </div>
     <!--    Footer -->
     <Footer />
@@ -104,6 +123,7 @@ import Footer from "~/components/Footer.vue";
 import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
 import StartButton from "~/components/StartButton.vue";
+import { onKeyDown, onKeyUp } from "@vueuse/core";
 
 const {
   $i18n: {
@@ -130,6 +150,8 @@ const isMobile = ref<boolean>(false);
 if (process.client) {
   isMobile.value = window.innerWidth < 1024;
 }
+
+const isTrailerPlaying = ref(false);
 
 const handleResize = () => {
   isMobile.value = window.innerWidth < 1024;
@@ -178,6 +200,16 @@ const updateWordInAddingPopup = () => {
   const index = Math.floor(Math.random() * (result.length - 1));
   currentWordInAddingPopup.value = result[index];
 };
+
+const openTrailer = () => {
+  isTrailerPlaying.value = true;
+};
+
+onKeyUp("Escape", () => {
+  if (isTrailerPlaying.value) {
+    isTrailerPlaying.value = !isTrailerPlaying;
+  }
+});
 </script>
 
 <style scoped>
@@ -207,9 +239,42 @@ const updateWordInAddingPopup = () => {
 }
 
 .trailer-container {
-  width: 80%;
+  width: 70%;
   height: auto;
   aspect-ratio: 16/9;
+}
+
+.trailer-video {
+  width: 85%;
+  height: auto;
+  aspect-ratio: 16/9;
+}
+
+.trailer-shadow {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@keyframe slidein {
+  from {
+    transform: scale(1);
+    -webkit-transform: scale(1);
+  }
+  to {
+    transform: scale(1.3);
+    -webkit-transform: scale(1.3);
+  }
+}
+
+.play-button {
+  position: absolute;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 2.2rem;
+  height: auto;
+  cursor: pointer;
+  animation: slidein 2s ease-in-out infinite;
 }
 
 @media screen and (max-width: 1024px) {
