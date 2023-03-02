@@ -9,7 +9,7 @@
         >
           <TitleLogoElement />
           <StartButton class="mt-10" />
-          <NuxtLink class="mt-3" to="/">
+          <NuxtLink class="mt-3" to="/" @click="openTrailer">
             <span
               class="text-black text-xl font-bold cursor-pointer underline underline-offset-4"
               >{{ $t("demo") }}</span
@@ -123,7 +123,7 @@ import Footer from "~/components/Footer.vue";
 import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
 import StartButton from "~/components/StartButton.vue";
-import { onKeyDown, onKeyUp } from "@vueuse/core";
+import { onKeyUp } from "@vueuse/core";
 
 const {
   $i18n: {
@@ -193,16 +193,16 @@ const firstWordListWithCurrentLang = (): Word | null => {
   }
 };
 
+const openTrailer = () => {
+  isTrailerPlaying.value = true;
+};
+
 const currentWordInAddingPopup = ref<Word>(firstWordListWithCurrentLang());
 
 const updateWordInAddingPopup = () => {
   const result = wordListWithCurrentLang();
   const index = Math.floor(Math.random() * (result.length - 1));
   currentWordInAddingPopup.value = result[index];
-};
-
-const openTrailer = () => {
-  isTrailerPlaying.value = true;
 };
 
 onKeyUp("Escape", () => {
@@ -248,21 +248,11 @@ onKeyUp("Escape", () => {
   width: 85%;
   height: auto;
   aspect-ratio: 16/9;
+  z-index: 50;
 }
 
 .trailer-shadow {
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-@keyframe slidein {
-  from {
-    transform: scale(1);
-    -webkit-transform: scale(1);
-  }
-  to {
-    transform: scale(1.3);
-    -webkit-transform: scale(1.3);
-  }
 }
 
 .play-button {

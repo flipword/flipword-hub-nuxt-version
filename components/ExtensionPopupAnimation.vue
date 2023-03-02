@@ -9,7 +9,7 @@
       <img
         ref="cursorRef"
         src="~/assets/icons/cursor.svg"
-        class="z-50 absolute cursor"
+        class="z-40 absolute cursor"
       />
       <div
         ref="logoRef"
