@@ -48,8 +48,8 @@
               :foreign-word="chunk[0].foreignWord"
             ></ListCard>
             <ListCard
-                v-if="chunk[1]"
-                :native-word="chunk[1].nativeWord"
+              v-if="chunk[1]"
+              :native-word="chunk[1].nativeWord"
               :foreign-word="chunk[1].foreignWord"
             ></ListCard>
           </div>
@@ -65,7 +65,7 @@
             @update-word="updateWordInAddingPopup"
           />
         </div>
-        <div class="w-full bg-primary px-20 py-20 rounded-l-3xl mt-14">
+        <div class="w-full bg-primary px-20 py-20 rounded-l-3xl mt-20">
           <ExtensionPopupAnimation
             :native-language-label="getNativeLanguageLabel()"
             :foreign-language-label="getForeignLanguageLabel()"
@@ -77,11 +77,13 @@
       </div>
     </div>
     <!--    Screen part 3 -->
-    <div class="py-10 flex flex-row justify-center items-center">
-      <div class="trailer-container relative rounded-2xl overflow-hidden">
-        <img src="~/assets/images/trailer.png" class="h-full w-full" />
-        <div class="absolute w-full h-full top-0 trailer-shadow"/>
-        <img class="play-button" src="~/assets/icons/play.svg" />
+    <div class="pb-10 flex flex-row justify-center items-center relative mb-10">
+      <div class="trailer-container overflow-hidden">
+        <iframe
+          class="w-full h-full -ml-0.5"
+          src="https://www.youtube.com/embed/jBNjdik0eCs"
+          allowfullscreen
+        />
       </div>
     </div>
     <!--    Footer -->
@@ -160,10 +162,6 @@ const wordListWithCurrentLang = (): Word[] => {
   return wordList[currentLang.value];
 };
 
-const redirectToApp = () => {
-  window.open("https://app.flipword.io");
-};
-
 const firstWordListWithCurrentLang = (): Word | null => {
   const list = wordListWithCurrentLang();
   if (list && list.length) {
@@ -212,22 +210,6 @@ const updateWordInAddingPopup = () => {
   width: 80%;
   height: auto;
   aspect-ratio: 16/9;
-}
-
-.trailer-shadow {
-  background-color: rgba(0, 0, 0, 0.50);
-  cursor: pointer;
-}
-
-.play-button {
-  position: absolute;
-  z-index: 100;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  width: 2.2rem;
-  height: auto;
-  cursor: pointer;
 }
 
 @media screen and (max-width: 1024px) {
