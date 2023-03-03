@@ -77,13 +77,12 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     );
     return currentRouteWithoutLang;
   };
-  const updateLang = (newLang: string) => {
-    const langPath = newLang == defaultNativeLang ? "" : newLang;
+  const updateNativeLang = (newLang: string) => {
     const currentRouteWithoutLang = removeLangFromRoute(
       $router.currentRoute.value
     );
     navigateTo(
-      `${langPath != "" ? `/${langPath}` : ""}${currentRouteWithoutLang}`
+      `/${newLang}-${currentForeignLang.value}${currentRouteWithoutLang}`
     );
   };
 
@@ -163,7 +162,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     currentForeignLang,
     foreignLanguageList,
     updateForeignLang,
-    updateLang: updateLang,
+    updateNativeLang,
     getNativeLanguageLabel: getNativeLanguageLabel,
     getForeignLanguageLabel: getForeignLanguageLabel,
   });

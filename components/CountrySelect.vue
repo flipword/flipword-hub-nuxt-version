@@ -2,7 +2,7 @@
   <div class="flex flex-col items-end gap-3">
     <div
       class="flex flex-row gap-2 bg-white rounded-xl items-center p-2 cursor-pointer shadow-md"
-      @click="toggle()"
+      @click="toggleSelectLang()"
     >
       <img src="~/assets/icons/earth.svg" class="h-10 w-auto" />
       <span class="text-black font-bold text-xl">{{ langSelected }}</span>
@@ -10,21 +10,26 @@
     </div>
 
     <div
-      v-if="value"
-      class="flex flex-col gap-1 bg-white text-black text-xl rounded-xl shadow-md py-2 dropdown"
+      v-if="isSelectLangOpen"
+      class="flex flex-col bg-white text-black text-xl rounded-xl shadow-md dropdown overflow-hidden"
     >
-      <span class="px-6">I speak:</span>
+      <span class="px-6 py-1">I speak:</span>
       <div
         class="flex flex-row w-full bg-base px-6 py-2 gap-3 cursor-pointer items-center justify-around"
+        @click="toggleSelectNativeLang()"
       >
         <img
           :src="`/icons/flags/${getFlagPath(currentNativeLang)}`"
           class="h-8 w-auto"
         />
         <span>{{ getLabelFromLangId(currentNativeLang) }}</span>
-        <img src="~/assets/icons/right_chevron.svg" class="h-5 w-auto" />
+        <img
+          src="~/assets/icons/right_chevron.svg"
+          class="h-5 w-auto chevron"
+          :class="isSelectNativeLangOpen ? 'transform rotate-90' : ''"
+        />
       </div>
-      <div class="flex flex-col gap-2 px-6">
+      <div v-if="!isSelectNativeLangOpen" class="flex flex-col gap-2 px-6 py-2">
         <span>I want to learn:</span>
         <div
           v-for="lang in foreignLanguageList"
@@ -32,6 +37,20 @@
           class="flex flex-row w-full px-6 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary"
           :class="lang.id === currentForeignLang ? 'bg-primary' : 'bg-base'"
           @click="updateForeignLang(lang.id)"
+        >
+          <img
+            :src="`/icons/flags/${getFlagPath(lang.id)}`"
+            class="h-8 w-auto"
+          />
+          <span>{{ getLabelFromLangId(lang.id) }}</span>
+        </div>
+      </div>
+      <div v-else class="flex flex-col gap-2 px-6 py-2 bg-base">
+        <div
+          v-for="lang in foreignLanguageList"
+          :key="lang.id"
+          class="flex flex-row w-full px-6 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary bg-white"
+          @click="updateNativeLang(lang.id)"
         >
           <img
             :src="`/icons/flags/${getFlagPath(lang.id)}`"
@@ -58,25 +77,27 @@ const {
     currentNativeLang,
     currentForeignLang,
     foreignLanguageList,
+    updateNativeLang,
     updateForeignLang,
   },
 } = useNuxtApp();
 
-const [value, toggle] = useToggle();
+const [isSelectLangOpen, toggleSelectLang] = useToggle();
+const [isSelectNativeLangOpen, toggleSelectNativeLang] = useToggle();
 
 const langSelected = computed(
   () => `${currentNativeLang.value} | ${currentForeignLang.value}`
 );
 
 const getFlagPath = (lang: string) => flagPaths[lang];
-
-// const updateLang = () => {
-//   emit("changeLang", selectedLang.value);
-// };
 </script>
 
 <style scoped>
 .dropdown {
   animation: growInY 120ms ease-in-out;
+}
+
+.chevron {
+  transition: transform 0.1s ease-in-out;
 }
 </style>
