@@ -99,7 +99,7 @@
         >
           <iframe
             class="trailer-video"
-            src="https://www.youtube.com/embed/jBNjdik0eCs?autoplay=1"
+            src="https://www.youtube.com/embed/jBNjdik0eCs?autoplay=1&?hd=1"
             allow="autoplay"
             allowfullscreen
             @keydown.esc="isTrailerPlaying = false"
@@ -122,8 +122,7 @@ import ListCard from "~/components/ListCard.vue";
 import TitleLogoElement from "~/components/TitleLogoElement.vue";
 import ExtensionPopupAnimation from "~/components/ExtensionPopupAnimation.vue";
 import Footer from "~/components/Footer.vue";
-import { wordList } from "assets/data/words";
-import { Word } from "~/components/Card.vue";
+import { wordList, Word } from "assets/data/words";
 import StartButton from "~/components/StartButton.vue";
 import { onKeyUp } from "@vueuse/core";
 import CountrySelect from "~/components/CountrySelect.vue";

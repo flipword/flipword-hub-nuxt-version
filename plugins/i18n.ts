@@ -103,14 +103,12 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     return "";
   };
 
-  // Todo: Use ref to display label in components
   const getForeignLanguageLabel = () => {
-    const lang = langOptions.find((x: any) => x.id == currentNativeLang.value);
-    let foreignLang = langOptions.find((x: any) => x.id == "en");
-    if (lang && lang.id == "en") {
-      foreignLang = langOptions.find((x: any) => x.id == "fr");
+    const lang = langOptions.find((x: any) => x.id == currentForeignLang.value);
+    if (lang) {
+      return lang.label;
     }
-    return foreignLang.label;
+    return "";
   };
 
   const foreignLanguageList = computed(() => {
