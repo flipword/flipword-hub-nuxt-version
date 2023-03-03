@@ -11,6 +11,7 @@
 
     <div
       v-if="isSelectLangOpen"
+      ref="selectLangRef"
       class="flex flex-col bg-white text-black text-xl rounded-xl shadow-md dropdown overflow-hidden"
     >
       <span class="px-6 py-1">I speak:</span>
@@ -64,10 +65,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineEmits } from "vue";
+import { ref, computed, defineEmits } from "vue";
 import { flagPaths, getLabelFromLangId } from "~/plugins/i18n";
 import { useNuxtApp } from "#app";
-import { useToggle } from "@vueuse/core";
+import { useToggle, onClickOutside } from "@vueuse/core";
 
 const emit = defineEmits(["changeLang"]);
 
@@ -82,13 +83,21 @@ const {
   },
 } = useNuxtApp();
 
-const [isSelectLangOpen, toggleSelectLang] = useToggle();
+const selectLangRef = ref(null);
+
+const [isSelectLangOpen] = useToggle();
 const [isSelectNativeLangOpen, toggleSelectNativeLang] = useToggle();
 
 const langSelected = computed(
   () => `${currentNativeLang.value} | ${currentForeignLang.value}`
 );
 
+onClickOutside(selectLangRef, (event) => toggleSelectLang());
+
+const toggleSelectLang = () => {
+  isSelectNativeLangOpen.value = false;
+  isSelectLangOpen.value = !isSelectLangOpen.value;
+};
 const getFlagPath = (lang: string) => flagPaths[lang];
 </script>
 
