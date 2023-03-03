@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-end gap-3">
+  <div ref="selectLangRef" class="flex flex-col items-end gap-3">
     <div
       class="flex flex-row gap-2 bg-white rounded-xl items-center p-2 cursor-pointer shadow-md"
       @click="toggleSelectLang()"
@@ -11,10 +11,9 @@
 
     <div
       v-if="isSelectLangOpen"
-      ref="selectLangRef"
       class="flex flex-col bg-white text-black text-xl rounded-xl shadow-md dropdown overflow-hidden"
     >
-      <span class="px-6 py-1">I speak:</span>
+      <span class="px-6 py-1">{{ $t("speak") }}</span>
       <div
         class="flex flex-row w-full bg-base px-6 py-2 gap-3 cursor-pointer items-center justify-around"
         @click="toggleSelectNativeLang()"
@@ -31,7 +30,7 @@
         />
       </div>
       <div v-if="!isSelectNativeLangOpen" class="flex flex-col gap-2 px-6 py-2">
-        <span>I want to learn:</span>
+        <span>{{ $t("want_to_speak") }}</span>
         <div
           v-for="lang in foreignLanguageList"
           :key="lang.id"
@@ -92,7 +91,9 @@ const langSelected = computed(
   () => `${currentNativeLang.value} | ${currentForeignLang.value}`
 );
 
-onClickOutside(selectLangRef, (event) => toggleSelectLang());
+onClickOutside(selectLangRef, () => {
+  toggleSelectLang();
+});
 
 const toggleSelectLang = () => {
   isSelectNativeLangOpen.value = false;

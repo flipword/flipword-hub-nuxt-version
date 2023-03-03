@@ -21,6 +21,8 @@
   "sign_in":"S'identifier",
   "apple_auth": "S'identifier avec Apple",
   "google_auth": "S'identifier avec Google",
+  "speak": "Je parle:",
+  "want_to_speak": "Je veux apprendre:",
   "congratulation": "Félicitation vous êtes prêt à utiliser FlipWord ! \uD83C\uDF89",
   "this_is_an_example": "Voici un exemple de texte en langue étrangère que vous pouvez rencontrer lors de votre navigation:",
   "send_word_explication": "Sélectionnez le mot qui vous pose problème, ainsi un bouton de traduction apparetra et vous pourrez envoyer ce mot dans votre liste de vocabulaire.",
