@@ -69,17 +69,17 @@ export default defineNuxtConfig({
       pages.unshift({
         name: "home",
         path: "/",
-        file: resolve(__dirname, "pages/[lang]/index.vue"),
+        file: resolve(__dirname, "pages/[langs]/index.vue"),
       });
       pages.unshift({
         name: "about-us",
         path: "/about-us",
-        file: resolve(__dirname, "pages/[lang]/about-us.vue"),
+        file: resolve(__dirname, "pages/[langs]/about-us.vue"),
       });
       pages.unshift({
         name: "welcome-extension",
         path: "/welcome-extension",
-        file: resolve(__dirname, "pages/[lang]/welcome-extension.vue"),
+        file: resolve(__dirname, "pages/[langs]/welcome-extension.vue"),
       });
     },
   },

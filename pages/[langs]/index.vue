@@ -21,7 +21,7 @@
             ref="isometricCard"
             :class="{ 'isometric-card-final': isMounted }"
             class="isometric-card-transition"
-            :lang="currentLang"
+            :lang="currentNativeLang"
           />
         </div>
       </div>
@@ -128,7 +128,8 @@ import { onKeyUp } from "@vueuse/core";
 const {
   $i18n: {
     $t,
-    currentLang,
+    currentNativeLang,
+    currentForeignLang,
     updateLang,
     getNativeLanguageLabel,
     getForeignLanguageLabel,
@@ -138,6 +139,7 @@ const {
 onMounted(() => {
   setWordListChunk();
   isMounted.value = true;
+  console.log("current lang", currentNativeLang.value);
 });
 
 const getTitle = () => `- ${$t("home")}`;
@@ -160,9 +162,9 @@ const wordListChunk = ref<Word[][]>([]);
 const isMounted = ref(false);
 
 const setWordListChunk = () => {
-  if (wordList[currentLang.value]) {
+  if (wordList[currentNativeLang.value]) {
     const nbWordToDisplay = 5;
-    wordListChunk.value = wordList[currentLang.value]
+    wordListChunk.value = wordList[currentNativeLang.value]
       .slice(0, nbWordToDisplay)
       .reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index / 2);
@@ -181,7 +183,7 @@ const setWordListChunk = () => {
 };
 
 const wordListWithCurrentLang = (): Word[] => {
-  return wordList[currentLang.value];
+  return wordList[currentNativeLang.value];
 };
 
 const firstWordListWithCurrentLang = (): Word | null => {
