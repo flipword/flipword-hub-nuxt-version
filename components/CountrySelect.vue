@@ -29,7 +29,7 @@
         <div
           v-for="lang in foreignLanguageList"
           :key="lang.id"
-          class="flex flex-row w-full px-6 py-2 gap-5 rounded-xl cursor-pointer"
+          class="flex flex-row w-full px-6 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary"
           :class="lang.id === currentForeignLang ? 'bg-primary' : 'bg-base'"
           @click="updateForeignLang(lang.id)"
         >
