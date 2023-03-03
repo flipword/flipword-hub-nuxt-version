@@ -21,7 +21,8 @@
             ref="isometricCard"
             :class="{ 'isometric-card-final': isMounted }"
             class="isometric-card-transition"
-            :lang="currentNativeLang"
+            :native-lang="currentNativeLang"
+            :foreign-lang="currentForeignLang"
           />
         </div>
       </div>
@@ -132,7 +133,6 @@ const {
     $t,
     currentNativeLang,
     currentForeignLang,
-    updateLang,
     getNativeLanguageLabel,
     getForeignLanguageLabel,
   },

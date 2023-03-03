@@ -7,7 +7,7 @@
         </div>
         <div class="flex flex-row mb-7 justify-center">
           <span class="font-sans text-4xl text-black">{{
-            props.word.foreignWord
+            props.foreignWord
           }}</span>
         </div>
         <div></div>
@@ -18,7 +18,7 @@
         </div>
         <div class="flex flex-row mb-7 justify-center">
           <span class="font-sans text-4xl text-black">{{
-            props.word.nativeWord
+            props.nativeWord
           }}</span>
         </div>
         <div></div>
@@ -28,15 +28,13 @@
 </template>
 
 <script setup lang="ts">
-// TODO: declare in specific ts file
-export interface Word {
-  nativeWord: string;
-  foreignWord: string;
-}
-
 const props = defineProps({
-  word: {
-    type: Object,
+  nativeWord: {
+    type: String,
+    required: true,
+  },
+  foreignWord: {
+    type: String,
     required: true,
   },
 });
