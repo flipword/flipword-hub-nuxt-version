@@ -25,6 +25,7 @@
           />
         </div>
       </div>
+      <CountrySelect class="absolute top-2 right-2" />
     </div>
 
     <!--    Screen part 2-->
@@ -124,6 +125,7 @@ import { wordList } from "assets/data/words";
 import { Word } from "~/components/Card.vue";
 import StartButton from "~/components/StartButton.vue";
 import { onKeyUp } from "@vueuse/core";
+import CountrySelect from "~/components/CountrySelect.vue";
 
 const {
   $i18n: {

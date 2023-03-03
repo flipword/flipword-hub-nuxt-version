@@ -4,7 +4,7 @@ import * as i18nEN from "../i18n/i18n-en.json";
 import * as i18nFR from "../i18n/i18n-fr.json";
 import * as i18nES from "../i18n/i18n-es.json";
 import * as i18nDE from "../i18n/i18n-de.json";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import {
   RouteLocationNormalized,
   RouteLocationNormalizedLoaded,
@@ -45,6 +45,14 @@ export const flagPaths: { [key: string]: string } = {
   de: "de.svg",
 };
 
+export const getLabelFromLangId = (langId: string) => {
+  const lang = langOptions.find((x) => x.id === langId);
+  if (!lang) {
+    return "";
+  }
+  return lang.label;
+};
+
 export default defineNuxtPlugin(async (nuxtApp) => {
   const { $router } = nuxtApp;
 
@@ -79,6 +87,15 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     );
   };
 
+  const updateForeignLang = (newLang: string) => {
+    const currentRouteWithoutLang = removeLangFromRoute(
+      $router.currentRoute.value
+    );
+    navigateTo(
+      `/${currentNativeLang.value}-${newLang}${currentRouteWithoutLang}`
+    );
+  };
+
   const getNativeLanguageLabel = () => {
     const lang = langOptions.find((x: any) => x.id == currentNativeLang.value);
     if (lang) {
@@ -96,6 +113,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     }
     return foreignLang.label;
   };
+
+  const foreignLanguageList = computed(() => {
+    return langOptions.filter((lang) => lang.id !== currentNativeLang.value);
+  });
 
   addRouteMiddleware(
     "i18nRedirect",
@@ -140,6 +161,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     $t: t,
     currentNativeLang,
     currentForeignLang,
+    foreignLanguageList,
+    updateForeignLang,
     updateLang: updateLang,
     getNativeLanguageLabel: getNativeLanguageLabel,
     getForeignLanguageLabel: getForeignLanguageLabel,
