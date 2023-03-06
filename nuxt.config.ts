@@ -6,9 +6,6 @@ const { __dirname } = createCommonJS(import.meta.url);
 
 export default defineNuxtConfig({
   modules: ["@vueuse/nuxt"],
-  bridge: {
-    nitro: process.env.NODE_ENV === "production",
-  },
   firebase: {
     service: {
       functions: {
