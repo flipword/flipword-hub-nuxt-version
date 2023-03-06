@@ -1,17 +1,18 @@
 <template>
-  <div ref="selectLangRef" class="flex flex-col items-end gap-3">
-    <div
+  <div ref="buttonRef">
+    <button
       class="flex flex-row gap-2 bg-white rounded-xl items-center p-2 cursor-pointer shadow-md"
       @click="toggleSelectLang()"
     >
       <img src="~/assets/icons/earth.svg" class="h-10 w-auto" />
       <span class="text-black font-bold text-xl">{{ langSelected }}</span>
       <img src="~/assets/icons/filled_arrow_down.svg" class="h-4 w-auto" />
-    </div>
+    </button>
 
     <div
       v-if="isSelectLangOpen"
-      class="flex flex-col bg-white text-black text-xl rounded-xl shadow-md dropdown overflow-hidden"
+      class="flex flex-col bg-white text-black text-xl rounded-xl shadow-md dropdown overflow-hidden absolute top-16 right-0"
+      @click="stopPropagate"
     >
       <span class="px-6 py-1">{{ $t("speak") }}</span>
       <div
@@ -34,7 +35,7 @@
         <div
           v-for="lang in foreignLanguageList"
           :key="lang.id"
-          class="flex flex-row w-full px-6 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary"
+          class="flex flex-row w-full pl-6 pr-12 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary"
           :class="lang.id === currentForeignLang ? 'bg-primary' : 'bg-base'"
           @click="updateForeignLang(lang.id)"
         >
@@ -49,7 +50,7 @@
         <div
           v-for="lang in foreignLanguageList"
           :key="lang.id"
-          class="flex flex-row w-full px-6 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary bg-white"
+          class="flex flex-row w-full pl-6 pr-12 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary bg-white"
           @click="updateNativeLang(lang.id)"
         >
           <img
@@ -82,7 +83,7 @@ const {
   },
 } = useNuxtApp();
 
-const selectLangRef = ref(null);
+const buttonRef = ref(null);
 
 const [isSelectLangOpen] = useToggle();
 const [isSelectNativeLangOpen, toggleSelectNativeLang] = useToggle();
@@ -91,10 +92,15 @@ const langSelected = computed(
   () => `${currentNativeLang.value} | ${currentForeignLang.value}`
 );
 
-onClickOutside(selectLangRef, () => {
-  toggleSelectLang();
+onClickOutside(buttonRef, (event) => {
+  isSelectNativeLangOpen.value = false;
+  isSelectLangOpen.value = false;
+  console.log("ping: ", event);
 });
 
+const stopPropagate = (event) => {
+  console.log("event: ", event);
+};
 const toggleSelectLang = () => {
   isSelectNativeLangOpen.value = false;
   isSelectLangOpen.value = !isSelectLangOpen.value;
