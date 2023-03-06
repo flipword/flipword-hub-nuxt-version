@@ -5,7 +5,7 @@
     "tw": "nuxi dev -o & tailwind-config-viewer -o -p 4000",
     "build": "nuxt build",
     "start": "node .output/server/index.mjs",
-    "build-firebase": "npm run build",
+    "build-firebase": "NITRO_PRESET=firebase npm run build",
     "deploy": "npm run build-firebase && firebase deploy --debug"
   },
   "devDependencies": {
