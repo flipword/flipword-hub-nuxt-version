@@ -60,8 +60,8 @@
       <div class="w-7/12 h-full">
         <div class="w-full px-32">
           <AddingPopup
-            :native-word="currentWordInAddingPopup.nativeWord"
-            :foreign-word="currentWordInAddingPopup.foreignWord"
+            :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
+            :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
             :native-language-label="getNativeLanguageLabel()"
             :foreign-language-label="getForeignLanguageLabel()"
             @update-word="updateWordInAddingPopup"
@@ -72,8 +72,8 @@
             :native-language-label="getNativeLanguageLabel()"
             :foreign-language-label="getForeignLanguageLabel()"
             :text="$t('extension_promo')"
-            :native-word="$t('extension_popup_native_word')"
-            :foreign-word="$t('extension_popup_foreign_word')"
+            :native-word="wordList[currentNativeLang][0]"
+            :foreign-word="wordList[currentForeignLang][0]"
           />
         </div>
       </div>
@@ -139,6 +139,7 @@ const {
 
 onMounted(() => {
   setWordListChunk();
+  updateWordInAddingPopup();
   isMounted.value = true;
   console.log("current lang", currentNativeLang.value);
 });
@@ -183,29 +184,24 @@ const setWordListChunk = () => {
   }
 };
 
-const wordListWithCurrentLang = (): Word[] => {
-  return wordList[currentNativeLang.value];
-};
-
-const firstWordListWithCurrentLang = (): Word | null => {
-  const list = wordListWithCurrentLang();
-  if (list && list.length) {
-    return list[0];
-  } else {
-    return null;
-  }
-};
-
 const openTrailer = () => {
   isTrailerPlaying.value = true;
 };
 
-const currentWordInAddingPopup = ref<Word>(firstWordListWithCurrentLang());
+const currentWordInAddingPopup = ref<Word | null>();
 
 const updateWordInAddingPopup = () => {
-  const result = wordListWithCurrentLang();
-  const index = Math.floor(Math.random() * (result.length - 1));
-  currentWordInAddingPopup.value = result[index];
+  try{
+    const nativeWordList = wordList[currentNativeLang.value];
+    const foreignWordList = wordList[currentForeignLang.value];
+    const index = Math.floor(Math.random() * (nativeWordList.length - 1));
+    currentWordInAddingPopup.value = {
+      nativeWord: nativeWordList[index],
+      foreignWord: foreignWordList[index],
+    };
+  } catch (e: any){
+    console.log("err", e)
+  }
 };
 
 const openStore = () =>

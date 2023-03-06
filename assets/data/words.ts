@@ -5,6 +5,7 @@ export interface Word {
 
 export const wordList: { [key: string]: string[] } = {
   en: [
+    "Easily",
     "Heavy",
     "Clumsy",
     "Walk",
@@ -21,6 +22,7 @@ export const wordList: { [key: string]: string[] } = {
     "Jump",
   ],
   fr: [
+    "Facilement",
     "Lourd",
     "Maladroit",
     "Marcher",
@@ -37,6 +39,7 @@ export const wordList: { [key: string]: string[] } = {
     "Sauter",
   ],
   es: [
+    "Fácilmente",
     "Pesado",
     "Torpe",
     "Caminar",
@@ -53,6 +56,7 @@ export const wordList: { [key: string]: string[] } = {
     "Salto",
   ],
   de: [
+    "Einfach",
     "Schwer",
     "Ungeschickt",
     "Gehen",
