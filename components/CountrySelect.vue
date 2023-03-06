@@ -16,7 +16,7 @@
     >
       <span class="px-6 py-1">{{ $t("speak") }}</span>
       <div
-        class="flex flex-row w-full bg-base px-6 py-2 gap-3 cursor-pointer items-center justify-around"
+        class="flex flex-row w-full bg-base px-16 py-2 gap-3 cursor-pointer items-center justify-around"
         @click="toggleSelectNativeLang()"
       >
         <img
@@ -35,7 +35,7 @@
         <div
           v-for="lang in foreignLanguageList"
           :key="lang.id"
-          class="flex flex-row w-full pl-6 pr-12 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary"
+          class="flex flex-row w-full pl-8 pr-14 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary"
           :class="lang.id === currentForeignLang ? 'bg-primary' : 'bg-base'"
           @click="updateForeignLang(lang.id)"
         >
@@ -50,7 +50,7 @@
         <div
           v-for="lang in foreignLanguageList"
           :key="lang.id"
-          class="flex flex-row w-full pl-6 pr-12 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary bg-white"
+          class="flex flex-row w-full pl-8 pr-14 py-2 gap-5 rounded-xl cursor-pointer hover:bg-primary bg-white"
           @click="updateNativeLang(lang.id)"
         >
           <img
