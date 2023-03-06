@@ -166,9 +166,12 @@ const isMounted = ref(false);
 const setWordListChunk = () => {
   if (wordList[currentNativeLang.value]) {
     const nbWordToDisplay = 5;
-    wordListChunk.value = wordList[currentNativeLang.value]
-      .slice(0, nbWordToDisplay)
-      .reduce((resultArray, item, index) => {
+    wordListChunk.value = Array(nbWordToDisplay).fill(null).map((_, index): Word => {
+      return {
+        nativeWord: wordList[currentNativeLang.value][index],
+        foreignWord: wordList[currentForeignLang.value][index]
+      }
+    }).reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index / 2);
 
         if (!resultArray[chunkIndex]) {
