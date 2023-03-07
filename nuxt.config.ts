@@ -5,6 +5,13 @@ const { __dirname } = createCommonJS(import.meta.url);
 
 export default defineNuxtConfig({
   modules: ["@vueuse/nuxt"],
+  firebase: {
+    service: {
+      functions: {
+        region: "europe-west1",
+      },
+    },
+  },
   nitro: {
     preset: "firebase",
     replace: {
