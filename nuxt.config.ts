@@ -4,11 +4,21 @@ import { createCommonJS } from "mlly";
 const { __dirname } = createCommonJS(import.meta.url);
 
 export default defineNuxtConfig({
-  modules: ["@vueuse/nuxt", "@nuxtjs/tailwindcss"],
-  firebase: {
-    service: {
-      functions: {
-        region: "europe-west1",
+  modules: ["@vueuse/nuxt"],
+  nitro: {
+    preset: "firebase",
+    replace: {
+      "functions.https.onRequest":
+        "functions.region('europe-west1').https.onRequest",
+    },
+  },
+  build: {
+    postcss: {
+      postcssOptions: {
+        plugins: {
+          tailwindcss: {},
+          autoprefixer: {},
+        },
       },
     },
   },
