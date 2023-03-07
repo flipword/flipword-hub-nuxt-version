@@ -1,13 +1,19 @@
 {
   "functions": [{
     "source": ".output/server",
-    "predeploy": "node ./deploy.js"
+    "predeploy": "node ./deploy.js",
+    "region": "europe-west1"
   }],
   "hosting": [
     {
       "target": "flutter-flip-card",
       "public": ".output/public",
       "cleanUrls": true,
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
       "rewrites": [
         {
           "source": "**",
