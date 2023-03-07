@@ -1,7 +1,8 @@
 {
-  "functions": {
-    "source": ".output/server"
-  },
+  "functions": [{
+    "source": ".output/server",
+    "predeploy": "node ./deploy.js"
+  }],
   "hosting": [
     {
       "target": "flutter-flip-card",
