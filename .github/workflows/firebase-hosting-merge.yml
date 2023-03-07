@@ -18,8 +18,11 @@ jobs:
         with:
           node-version: 16.13.2
 
+      - name: Install Yarn
+        run: npm install -g yarn
+
       - name: Npm install
-        run: npm install -g yarn; npm install -g nuxt3; npm install -g firebase-tools; yarn
+        run: yarn global add nuxt3 firebase-tools; yarn
 
       - name: Build
         run: yarn build-firebase
