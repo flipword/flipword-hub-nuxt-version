@@ -19,10 +19,7 @@ jobs:
           node-version: 16.13.2
 
       - name: Npm install
-        run: npm install -g nuxt3; npm install
-
-      - name: Prepare nuxt
-        run: nuxi info
+        run: npm install -g nuxt3; npm install -g firebase-tools; npm install
 
       - name: Build
         run: npm run build-firebase
