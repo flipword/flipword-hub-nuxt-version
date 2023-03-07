@@ -2,7 +2,6 @@
   "functions": [{
     "source": ".output/server",
     "predeploy": "node ./deploy.js",
-    "region": "europe-west1"
   }],
   "hosting": [
     {

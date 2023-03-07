@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   firebase: {
     service: {
       functions: {
-        location: "europe-west1",
+        region: "europe-west1",
       },
     },
   },
