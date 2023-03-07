@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from "nuxt3";
 import { resolve } from "path";
 import { createCommonJS } from "mlly";
 
