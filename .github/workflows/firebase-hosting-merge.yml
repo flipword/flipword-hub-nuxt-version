@@ -22,7 +22,7 @@ jobs:
         run: npm install -g nuxt3; npm install
 
       - name: Prepare nuxt
-        run: nuxi prepare
+        run: nuxi info
 
       - name: Build
         run: npm run build-firebase
