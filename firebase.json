@@ -1,6 +1,7 @@
 {
   "functions": [{
-    "source": ".output/server"
+    "source": ".output/server",
+    "predeploy": "node ./deploy.js"
   }],
   "hosting": [
     {
