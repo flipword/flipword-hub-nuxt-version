@@ -19,10 +19,10 @@ jobs:
           node-version: 16.13.2
 
       - name: Npm install
-        run: npm install -g yarn; npm install -g nuxt3; npm install -g firebase-tools; yarn
+        run: npm install -g nuxt3; npm install -g firebase-tools; npm install
 
       - name: Build
-        run: yarn build-firebase
+        run: npm run build-firebase
 
       - name: Deploy site to Firebase
         uses: FirebaseExtended/action-hosting-deploy@v0
