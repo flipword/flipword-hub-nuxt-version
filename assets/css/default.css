@@ -18,12 +18,10 @@ body::-webkit-scrollbar-thumb {
     border-radius: 1rem;
 }
 
-/*@layer base {*/
-/*    @font-face {*/
-/*        font-family: 'QuicksandCustom';*/
-/*        src: url('/fonts/Quicksand-Custom.ttf') format('truetype');*/
-/*    }*/
-/*}*/
+@font-face {
+    font-family: 'QuicksandCustom';
+    src: url('/fonts/Quicksand-Custom.ttf') format('truetype');
+}
 
 @keyframes slidein {
     0% { transform: scale(1); }
