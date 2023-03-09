@@ -16,7 +16,8 @@
       "rewrites": [
         {
           "source": "**",
-          "function": "flipwordSSR"
+          "function": "server",
+          "region": "europe-west1"
         }
       ]
     }
