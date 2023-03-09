@@ -4,7 +4,7 @@ import { createCommonJS } from "mlly";
 const { __dirname } = createCommonJS(import.meta.url);
 
 export default defineNuxtConfig({
-  modules: ["@vueuse/nuxt"],
+  modules: ["@vueuse/nuxt", "@nuxtjs/tailwindcss"],
   firebase: {
     service: {
       functions: {
