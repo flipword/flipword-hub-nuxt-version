@@ -16,7 +16,7 @@
       "rewrites": [
         {
           "source": "**",
-          "function": "server"
+          "function": "flipwordSSR"
         }
       ]
     }
