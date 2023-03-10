@@ -1,11 +1,7 @@
 <template>
   <div>
     <div class="relative">
-      <div
-        ref="selectedDivRef"
-        :class="isWelcomeExtension ? 'h-5' : 'h-10'"
-        class="absolute selected-div"
-      ></div>
+      <div ref="selectedDivRef" class="h-14 absolute selected-div"></div>
       <img
         ref="cursorRef"
         src="~/assets/icons/cursor.svg"
@@ -56,8 +52,7 @@
       <span
         id="extension_promo"
         ref="extensionPromoRef"
-        :class="isWelcomeExtension ? '' : 'sm:text-4xl text-3xl'"
-        class="relative font-sans leading-normal text-black text-center"
+        class="relative font-sans leading-normal text-4xl text-black text-center"
         v-html="props.text"
       />
     </div>
@@ -89,9 +84,6 @@ const props = defineProps({
   foreignWord: {
     type: String,
     required: true,
-  },
-  isWelcomeExtension: {
-    type: Boolean,
   },
 });
 

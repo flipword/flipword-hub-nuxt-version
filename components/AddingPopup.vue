@@ -7,33 +7,37 @@
         src="~/assets/images/microsoft-translate.png"
         class="w-auto lg:h-4/5 h-2/5"
       />
-      <span class="ml-3 sm:text-4xl text-3xl text-black font-bold"
+      <span class="ml-3 2xl:text-4xl xl:text-3xl text-2xl text-black font-bold"
         >Microsoft</span
       >
-      <span class="ml-1 sm:text-4xl text-3xl text-black">Translate</span>
+      <span class="ml-1 2xl:text-4xl xl:text-3xl text-2xl text-black"
+        >Translate</span
+      >
     </div>
     <div class="w-full h-10 flex flex-row justify-center z-20">
       <div
         class="flex flex-row justify-center items-center w-3/4 h-full bg-primary rounded-b-4xl gap-2 z-20 filter drop-shadow-xl"
       >
-        <span class="sm:text-xl text-sm text-black">{{
+        <span class="2xl:text-xl xl:text-lg text-md text-black">{{
           props.nativeLanguageLabel
         }}</span>
         <div class="pa-5">
           <img src="~/assets/icons/compare_arrows.svg" class="h-4 w-auto" />
         </div>
-        <span class="sm:text-xl text-sm text-black">{{
+        <span class="2xl:text-xl xl:text-lg text-md text-black">{{
           props.foreignLanguageLabel
         }}</span>
       </div>
     </div>
     <div class="mt-8 flex flex-col items-center w-full px-24 gap-5">
       <div
-        class="flex flex-col w-full h-28 bg-white rounded-3xl filter drop-shadow-xl items-center"
+        class="flex flex-col w-full bg-white rounded-3xl filter drop-shadow-xl justify-center items-center relative"
+        style="height: 12vh"
       >
-        <div class="flex flex-row w-full justify-end pt-3 pr-3">
-          <div><img src="~/assets/icons/clear.svg" class="h-4 w-auto" /></div>
-        </div>
+        <img
+          src="~/assets/icons/clear.svg"
+          class="h-4 w-auto absolute top-3 right-3"
+        />
         <span v-if="nativeWordDisplayed" class="sm:text-4xl text-3xl mt-3">{{
           props.nativeWord
         }}</span>
@@ -55,11 +59,13 @@
         </div>
       </div>
       <div
-        class="w-full h-28 bg-white flex flex-col rounded-3xl filter drop-shadow-xl items-center"
+        class="flex flex-col w-full bg-white rounded-3xl filter drop-shadow-xl justify-center items-center relative"
+        style="height: 12vh"
       >
-        <div class="flex flex-row w-full justify-end pt-3 pr-3">
-          <div><img src="~/assets/icons/clear.svg" class="h-4 w-auto" /></div>
-        </div>
+        <img
+          src="~/assets/icons/clear.svg"
+          class="h-4 w-auto absolute top-3 right-3"
+        />
         <span
           v-if="foreignWordDisplayed"
           ref="foreignWordRef"

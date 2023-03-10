@@ -31,15 +31,15 @@
     </div>
 
     <!--    Screen part 2-->
-    <div class="screen-part flex flex-row overflow-hidden">
-      <div class="w-5/12 h-full flex flex-col">
-        <div class="w-full bg-primary px-20 py-20 rounded-r-3xl mt-14">
+    <div class="w-full flex flex-row overflow-hidden pb-10">
+      <div class="w-5/12 h-full flex flex-col gap-10">
+        <div class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-r-3xl mt-14">
           <span
             class="font-sans text-4xl leading-normal text-black text-center"
             v-html="$t('create_description')"
           />
         </div>
-        <div class="w-full flex flex-col gap-8 mt-20 px-14">
+        <div class="w-full flex flex-col" style="padding: 0 3vw 0 3vw; gap: 4vh">
           <div
             v-for="(chunk, index) in wordListChunk"
             :key="index"
@@ -58,8 +58,8 @@
           </div>
         </div>
       </div>
-      <div class="w-7/12 h-full">
-        <div class="w-full px-32">
+      <div class="flex flex-col gap-7 items-center justify-between w-7/12 h-full">
+        <div class="w-full 2xl:px-32 xl:px-28 px-16">
           <AddingPopup
             :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
             :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
@@ -68,7 +68,7 @@
             @update-word="updateWordInAddingPopup"
           />
         </div>
-        <div class="w-full bg-primary px-20 py-20 rounded-l-3xl mt-20">
+        <div class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-l-3xl">
           <ExtensionPopupAnimation
             :native-language-label="getNativeLanguageLabel()"
             :foreign-language-label="getForeignLanguageLabel()"
@@ -241,7 +241,7 @@ onKeyUp("Escape", () => {
 }
 
 .isometric-card-final {
-  margin-top: -30vw;
+  margin-top: -37vw;
   margin-left: -25vw;
   opacity: 1;
 }
