@@ -5,8 +5,15 @@
       <div class="w-full h-1/2 bg-primary absolute top-0 z-behind" />
       <div class="w-full h-full flex flex-row">
         <div
-          class="w-5/12 h-full bg-base rounded-tr-4xl mt-14 flex flex-col items-center justify-center pb-28 z-10"
+          class="w-5/12 h-full bg-base rounded-tr-4xl mt-14 pb-28 z-10"
         >
+          <div
+              class="h-full w-full flex flex-col items-center justify-center transition-all duration-500"
+              :class="{
+          'opacity-0 scale-125': !isMounted,
+          'opacity-100 scale-100': isMounted
+        }"
+          >
           <TitleLogoElement />
           <StartButton class="mt-10" @click="openStore" />
           <NuxtLink class="mt-3" to="/" @click="openTrailer">
@@ -16,6 +23,7 @@
               >{{ $t("demo") }}</span
             >
           </NuxtLink>
+          </div>
         </div>
         <div class="w-7/12 h-full bg-primary rounded-bl-4xl">
           <IsometricCards
@@ -27,7 +35,10 @@
           />
         </div>
       </div>
-      <CountrySelect class="absolute top-2 right-2" />
+      <CountrySelect class="absolute top-2 right-2 transition-all duration-500 delay-300" :class="{
+          'opacity-0 scale-125': !isMounted,
+          'opacity-100 scale-100': isMounted
+        }"/>
     </div>
 
     <!--    Screen part 2-->
