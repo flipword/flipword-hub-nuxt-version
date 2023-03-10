@@ -1,9 +1,17 @@
 <template>
-  <button class="flex flex-row start-button" @click="emit('click')">
-    <div class="bg-primary p-4 start-button-icon">
+  <button
+    class="flex flex-row items-stretch start-button"
+    @click="emit('click')"
+  >
+    <div
+      class="flex flex-col justify-center bg-primary self-auto px-4 start-button-icon"
+    >
       <img class="icon-start" src="~/assets/icons/play.svg" />
     </div>
-    <div class="bg-primary text-3xl text-white py-4 px-5 start-button-label">
+    <div
+      class="bg-primary text-white py-3 px-5 start-button-label"
+      style="font-size: 2vw"
+    >
       {{ $t("start") }}
     </div>
   </button>
@@ -21,7 +29,7 @@ const {
 
 <style scoped>
 .start-button {
-  gap: 0.75rem;
+  gap: 1vw;
   transition: 0.3s ease-in-out gap;
 }
 .start-button:hover {
@@ -47,7 +55,7 @@ const {
 }
 
 .icon-start {
-  width: 2.2rem;
+  width: 2.5vw;
   height: auto;
 }
 </style>

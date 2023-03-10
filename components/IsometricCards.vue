@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-row">
-    <div class="isometric flex flex-col gap-14">
+    <div class="isometric flex flex-col card-gap">
       <EmptyCard />
       <EmptyCard />
       <EmptyCard />
@@ -9,7 +9,10 @@
         :foreign-word="wordList[props.foreignLang][0]"
       />
     </div>
-    <div class="isometric flex flex-col gap-14 pl-24 -mt-24">
+    <div
+      class="isometric flex flex-col card-gap"
+      style="padding-left: 6vw; margin-top: -7vw"
+    >
       <EmptyCard />
       <EmptyCard />
       <Card
@@ -21,7 +24,10 @@
         :foreign-word="wordList[props.foreignLang][2]"
       />
     </div>
-    <div class="isometric flex flex-col gap-14 pl-36 -mt-36">
+    <div
+      class="isometric flex flex-col card-gap"
+      style="padding-left: 10vw; margin-top: -10vw"
+    >
       <EmptyCard />
       <Card
         :native-word="wordList[props.nativeLang][3]"
@@ -36,7 +42,10 @@
         :foreign-word="wordList[props.foreignLang][5]"
       />
     </div>
-    <div class="isometric flex flex-col gap-14 pl-44 -mt-44">
+    <div
+      class="isometric flex flex-col card-gap"
+      style="padding-left: 13vw; margin-top: -10vw"
+    >
       <Card
         :native-word="wordList[props.nativeLang][6]"
         :foreign-word="wordList[props.foreignLang][6]"
@@ -51,7 +60,7 @@
       />
       <EmptyCard />
     </div>
-    <div class="isometric flex flex-col gap-14 pl-32 -mt-64">
+    <div class="isometric flex flex-col card-gap pl-32 -mt-64">
       <EmptyCard />
       <Card
         :native-word="wordList[props.nativeLang][9]"
@@ -82,5 +91,9 @@ const props = defineProps({
 <style scoped>
 .isometric {
   transform: rotateX(60deg) rotateY(0deg) rotateZ(-45deg);
+}
+
+.card-gap {
+  gap: 4vw;
 }
 </style>

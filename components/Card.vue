@@ -3,10 +3,13 @@
     <div class="flip-card-inner">
       <div class="flip-card-front flex flex-col justify-between">
         <div class="flex flex-row justify-end pr-3 pt-3">
-          <img src="~/assets/icons/volume.svg" class="h-8 w-auto" />
+          <img
+            src="~/assets/icons/volume.svg"
+            style="width: 2vw; height: auto"
+          />
         </div>
         <div class="flex flex-row mb-7 justify-center">
-          <span class="font-sans text-4xl text-black">{{
+          <span class="font-sans text-black" style="font-size: 2.5vw">{{
             props.foreignWord
           }}</span>
         </div>
@@ -14,10 +17,13 @@
       </div>
       <div class="flip-card-back flex flex-col justify-between">
         <div class="flex flex-row justify-end pr-3 pt-3">
-          <img src="~/assets/icons/volume.svg" class="h-8 w-auto" />
+          <img
+            src="~/assets/icons/volume.svg"
+            style="width: 2vw; height: auto"
+          />
         </div>
         <div class="flex flex-row mb-7 justify-center">
-          <span class="font-sans text-4xl text-black">{{
+          <span class="font-sans text-black" style="font-size: 2.5vw">{{
             props.nativeWord
           }}</span>
         </div>
@@ -43,8 +49,8 @@ const props = defineProps({
 <style scoped>
 .flip-card {
   background-color: transparent;
-  width: 300px;
-  height: 420px;
+  width: 20vw;
+  height: 28vw;
   transition: 0.4s ease-in-out transform, 0.3s ease-in-out box-shadow;
   perspective: 1000px;
 }
@@ -69,7 +75,7 @@ const props = defineProps({
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  border-radius: 0.75rem;
+  border-radius: 1vw;
   box-shadow: -2px 2px 0 1px rgba(34, 33, 81, 0.15);
 }
 

@@ -11,7 +11,8 @@
           <StartButton class="mt-10" @click="openStore" />
           <NuxtLink class="mt-3" to="/" @click="openTrailer">
             <span
-              class="text-black text-xl font-bold cursor-pointer underline underline-offset-4"
+              class="text-black font-bold cursor-pointer underline underline-offset-4"
+              style="font-size: 1.5vw"
               >{{ $t("demo") }}</span
             >
           </NuxtLink>
@@ -240,8 +241,8 @@ onKeyUp("Escape", () => {
 }
 
 .isometric-card-final {
-  margin-top: -30rem;
-  margin-left: -20rem;
+  margin-top: -30vw;
+  margin-left: -25vw;
   opacity: 1;
 }
 
