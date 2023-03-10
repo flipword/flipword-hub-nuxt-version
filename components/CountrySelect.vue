@@ -12,7 +12,6 @@
     <div
       v-if="isSelectLangOpen"
       class="flex flex-col bg-white text-black text-xl rounded-xl shadow-md dropdown overflow-hidden absolute top-16 right-0"
-      @click="stopPropagate"
     >
       <span class="px-6 py-1">{{ $t("speak") }}</span>
       <div
@@ -70,8 +69,6 @@ import { flagPaths, getLabelFromLangId } from "~/plugins/i18n";
 import { useNuxtApp } from "#app";
 import { useToggle, onClickOutside } from "@vueuse/core";
 
-const emit = defineEmits(["changeLang"]);
-
 const {
   $i18n: {
     $t,
@@ -92,15 +89,11 @@ const langSelected = computed(
   () => `${currentNativeLang.value} | ${currentForeignLang.value}`
 );
 
-onClickOutside(buttonRef, (event) => {
+onClickOutside(buttonRef, () => {
   isSelectNativeLangOpen.value = false;
   isSelectLangOpen.value = false;
-  console.log("ping: ", event);
 });
 
-const stopPropagate = (event) => {
-  console.log("event: ", event);
-};
 const toggleSelectLang = () => {
   isSelectNativeLangOpen.value = false;
   isSelectLangOpen.value = !isSelectLangOpen.value;

@@ -153,7 +153,6 @@ onMounted(() => {
   setWordListChunk();
   updateWordInAddingPopup();
   isMounted.value = true;
-  console.log("current lang", currentNativeLang.value);
 });
 
 const getTitle = () => `- ${$t("home")}`;
