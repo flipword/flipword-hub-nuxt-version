@@ -60,14 +60,6 @@
       />
       <EmptyCard />
     </div>
-    <div class="isometric flex flex-col card-gap pl-32 -mt-64">
-      <EmptyCard />
-      <Card
-        :native-word="wordList[props.nativeLang][9]"
-        :foreign-word="wordList[props.foreignLang][9]"
-      />
-      <EmptyCard />
-    </div>
   </div>
 </template>
 

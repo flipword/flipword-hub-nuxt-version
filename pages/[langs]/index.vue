@@ -31,7 +31,7 @@
     </div>
 
     <!--    Screen part 2-->
-    <div class="w-full flex flex-row overflow-hidden pb-10">
+    <div class="w-full flex flex-row pb-10">
       <div class="w-5/12 h-full flex flex-col gap-10">
         <div class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-r-3xl mt-14">
           <span
@@ -241,7 +241,7 @@ onKeyUp("Escape", () => {
 }
 
 .isometric-card-final {
-  margin-top: -37vw;
+  margin-top: -63%;
   margin-left: -25vw;
   opacity: 1;
 }
