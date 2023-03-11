@@ -40,8 +40,8 @@
         }"/>
     </div>
 
-    <!--    Screen part 2-->
-    <div class="w-full flex flex-row pb-10">
+    <!--    Screen part 2 Desktop -->
+    <div class="is-desktop w-full flex flex-row pb-10">
       <div class="w-5/12 h-full flex flex-col gap-10">
         <div class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-r-3xl mt-14">
           <span
@@ -89,6 +89,53 @@
         </div>
       </div>
     </div>
+
+    <!--    Screen part 2 Mobile -->
+    <div class="is-mobile w-full flex flex-row pb-10">
+      <div class="w-full h-4 bg-primary" />
+        <AddingPopup
+            class="w-full"
+            :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
+            :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
+            @update-word="updateWordInAddingPopup"
+        />
+      <div class="w-full bg-primary p-6 mt-6">
+          <span
+              class="font-sans text-3xl leading-normal text-black text-center"
+              v-html="$t('create_description')"
+          />
+      </div>
+      <div class="w-full flex flex-col px-10 gap-5 mt-6">
+        <div
+            v-for="(chunk, index) in wordListChunk"
+            :key="index"
+            class="flex flex-row justify-between"
+        >
+          <ListCard
+              v-if="chunk[0]"
+              :native-word="chunk[0].nativeWord"
+              :foreign-word="chunk[0].foreignWord"
+          ></ListCard>
+          <ListCard
+              v-if="chunk[1]"
+              :native-word="chunk[1].nativeWord"
+              :foreign-word="chunk[1].foreignWord"
+          ></ListCard>
+        </div>
+      </div>
+      <div class="w-full bg-primary p-6 mt-6">
+        <ExtensionPopupAnimation
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
+            :text="$t('extension_promo')"
+            :native-word="wordList[currentNativeLang][0]"
+            :foreign-word="wordList[currentForeignLang][0]"
+        />
+      </div>
+    </div>
+
     <!--    Screen part 3 -->
     <div class="pb-10 flex flex-row justify-center items-center relative mb-10">
       <div
@@ -271,8 +318,8 @@ onKeyUp("Escape", () => {
 .play-button {
   position: absolute;
   z-index: 10;
-  left: 50%;
-  top: 50%;
+  left: calc(50% - 10px);
+  top: calc(50% - 10px);
   transform: translate(-50%, -50%);
   width: 2.2rem;
   height: auto;
@@ -292,6 +339,12 @@ onKeyUp("Escape", () => {
   .screen-part2 {
     height: unset;
     width: unset;
+  }
+
+  .trailer-container {
+    width: 80%;
+    height: auto;
+    aspect-ratio: 16/9;
   }
 }
 </style>

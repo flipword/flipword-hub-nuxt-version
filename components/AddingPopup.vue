@@ -1,7 +1,7 @@
 <template>
   <div class="relative">
     <div
-      class="w-full h-14 bg-primary rounded-b-4xl flex flex-row justify-center items-center filter drop-shadow-xl z-10"
+      class="w-full h-14 bg-primary sm:rounded-b-4xl rounded-b-3xl flex flex-row justify-center items-center filter drop-shadow-xl z-10"
     >
       <img
         src="~/assets/images/microsoft-translate.png"
@@ -16,7 +16,7 @@
     </div>
     <div class="w-full h-10 flex flex-row justify-center z-20">
       <div
-        class="flex flex-row justify-center items-center w-3/4 h-full bg-primary rounded-b-4xl gap-2 z-20 filter drop-shadow-xl"
+        class="flex flex-row justify-center items-center w-3/4 h-full bg-primary sm:rounded-b-4xl rounded-b-3xl gap-2 z-20 filter drop-shadow-xl"
       >
         <span class="2xl:text-xl xl:text-lg text-md text-black">{{
           props.nativeLanguageLabel
@@ -29,7 +29,7 @@
         }}</span>
       </div>
     </div>
-    <div class="mt-8 flex flex-col items-center w-full px-24 gap-5">
+    <div class="mt-8 flex flex-col items-center w-full sm:px-24 px-10 gap-5">
       <div
         class="flex flex-col w-full bg-white rounded-3xl filter drop-shadow-xl justify-center items-center relative"
         style="height: 12vh"
