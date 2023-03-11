@@ -282,10 +282,6 @@ onKeyUp("Escape", () => {
   display: none;
 }
 
-.is-desktop {
-  display: flex;
-}
-
 .isometric-card-transition {
   margin-top: -10rem;
   opacity: 0;
