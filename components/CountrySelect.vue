@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, defineEmits } from "vue";
+import { ref, computed } from "vue";
 import { flagPaths, getLabelFromLangId } from "~/plugins/i18n";
 import { useNuxtApp } from "#app";
 import { useToggle, onClickOutside } from "@vueuse/core";

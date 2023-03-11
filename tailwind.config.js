@@ -42,11 +42,15 @@ module.exports = {
         "5xl": "5rem",
       },
       fontSize: {
-        title: "5vw",
-        subtitle: "1.75vw",
+        title: "6vw",
+        subtitle: "3vw",
+        button: "2vw",
+        demo: "1.75vw",
       },
       spacing: {
         110: "27rem",
+        "2.5vw": "2.5vw",
+        "8vw": "8vw",
       },
       screens: {
         xs: "500px",

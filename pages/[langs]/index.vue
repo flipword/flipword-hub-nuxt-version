@@ -1,11 +1,11 @@
 <template>
   <div>
     <!--    Screen part 1  -->
-    <div class="screen-part overflow-hidden relative">
+    <div class="h-screen w-full overflow-hidden relative">
       <div class="w-full h-1/2 bg-primary absolute top-0 z-behind" />
       <div class="w-full h-full flex flex-row">
         <div
-          class="w-5/12 h-full bg-base rounded-tr-4xl mt-14 pb-28 z-10"
+          class="sm:w-5/12 w-full h-full bg-base sm:rounded-tr-4xl sm:mt-14 pb-28 z-10"
         >
           <div
               class="h-full w-full flex flex-col items-center justify-center transition-all duration-500"
@@ -18,14 +18,13 @@
           <StartButton class="mt-10" @click="openStore" />
           <NuxtLink class="mt-3" to="/" @click="openTrailer">
             <span
-              class="text-black font-bold cursor-pointer underline underline-offset-4"
-              style="font-size: 1.5vw"
+              class="text-black font-bold cursor-pointer underline underline-offset-4 sm:text-demo text-xl"
               >{{ $t("demo") }}</span
             >
           </NuxtLink>
           </div>
         </div>
-        <div class="w-7/12 h-full bg-primary rounded-bl-4xl">
+        <div class="is-desktop w-7/12 h-full bg-primary rounded-bl-4xl">
           <IsometricCards
             ref="isometricCard"
             :class="{ 'isometric-card-final': isMounted }"
@@ -35,7 +34,7 @@
           />
         </div>
       </div>
-      <CountrySelect class="absolute top-2 right-2 transition-all duration-500 delay-300" :class="{
+      <CountrySelect class="absolute top-2 right-2 transition-all duration-500 delay-300 z-50" :class="{
           'opacity-0 scale-125': !isMounted,
           'opacity-100 scale-100': isMounted
         }"/>
@@ -231,10 +230,6 @@ onKeyUp("Escape", () => {
 </script>
 
 <style scoped>
-.screen-part {
-  height: 100vh;
-  width: 100%;
-}
 
 .is-mobile {
   display: none;
@@ -285,7 +280,7 @@ onKeyUp("Escape", () => {
   animation: slidein 2s ease-in-out infinite;
 }
 
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 640px) {
   .is-mobile {
     display: block;
   }

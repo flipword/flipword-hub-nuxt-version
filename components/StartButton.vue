@@ -6,11 +6,10 @@
     <div
       class="flex flex-col justify-center bg-primary self-auto px-4 start-button-icon"
     >
-      <img class="icon-start" src="~/assets/icons/play.svg" />
+      <img class="h-auto sm:w-2.5vw w-7" src="~/assets/icons/play.svg" />
     </div>
     <div
-      class="bg-primary text-white py-3 px-5 start-button-label"
-      style="font-size: 2vw"
+      class="bg-primary text-white py-3 px-5 start-button-label sm:text-button text-2xl"
     >
       {{ $t("start") }}
     </div>
@@ -52,10 +51,5 @@ const {
 
 .start-button:hover .start-button-label {
   border-radius: 0 0.75rem 0.75rem 0;
-}
-
-.icon-start {
-  width: 2.5vw;
-  height: auto;
 }
 </style>

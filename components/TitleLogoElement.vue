@@ -1,21 +1,18 @@
 <template>
   <div class="w-full flex flex-col justify-center items-center">
     <div class="w-full flex flex-row justify-center">
-      <img
-        src="~/assets/icons/logo_dark.svg"
-        class="h-auto"
-        style="width: 8vw"
-      />
+      <img src="~/assets/icons/logo_dark.svg" class="h-auto sm:w-8vw w-20" />
       <div class="flex flex-col justify-center">
-        <span class="font-sans text-black font-bold" style="font-size: 6vw"
+        <span class="font-sans text-black font-bold sm:text-title text-6xl"
           >FlipWord</span
         >
       </div>
     </div>
     <div class="w-full flex justify-center">
-      <span class="font-sans text-black text-center" style="font-size: 2vw">{{
-        $t("subtitle")
-      }}</span>
+      <span
+        class="font-sans text-black text-center sm:text-subtitle text-2xl"
+        >{{ $t("subtitle") }}</span
+      >
     </div>
   </div>
 </template>
