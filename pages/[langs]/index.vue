@@ -34,6 +34,7 @@
           />
         </div>
       </div>
+      <div class="is-mobile absolute w-full h-16 start-gradiant bottom-0 z-50" />
       <CountrySelect class="absolute top-2 right-2 transition-all duration-500 delay-300 z-50" :class="{
           'opacity-0 scale-125': !isMounted,
           'opacity-100 scale-100': isMounted
@@ -92,7 +93,6 @@
 
     <!--    Screen part 2 Mobile -->
     <div class="is-mobile w-full flex flex-row pb-10">
-      <div class="w-full h-4 bg-primary" />
         <AddingPopup
             class="w-full"
             :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
@@ -332,9 +332,8 @@ onKeyUp("Escape", () => {
     display: none;
   }
 
-  .screen-part2 {
-    height: unset;
-    width: unset;
+  .start-gradiant {
+    background: linear-gradient(to bottom, #EAEAEA, #FF9100);
   }
 
   .trailer-container {

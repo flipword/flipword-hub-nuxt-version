@@ -1,7 +1,10 @@
 <template>
   <div>
     <div class="relative">
-      <div ref="selectedDivRef" class="h-14 absolute selected-div"></div>
+      <div
+        ref="selectedDivRef"
+        class="sm:h-14 h-10 absolute selected-div"
+      ></div>
       <img
         ref="cursorRef"
         src="~/assets/icons/cursor.svg"
@@ -52,7 +55,7 @@
       <span
         id="extension_promo"
         ref="extensionPromoRef"
-        class="relative font-sans leading-normal text-4xl text-black text-center"
+        class="relative font-sans leading-normal sm:text-4xl text-3xl text-black text-center"
         v-html="props.text"
       />
     </div>
