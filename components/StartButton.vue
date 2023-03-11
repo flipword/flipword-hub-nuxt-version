@@ -9,7 +9,7 @@
       <img class="h-auto sm:w-2.5vw w-7" src="~/assets/icons/play.svg" />
     </div>
     <div
-      class="bg-primary text-white py-3 px-5 start-button-label sm:text-button text-2xl"
+      class="bg-primary text-white sm:py-5 py-3 px-5 start-button-label sm:text-button text-2xl"
     >
       {{ $t("start") }}
     </div>
