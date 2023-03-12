@@ -1,60 +1,154 @@
 <template>
-  <div class="w-full overflow-hidden">
-    <!--    Screen part 1  -->
-    <div class="h-screen w-full overflow-hidden relative z-10">
-      <div class="w-full h-1/2 bg-primary absolute top-0 z-behind" />
-      <div class="w-full h-full flex flex-row">
-        <div
-          class="sm:w-5/12 w-full h-full bg-base sm:rounded-tr-4xl sm:mt-14 pb-28 z-10"
-        >
+  <div>
+    <!--    Header  -->
+    <div
+      class="fixed top-0 bg-primary w-full z-50 py-1 px-2 flex flex-row justify-between items-center shadow-md transition-all duration-300"
+      :class="titleElementDisplayed ? '-translate-y-full' : 'translate-y-0'"
+    >
+      <div
+        class="flex flex-row items-center gap-2 cursor-pointer"
+        @click="scrollTop"
+      >
+        <img src="~/assets/icons/logo.svg" class="h-12 w-auto" />
+        <span class="text-3xl text-black font-bold">FlipWord</span>
+      </div>
+      <CountrySelect v-if="!titleElementDisplayed" />
+    </div>
+    <div class="w-full overflow-hidden">
+      <!--    Screen part 1  -->
+      <div class="h-screen w-full overflow-hidden relative z-10">
+        <div class="w-full h-1/2 bg-primary absolute top-0 z-behind" />
+        <div class="w-full h-full flex flex-row">
           <div
+            class="sm:w-5/12 w-full h-full bg-base sm:rounded-tr-4xl sm:mt-14 pb-28 z-10"
+          >
+            <div
               class="h-full w-full flex flex-col items-center justify-center transition-all duration-500"
               :class="{
-          'opacity-0 scale-125': !isMounted,
-          'opacity-100 scale-100': isMounted
-        }"
-          >
-          <TitleLogoElement />
-          <StartButton class="mt-10" @click="openStore" />
-          <NuxtLink class="mt-3" to="/" @click="openTrailer">
-            <span
-              class="text-black font-bold cursor-pointer underline underline-offset-4 sm:text-demo text-xl"
-              >{{ $t("demo") }}</span
+                'opacity-0 scale-125': !isMounted,
+                'opacity-100 scale-100': isMounted,
+              }"
             >
-          </NuxtLink>
+              <TitleLogoElement ref="titleElementRef" />
+              <StartButton class="mt-10" @click="openStore" />
+              <NuxtLink class="mt-3" to="/" @click="openTrailer">
+                <span
+                  class="text-black font-bold cursor-pointer underline underline-offset-4 sm:text-demo text-xl"
+                  >{{ $t("demo") }}</span
+                >
+              </NuxtLink>
+            </div>
+          </div>
+          <div class="is-desktop w-7/12 h-full bg-primary rounded-bl-4xl">
+            <IsometricCards
+              ref="isometricCard"
+              :class="{ 'isometric-card-final': isMounted }"
+              class="isometric-card-transition"
+              :native-lang="currentNativeLang"
+              :foreign-lang="currentForeignLang"
+            />
           </div>
         </div>
-        <div class="is-desktop w-7/12 h-full bg-primary rounded-bl-4xl">
-          <IsometricCards
-            ref="isometricCard"
-            :class="{ 'isometric-card-final': isMounted }"
-            class="isometric-card-transition"
-            :native-lang="currentNativeLang"
-            :foreign-lang="currentForeignLang"
-          />
-        </div>
-      </div>
-      <div class="is-mobile absolute w-full h-16 start-gradiant bottom-0 z-50" />
-      <CountrySelect class="absolute top-2 right-2 transition-all duration-500 delay-300 z-50" :class="{
-          'opacity-0 scale-125': !isMounted,
-          'opacity-100 scale-100': isMounted
-        }"/>
-    </div>
-
-    <!--    Screen part 2 Desktop -->
-    <div class="is-desktop w-full flex flex-row pb-10">
-      <div class="w-5/12 h-full flex flex-col gap-10">
         <div
+          class="is-mobile absolute w-full h-16 start-gradiant bottom-0 z-50"
+        />
+        <CountrySelect
+          v-if="titleElementDisplayed"
+          class="absolute top-2 right-2 transition-all duration-500 delay-300 z-50"
+          :class="{
+            'opacity-0 scale-125': !isMounted,
+            'opacity-100 scale-100': isMounted,
+          }"
+        />
+      </div>
+
+      <!--    Screen part 2 Desktop -->
+      <div class="is-desktop w-full flex flex-row pb-10">
+        <div class="w-5/12 h-full flex flex-col gap-10">
+          <div
             ref="firstTextRef"
             class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-r-3xl mt-14 transition-all duration-500"
             :class="firstTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
+          >
+            <span
+              class="font-sans text-4xl leading-normal text-black text-center"
+              v-html="$t('create_description')"
+            />
+          </div>
+          <div
+            class="w-full flex flex-col"
+            style="padding: 0 3vw 0 3vw; gap: 4vh"
+          >
+            <div
+              v-for="(chunk, index) in wordListChunk"
+              :key="index"
+              class="flex flex-row justify-between"
+            >
+              <ListCard
+                v-if="chunk[0]"
+                :native-word="chunk[0].nativeWord"
+                :foreign-word="chunk[0].foreignWord"
+                class="transition-all duration-500"
+                :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
+              ></ListCard>
+              <ListCard
+                v-if="chunk[1]"
+                :native-word="chunk[1].nativeWord"
+                :foreign-word="chunk[1].foreignWord"
+                class="transition-all duration-500"
+                :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
+              ></ListCard>
+            </div>
+          </div>
+        </div>
+        <div
+          class="flex flex-col gap-7 items-center justify-between w-7/12 h-full"
         >
+          <div
+            class="w-full 2xl:px-32 xl:px-28 px-16 transition-all duration-500"
+            :class="firstTextDisplayed ? 'translate-y-0' : '-translate-y-full'"
+          >
+            <AddingPopup
+              :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
+              :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
+              :native-language-label="getNativeLanguageLabel()"
+              :foreign-language-label="getForeignLanguageLabel()"
+              @update-word="updateWordInAddingPopup"
+            />
+          </div>
+          <div
+            ref="secondTextRef"
+            class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-l-3xl transition-all duration-500"
+            :class="secondTextDisplayed ? 'translate-x-0' : 'translate-x-full'"
+          >
+            <ExtensionPopupAnimation
+              :native-language-label="getNativeLanguageLabel()"
+              :foreign-language-label="getForeignLanguageLabel()"
+              :text="$t('extension_promo')"
+              :native-word="wordList[currentNativeLang][0]"
+              :foreign-word="wordList[currentForeignLang][0]"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!--    Screen part 2 Mobile -->
+      <div class="is-mobile w-full flex flex-row pb-10">
+        <AddingPopup
+          class="w-full"
+          :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
+          :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
+          :native-language-label="getNativeLanguageLabel()"
+          :foreign-language-label="getForeignLanguageLabel()"
+          @update-word="updateWordInAddingPopup"
+        />
+        <div class="w-full bg-primary p-6 mt-6">
           <span
-            class="font-sans text-4xl leading-normal text-black text-center"
+            class="font-sans text-3xl leading-normal text-black text-center"
             v-html="$t('create_description')"
           />
         </div>
-        <div class="w-full flex flex-col" style="padding: 0 3vw 0 3vw; gap: 4vh">
+        <div class="w-full flex flex-col px-10 gap-5 mt-6">
           <div
             v-for="(chunk, index) in wordListChunk"
             :key="index"
@@ -64,37 +158,15 @@
               v-if="chunk[0]"
               :native-word="chunk[0].nativeWord"
               :foreign-word="chunk[0].foreignWord"
-              class="transition-all duration-500"
-              :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
             ></ListCard>
             <ListCard
               v-if="chunk[1]"
               :native-word="chunk[1].nativeWord"
               :foreign-word="chunk[1].foreignWord"
-              class="transition-all duration-500"
-              :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
             ></ListCard>
           </div>
         </div>
-      </div>
-      <div class="flex flex-col gap-7 items-center justify-between w-7/12 h-full">
-        <div
-            class="w-full 2xl:px-32 xl:px-28 px-16 transition-all duration-500"
-            :class="firstTextDisplayed ? 'translate-y-0' : '-translate-y-full'"
-        >
-          <AddingPopup
-            :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
-            :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
-            :native-language-label="getNativeLanguageLabel()"
-            :foreign-language-label="getForeignLanguageLabel()"
-            @update-word="updateWordInAddingPopup"
-          />
-        </div>
-        <div
-            ref="secondTextRef"
-            class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-l-3xl transition-all duration-500"
-            :class="secondTextDisplayed ? 'translate-x-0' : 'translate-x-full'"
-        >
+        <div class="w-full bg-primary p-6 mt-6">
           <ExtensionPopupAnimation
             :native-language-label="getNativeLanguageLabel()"
             :foreign-language-label="getForeignLanguageLabel()"
@@ -104,90 +176,47 @@
           />
         </div>
       </div>
-    </div>
 
-    <!--    Screen part 2 Mobile -->
-    <div class="is-mobile w-full flex flex-row pb-10">
-        <AddingPopup
-            class="w-full"
-            :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
-            :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
-            :native-language-label="getNativeLanguageLabel()"
-            :foreign-language-label="getForeignLanguageLabel()"
-            @update-word="updateWordInAddingPopup"
-        />
-      <div class="w-full bg-primary p-6 mt-6">
-          <span
-              class="font-sans text-3xl leading-normal text-black text-center"
-              v-html="$t('create_description')"
-          />
-      </div>
-      <div class="w-full flex flex-col px-10 gap-5 mt-6">
-        <div
-            v-for="(chunk, index) in wordListChunk"
-            :key="index"
-            class="flex flex-row justify-between"
-        >
-          <ListCard
-              v-if="chunk[0]"
-              :native-word="chunk[0].nativeWord"
-              :foreign-word="chunk[0].foreignWord"
-          ></ListCard>
-          <ListCard
-              v-if="chunk[1]"
-              :native-word="chunk[1].nativeWord"
-              :foreign-word="chunk[1].foreignWord"
-          ></ListCard>
-        </div>
-      </div>
-      <div class="w-full bg-primary p-6 mt-6">
-        <ExtensionPopupAnimation
-            :native-language-label="getNativeLanguageLabel()"
-            :foreign-language-label="getForeignLanguageLabel()"
-            :text="$t('extension_promo')"
-            :native-word="wordList[currentNativeLang][0]"
-            :foreign-word="wordList[currentForeignLang][0]"
-        />
-      </div>
-    </div>
-
-    <!--    Screen part 3 -->
-    <div class="pb-10 flex flex-row justify-center items-center relative mb-10">
+      <!--    Screen part 3 -->
       <div
-        class="trailer-container relative rounded-2xl overflow-hidden"
-        @click="openTrailer"
+        class="pb-10 flex flex-row justify-center items-center relative mb-10"
       >
-        <img src="~/assets/images/trailer.png" class="h-full w-full" />
         <div
-          class="absolute w-full h-full top-0 trailer-shadow cursor-pointer"
-        />
-        <img class="play-button" src="~/assets/icons/play.svg" />
-      </div>
-      <teleport to="body">
-        <div
-          v-if="isTrailerPlaying"
-          class="fixed top-0 w-screen h-screen trailer-shadow z-50 flex flex-row justify-center items-center"
-          tabindex="0"
-          @click="isTrailerPlaying = false"
+          class="trailer-container relative rounded-2xl overflow-hidden"
+          @click="openTrailer"
         >
-          <iframe
-            class="trailer-video"
-            src="https://www.youtube.com/embed/jBNjdik0eCs?autoplay=1&?hd=1"
-            allow="autoplay"
-            allowfullscreen
-            @keydown.esc="isTrailerPlaying = false"
+          <img src="~/assets/images/trailer.png" class="h-full w-full" />
+          <div
+            class="absolute w-full h-full top-0 trailer-shadow cursor-pointer"
           />
+          <img class="play-button" src="~/assets/icons/play.svg" />
         </div>
-      </teleport>
+        <teleport to="body">
+          <div
+            v-if="isTrailerPlaying"
+            class="fixed top-0 w-screen h-screen trailer-shadow z-50 flex flex-row justify-center items-center"
+            tabindex="0"
+            @click="isTrailerPlaying = false"
+          >
+            <iframe
+              class="trailer-video"
+              src="https://www.youtube.com/embed/jBNjdik0eCs?autoplay=1&?hd=1"
+              allow="autoplay"
+              allowfullscreen
+              @keydown.esc="isTrailerPlaying = false"
+            />
+          </div>
+        </teleport>
+      </div>
+      <!--    Footer -->
+      <Footer />
+      <resize-observer :show-trigger="true" @notify="handleResize" />
     </div>
-    <!--    Footer -->
-    <Footer />
-    <resize-observer :show-trigger="true" @notify="handleResize" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch} from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useHead, useNuxtApp } from "#app";
 import IsometricCards from "~/components/IsometricCards.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
@@ -235,35 +264,46 @@ const handleResize = () => {
 const wordListChunk = ref<Word[][]>([]);
 const isMounted = ref(false);
 
-const firstTextRef = ref<HTMLElement | null>(null)
-const firstTextDisplayed = ref(false)
-const isVisibleFirstText = useElementVisibility(firstTextRef)
+const titleElementRef = ref(null);
+const titleElementDisplayed = ref(true);
+const isVisibleTitleElement = useElementVisibility(titleElementRef);
+
+watch(isVisibleTitleElement, () => {
+  titleElementDisplayed.value = isVisibleTitleElement.value;
+});
+
+const firstTextRef = ref(null);
+const firstTextDisplayed = ref(false);
+const isVisibleFirstText = useElementVisibility(firstTextRef);
 
 watch(isVisibleFirstText, () => {
-  if(isVisibleFirstText) {
-    firstTextDisplayed.value = true
+  if (isVisibleFirstText) {
+    firstTextDisplayed.value = true;
   }
-})
+});
 
-const secondTextRef = ref<HTMLElement | null>(null)
-const secondTextDisplayed = ref(false)
-const isVisibleSecondText = useElementVisibility(secondTextRef)
+const secondTextRef = ref(null);
+const secondTextDisplayed = ref(false);
+const isVisibleSecondText = useElementVisibility(secondTextRef);
 
 watch(isVisibleSecondText, () => {
-  if(isVisibleSecondText) {
-    secondTextDisplayed.value = true
+  if (isVisibleSecondText) {
+    secondTextDisplayed.value = true;
   }
-})
+});
 
 const setWordListChunk = () => {
   if (wordList[currentNativeLang.value]) {
     const nbWordToDisplay = 5;
-    wordListChunk.value = Array(nbWordToDisplay).fill(null).map((_, index): Word => {
-      return {
-        nativeWord: wordList[currentNativeLang.value][index],
-        foreignWord: wordList[currentForeignLang.value][index]
-      }
-    }).reduce((resultArray, item, index) => {
+    wordListChunk.value = Array(nbWordToDisplay)
+      .fill(null)
+      .map((_, index): Word => {
+        return {
+          nativeWord: wordList[currentNativeLang.value][index],
+          foreignWord: wordList[currentForeignLang.value][index],
+        };
+      })
+      .reduce((resultArray: any[], item, index) => {
         const chunkIndex = Math.floor(index / 2);
 
         if (!resultArray[chunkIndex]) {
@@ -286,7 +326,7 @@ const openTrailer = () => {
 const currentWordInAddingPopup = ref<Word | null>();
 
 const updateWordInAddingPopup = () => {
-  try{
+  try {
     const nativeWordList = wordList[currentNativeLang.value];
     const foreignWordList = wordList[currentForeignLang.value];
     const index = Math.floor(Math.random() * (nativeWordList.length - 1));
@@ -294,8 +334,8 @@ const updateWordInAddingPopup = () => {
       nativeWord: nativeWordList[index],
       foreignWord: foreignWordList[index],
     };
-  } catch (e: any){
-    console.log("err", e)
+  } catch (err) {
+    console.log("err", err);
   }
 };
 
@@ -309,10 +349,13 @@ onKeyUp("Escape", () => {
     isTrailerPlaying.value = !isTrailerPlaying;
   }
 });
+
+const scrollTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 </script>
 
 <style scoped>
-
 .is-mobile {
   display: none;
 }
@@ -368,7 +411,7 @@ onKeyUp("Escape", () => {
   }
 
   .start-gradiant {
-    background: linear-gradient(to bottom, #EAEAEA, #FF9100);
+    background: linear-gradient(to bottom, #eaeaea, #ff9100);
   }
 
   .trailer-container {

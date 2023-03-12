@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen w-full flex flex-col">
     <div
-      class="h-14 flex flex-row w-full justify-start items-center filter drop-shadow-md"
+      class="h-14 w-full flex flex-row justify-start items-center filter drop-shadow-md"
     >
       <div
         class="flex flex-row items-center gap-2 pl-3 cursor-pointer"
