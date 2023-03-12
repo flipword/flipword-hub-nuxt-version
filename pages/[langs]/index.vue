@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="w-full overflow-hidden">
     <!--    Screen part 1  -->
-    <div class="h-screen w-full overflow-hidden relative">
+    <div class="h-screen w-full overflow-hidden relative z-10">
       <div class="w-full h-1/2 bg-primary absolute top-0 z-behind" />
       <div class="w-full h-full flex flex-row">
         <div
@@ -44,7 +44,11 @@
     <!--    Screen part 2 Desktop -->
     <div class="is-desktop w-full flex flex-row pb-10">
       <div class="w-5/12 h-full flex flex-col gap-10">
-        <div class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-r-3xl mt-14">
+        <div
+            ref="firstTextRef"
+            class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-r-3xl mt-14 transition-all duration-500"
+            :class="firstTextIsVisible ? 'translate-x-0' : '-translate-x-full'"
+        >
           <span
             class="font-sans text-4xl leading-normal text-black text-center"
             v-html="$t('create_description')"
@@ -60,17 +64,24 @@
               v-if="chunk[0]"
               :native-word="chunk[0].nativeWord"
               :foreign-word="chunk[0].foreignWord"
+              class="transition-all duration-500"
+              :class="`${secondTextIsVisible ? 'opacity-100' : 'opacity-0'}`"
             ></ListCard>
             <ListCard
               v-if="chunk[1]"
               :native-word="chunk[1].nativeWord"
               :foreign-word="chunk[1].foreignWord"
+              class="transition-all duration-500"
+              :class="`${secondTextIsVisible ? 'opacity-100' : 'opacity-0'}`"
             ></ListCard>
           </div>
         </div>
       </div>
       <div class="flex flex-col gap-7 items-center justify-between w-7/12 h-full">
-        <div class="w-full 2xl:px-32 xl:px-28 px-16">
+        <div
+            class="w-full 2xl:px-32 xl:px-28 px-16 transition-all duration-500"
+            :class="firstTextIsVisible ? 'translate-y-0' : '-translate-y-full'"
+        >
           <AddingPopup
             :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
             :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
@@ -79,7 +90,11 @@
             @update-word="updateWordInAddingPopup"
           />
         </div>
-        <div class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-l-3xl">
+        <div
+            ref="secondTextRef"
+            class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-l-3xl transition-all duration-500"
+            :class="secondTextIsVisible ? 'translate-x-0' : 'translate-x-full'"
+        >
           <ExtensionPopupAnimation
             :native-language-label="getNativeLanguageLabel()"
             :foreign-language-label="getForeignLanguageLabel()"
@@ -182,7 +197,7 @@ import ExtensionPopupAnimation from "~/components/ExtensionPopupAnimation.vue";
 import Footer from "~/components/Footer.vue";
 import { wordList, Word } from "assets/data/words";
 import StartButton from "~/components/StartButton.vue";
-import { onKeyUp } from "@vueuse/core";
+import { onKeyUp, useElementVisibility } from "@vueuse/core";
 import CountrySelect from "~/components/CountrySelect.vue";
 
 const {
@@ -219,6 +234,12 @@ const handleResize = () => {
 };
 const wordListChunk = ref<Word[][]>([]);
 const isMounted = ref(false);
+
+const firstTextRef = ref(null)
+const firstTextIsVisible = useElementVisibility(firstTextRef)
+
+const secondTextRef = ref(null)
+const secondTextIsVisible = useElementVisibility(secondTextRef)
 
 const setWordListChunk = () => {
   if (wordList[currentNativeLang.value]) {
