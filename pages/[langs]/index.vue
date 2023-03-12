@@ -47,7 +47,7 @@
         <div
             ref="firstTextRef"
             class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-r-3xl mt-14 transition-all duration-500"
-            :class="firstTextIsVisible ? 'translate-x-0' : '-translate-x-full'"
+            :class="firstTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
         >
           <span
             class="font-sans text-4xl leading-normal text-black text-center"
@@ -65,14 +65,14 @@
               :native-word="chunk[0].nativeWord"
               :foreign-word="chunk[0].foreignWord"
               class="transition-all duration-500"
-              :class="`${secondTextIsVisible ? 'opacity-100' : 'opacity-0'}`"
+              :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
             ></ListCard>
             <ListCard
               v-if="chunk[1]"
               :native-word="chunk[1].nativeWord"
               :foreign-word="chunk[1].foreignWord"
               class="transition-all duration-500"
-              :class="`${secondTextIsVisible ? 'opacity-100' : 'opacity-0'}`"
+              :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
             ></ListCard>
           </div>
         </div>
@@ -80,7 +80,7 @@
       <div class="flex flex-col gap-7 items-center justify-between w-7/12 h-full">
         <div
             class="w-full 2xl:px-32 xl:px-28 px-16 transition-all duration-500"
-            :class="firstTextIsVisible ? 'translate-y-0' : '-translate-y-full'"
+            :class="firstTextDisplayed ? 'translate-y-0' : '-translate-y-full'"
         >
           <AddingPopup
             :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
@@ -93,7 +93,7 @@
         <div
             ref="secondTextRef"
             class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-l-3xl transition-all duration-500"
-            :class="secondTextIsVisible ? 'translate-x-0' : 'translate-x-full'"
+            :class="secondTextDisplayed ? 'translate-x-0' : 'translate-x-full'"
         >
           <ExtensionPopupAnimation
             :native-language-label="getNativeLanguageLabel()"
@@ -187,7 +187,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, watch} from "vue";
 import { useHead, useNuxtApp } from "#app";
 import IsometricCards from "~/components/IsometricCards.vue";
 import AddingPopup from "~/components/AddingPopup.vue";
@@ -235,11 +235,25 @@ const handleResize = () => {
 const wordListChunk = ref<Word[][]>([]);
 const isMounted = ref(false);
 
-const firstTextRef = ref(null)
-const firstTextIsVisible = useElementVisibility(firstTextRef)
+const firstTextRef = ref<HTMLElement | null>(null)
+const firstTextDisplayed = ref(false)
+const isVisibleFirstText = useElementVisibility(firstTextRef)
 
-const secondTextRef = ref(null)
-const secondTextIsVisible = useElementVisibility(secondTextRef)
+watch(isVisibleFirstText, () => {
+  if(isVisibleFirstText) {
+    firstTextDisplayed.value = true
+  }
+})
+
+const secondTextRef = ref<HTMLElement | null>(null)
+const secondTextDisplayed = ref(false)
+const isVisibleSecondText = useElementVisibility(secondTextRef)
+
+watch(isVisibleSecondText, () => {
+  if(isVisibleSecondText) {
+    secondTextDisplayed.value = true
+  }
+})
 
 const setWordListChunk = () => {
   if (wordList[currentNativeLang.value]) {
