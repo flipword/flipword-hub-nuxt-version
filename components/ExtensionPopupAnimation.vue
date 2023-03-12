@@ -46,9 +46,9 @@
 
           <div
             ref="submitBtnRef"
-            class="w-1/3 h-10 bg-primary filter drop-shadow-lg flex flex-row justify-center items-center rounded-lg"
+            class="px-3 py-1 bg-primary filter drop-shadow-lg flex flex-row justify-center items-center rounded-lg"
           >
-            <span class="text-black text-lg font-bold">Submit</span>
+            <span class="text-black text-lg font-bold">{{$t('save')}}</span>
           </div>
         </div>
       </div>
@@ -66,6 +66,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import blobScriptUrl from "~/assets/worker_scripts/extensionPromoWorker.js";
+import {useNuxtApp} from "#app";
 
 const props = defineProps({
   nativeLanguageLabel: {
@@ -89,6 +90,10 @@ const props = defineProps({
     required: true,
   },
 });
+
+const {
+  $i18n: { $t },
+} = useNuxtApp();
 
 const extensionPromoRef = ref<HTMLElement>(null);
 const selectedDivRef = ref<HTMLElement>(null);

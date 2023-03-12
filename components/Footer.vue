@@ -3,7 +3,7 @@
     class="w-full h-8 px-6 flex flex-row justify-end items-center gap-5 bg-primary filter drop-shadow-top"
   >
     <NuxtLink to="/about-us">
-      <span class="text-black font-bold cursor-pointer">About us</span>
+      <span class="text-black font-bold cursor-pointer">{{$t('about_us')}}</span>
     </NuxtLink>
     <NuxtLink
       class="flex flex-row items-center gap-2 cursor-pointer"
@@ -16,6 +16,12 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import {useNuxtApp} from "#app";
+
+const {
+  $i18n: { $t },
+} = useNuxtApp();
+</script>
 
 <style scoped></style>
