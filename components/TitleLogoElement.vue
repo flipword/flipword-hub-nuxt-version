@@ -1,7 +1,7 @@
 <template>
   <div class="w-full flex flex-col justify-center items-center">
     <div class="w-full flex flex-row justify-center">
-      <img src="~/assets/icons/logo_dark.svg" class="h-auto sm:w-8vw w-20" />
+      <img src="~/assets/icons/logo_dark.svg" class="h-auto sm:w-7vw w-20" />
       <div class="flex flex-col justify-center">
         <span class="font-sans text-black font-bold sm:text-title text-6xl"
           >FlipWord</span

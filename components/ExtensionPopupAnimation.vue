@@ -48,7 +48,7 @@
             ref="submitBtnRef"
             class="px-3 py-1 bg-primary filter drop-shadow-lg flex flex-row justify-center items-center rounded-lg"
           >
-            <span class="text-black text-lg font-bold">{{$t('save')}}</span>
+            <span class="text-black text-lg font-bold">{{ $t("save") }}</span>
           </div>
         </div>
       </div>
@@ -66,7 +66,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import blobScriptUrl from "~/assets/worker_scripts/extensionPromoWorker.js";
-import {useNuxtApp} from "#app";
+import { useNuxtApp } from "#app";
 
 const props = defineProps({
   nativeLanguageLabel: {
@@ -108,6 +108,7 @@ let handleResize = () => {};
 
 onMounted(() => {
   if (process.client) {
+    console.log("mounted !!");
     setupAnimation();
     // TODO: refacto duplicate code
     handleResize = () => {
@@ -171,6 +172,7 @@ const initAnimationPosition = () => {
 };
 
 const setupAnimation = () => {
+  console.log("setup anim");
   worker = new Worker(blobScriptUrl);
   worker.onmessage = function (e) {
     const result = e.data;

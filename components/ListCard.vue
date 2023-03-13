@@ -1,5 +1,5 @@
 <template>
-  <div class="h-auto sm:w-15vw w-36 filter drop-shadow-md aspect-video">
+  <div class="h-auto sm:w-14vw w-36 filter drop-shadow-md aspect-video">
     <div
       class="w-full h-1/2 bg-primary flex flex-row justify-center items-center rounded-t-3xl"
     >

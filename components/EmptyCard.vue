@@ -6,8 +6,8 @@
 
 <style scoped>
 .flip-card {
-  width: 20vw;
-  height: 28vw;
+  width: 18vw;
+  height: 25.2vw;
   transition: 0.4s ease-in-out transform, 0.3s ease-in-out box-shadow;
   perspective: 1000px;
 }

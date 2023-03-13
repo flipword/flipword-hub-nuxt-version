@@ -11,7 +11,7 @@
     </div>
     <div
       class="isometric flex flex-col card-gap"
-      style="padding-left: 6vw; margin-top: -7vw"
+      style="padding-left: 4vw; margin-top: -7vw"
     >
       <EmptyCard />
       <EmptyCard />
@@ -26,7 +26,7 @@
     </div>
     <div
       class="isometric flex flex-col card-gap"
-      style="padding-left: 10vw; margin-top: -10vw"
+      style="padding-left: 8vw; margin-top: -10vw"
     >
       <EmptyCard />
       <Card
@@ -44,7 +44,7 @@
     </div>
     <div
       class="isometric flex flex-col card-gap"
-      style="padding-left: 13vw; margin-top: -10vw"
+      style="padding-left: 11vw; margin-top: -10vw"
     >
       <Card
         :native-word="wordList[props.nativeLang][6]"
@@ -86,6 +86,6 @@ const props = defineProps({
 }
 
 .card-gap {
-  gap: 4vw;
+  gap: 3vw;
 }
 </style>

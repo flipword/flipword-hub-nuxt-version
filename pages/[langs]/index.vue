@@ -2,7 +2,7 @@
   <div>
     <!--    Header  -->
     <div
-      class="fixed top-0 bg-primary w-full z-50 py-1 px-2 flex flex-row justify-between items-center shadow-md transition-all duration-300"
+      class="fixed top-0 bg-primary w-full z-40 py-1 px-2 flex flex-row justify-between items-center shadow-md transition-all duration-300"
       :class="titleElementDisplayed ? '-translate-y-full' : 'translate-y-0'"
     >
       <div
@@ -367,8 +367,8 @@ const scrollTop = () => {
 }
 
 .isometric-card-final {
-  margin-top: -63%;
-  margin-left: -25vw;
+  margin-top: -50%;
+  margin-left: -20vw;
   opacity: 1;
 }
 
