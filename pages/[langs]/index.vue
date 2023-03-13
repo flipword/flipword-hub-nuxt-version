@@ -63,62 +63,60 @@
       </div>
 
       <!--    Screen part 2 Desktop -->
-      <div class="is-desktop w-full flex flex-row pb-10">
-        <div class="w-5/12 h-full flex flex-col gap-10">
+      <div
+        class="w-full sm:grid sm:grid-cols-12 flex flex-row flex-wrap pb-10 gap-4"
+      >
+        <div ref="firstTextRef" class="sm:col-span-5 sm:order-1 w-full order-2">
           <div
-            ref="firstTextRef"
-            class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-r-3xl mt-14 transition-all duration-500"
+            class="bg-primary 2xl:p-20 xl:p-14 p-10 sm:rounded-r-3xl sm:mt-14 transition-all duration-500"
             :class="firstTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
           >
             <span
-              class="font-sans text-4xl leading-normal text-black text-center"
+              class="font-sans sm:text-4xl text-3xl leading-normal text-black text-center"
               v-html="$t('create_description')"
             />
           </div>
-          <div
-            class="w-full flex flex-col"
-            style="padding: 0 3vw 0 3vw; gap: 4vh"
-          >
-            <div
-              v-for="(chunk, index) in wordListChunk"
-              :key="index"
-              class="flex flex-row justify-between"
-            >
-              <ListCard
-                v-if="chunk[0]"
-                :native-word="chunk[0].nativeWord"
-                :foreign-word="chunk[0].foreignWord"
-                class="transition-all duration-500"
-                :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
-              ></ListCard>
-              <ListCard
-                v-if="chunk[1]"
-                :native-word="chunk[1].nativeWord"
-                :foreign-word="chunk[1].foreignWord"
-                class="transition-all duration-500"
-                :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
-              ></ListCard>
-            </div>
-          </div>
         </div>
         <div
-          class="flex flex-col gap-7 items-center justify-between w-7/12 h-full"
+          class="sm:col-span-7 w-full order-1 2xl:px-32 xl:px-28 sm:px-16 transition-all duration-500"
+          :class="firstTextDisplayed ? 'translate-y-0' : '-translate-y-full'"
+        >
+          <AddingPopup
+            :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
+            :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
+            :native-language-label="getNativeLanguageLabel()"
+            :foreign-language-label="getForeignLanguageLabel()"
+            @update-word="updateWordInAddingPopup"
+          />
+        </div>
+        <div
+          class="sm:col-span-5 sm:-mt-15vh w-full order-3 flex flex-col"
+          style="padding: 0 3vw 0 3vw; gap: 4vh"
         >
           <div
-            class="w-full 2xl:px-32 xl:px-28 px-16 transition-all duration-500"
-            :class="firstTextDisplayed ? 'translate-y-0' : '-translate-y-full'"
+            v-for="(chunk, index) in wordListChunk"
+            :key="index"
+            class="flex flex-row justify-between"
           >
-            <AddingPopup
-              :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
-              :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
-              :native-language-label="getNativeLanguageLabel()"
-              :foreign-language-label="getForeignLanguageLabel()"
-              @update-word="updateWordInAddingPopup"
-            />
+            <ListCard
+              v-if="chunk[0]"
+              :native-word="chunk[0].nativeWord"
+              :foreign-word="chunk[0].foreignWord"
+              class="transition-all duration-500"
+              :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
+            ></ListCard>
+            <ListCard
+              v-if="chunk[1]"
+              :native-word="chunk[1].nativeWord"
+              :foreign-word="chunk[1].foreignWord"
+              class="transition-all duration-500"
+              :class="`${secondTextDisplayed ? 'opacity-100' : 'opacity-0'}`"
+            ></ListCard>
           </div>
+        </div>
+        <div ref="secondTextRef" class="sm:col-span-7 w-full order-4">
           <div
-            ref="secondTextRef"
-            class="w-full bg-primary 2xl:p-20 xl:p-14 p-10 rounded-l-3xl transition-all duration-500"
+            class="bg-primary 2xl:p-20 xl:p-14 p-10 sm:rounded-l-3xl transition-all duration-500"
             :class="secondTextDisplayed ? 'translate-x-0' : 'translate-x-full'"
           >
             <ExtensionPopupAnimation
@@ -129,51 +127,6 @@
               :foreign-word="wordList[currentForeignLang][0]"
             />
           </div>
-        </div>
-      </div>
-
-      <!--    Screen part 2 Mobile -->
-      <div class="is-mobile w-full flex flex-row pb-10">
-        <AddingPopup
-          class="w-full"
-          :native-word="currentWordInAddingPopup?.nativeWord ?? ''"
-          :foreign-word="currentWordInAddingPopup?.foreignWord ?? ''"
-          :native-language-label="getNativeLanguageLabel()"
-          :foreign-language-label="getForeignLanguageLabel()"
-          @update-word="updateWordInAddingPopup"
-        />
-        <div class="w-full bg-primary p-6 mt-6">
-          <span
-            class="font-sans text-3xl leading-normal text-black text-center"
-            v-html="$t('create_description')"
-          />
-        </div>
-        <div class="w-full flex flex-col px-10 gap-5 mt-6">
-          <div
-            v-for="(chunk, index) in wordListChunk"
-            :key="index"
-            class="flex flex-row justify-between"
-          >
-            <ListCard
-              v-if="chunk[0]"
-              :native-word="chunk[0].nativeWord"
-              :foreign-word="chunk[0].foreignWord"
-            ></ListCard>
-            <ListCard
-              v-if="chunk[1]"
-              :native-word="chunk[1].nativeWord"
-              :foreign-word="chunk[1].foreignWord"
-            ></ListCard>
-          </div>
-        </div>
-        <div class="w-full bg-primary p-6 mt-6">
-          <ExtensionPopupAnimation
-            :native-language-label="getNativeLanguageLabel()"
-            :foreign-language-label="getForeignLanguageLabel()"
-            :text="$t('extension_promo')"
-            :native-word="wordList[currentNativeLang][0]"
-            :foreign-word="wordList[currentForeignLang][0]"
-          />
         </div>
       </div>
 

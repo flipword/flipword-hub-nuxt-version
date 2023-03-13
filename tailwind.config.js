@@ -52,6 +52,7 @@ module.exports = {
         "2.5vw": "2.5vw",
         "7vw": "7vw",
         "14vw": "14vw",
+        "-15vh": "-15vh",
       },
       screens: {
         xs: "500px",
