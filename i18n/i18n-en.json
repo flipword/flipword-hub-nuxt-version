@@ -1,8 +1,10 @@
 {
   "greeting": "Hello Word !!!",
   "subtitle": "Vocabulary learning tool",
-  "create_description": "<b>Create</b> your own personalized word list using an automatic translator",
-  "extension_promo": "Thanks to the <b>browser extension</b>, add <abbr>easily</abbr> words to your list while browsing. Then <b>review</b> them within the application.",
+  "create_description_title": "<b>Create</b> your own word list",
+  "create_description": "Flipword was created to give its users the opportunity to build a personalised vocabulary list. In this way, everyone can learn the vocabulary words that they lack in their daily lives",
+  "extension_promo_title": "Thanks to the <b>browser extension</b>, add <abbr>easily</abbr> words to your list while browsing. Then <b>review</b> them within the application",
+  "extension_promo": "The purpose of this browser extension is to make it easy to add words to your list. If during your daily browsing you don't understand some words written in a foreign language, you can easily translate it and add it to your list",
   "your_turn": "It's your turn ! <b> Test </b> your knowledge!",
   "start": "Start learning",
   "demo": "View demo",

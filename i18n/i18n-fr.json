@@ -1,8 +1,10 @@
 {
   "greeting": "Salut le monde !!!",
   "subtitle": "Outils d'apprentissage de vocabulaire",
-  "create_description": "<b>Créer</b> votre propre liste de mot personnalisée à l’aide d’un traducteur automatique",
-  "extension_promo": "Grace à l’<b>extension navigateur</b>, ajouter <abbr>facilement</abbr> des mots à votre liste lors de votre navigation",
+  "create_description_title": "<b>Créer</b> votre propre liste de mot",
+  "create_description": "Flipword a été crée pour donner la possibilité à ses utilisateurs de se construire une liste de vocabulaire personnalisé. Ainsi chacun peut apprendre les mots de vocabulaire qui lui font defaut au quotidien",
+  "extension_promo_title": "Grace à l’<b>extension navigateur</b>, ajouter <abbr>facilement</abbr> des mots à votre liste lors de votre navigation",
+  "extension_promo": "L'objectif de cette extension navigateur est de rendre facile l'ajout de mot à votre liste. Si lors de votre navigation quotidienne vous ne comprenez pas certains mots écrits en langue étrangère, vous pouvez facilement le traduire et l'ajouter à votre liste",
   "your_turn": "A vous de jouer ! <b>Testez</b> vos connaissances !",
   "start": "Commencer",
   "demo": "Voir demo",

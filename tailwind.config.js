@@ -46,13 +46,19 @@ module.exports = {
         subtitle: "2vw",
         button: "1.75vw",
         demo: "1.5vw",
+        "4xl": [
+          "2.25rem",
+          {
+            lineHeight: "3rem",
+          },
+        ],
       },
       spacing: {
         110: "27rem",
         "2.5vw": "2.5vw",
         "7vw": "7vw",
         "14vw": "14vw",
-        "-15vh": "-15vh",
+        "-10vh": "-10vh",
       },
       screens: {
         xs: "500px",
