@@ -68,11 +68,11 @@
       >
         <div ref="firstTextRef" class="sm:col-span-5 sm:order-1 w-full order-2">
           <div
-            class="flex flex-col gap-4 items-start bg-primary 2xl:p-18 xl:p-14 p-10 sm:rounded-r-3xl sm:mt-10 transition-all duration-500"
+            class="flex flex-col gap-4 items-start bg-primary 2xl:p-18 xl:p-14 p-10 sm:rounded-r-3xl sm:mt-16 transition-all duration-500"
             :class="firstTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
           >
             <span
-              class="font-sans sm:text-4xl text-3xl leading-normal text-black text-center"
+              class="font-sans sm:text-4xl text-3xl leading-normal text-black"
               v-html="$t('create_description_title')"
             />
             <span
@@ -95,7 +95,7 @@
         </div>
         <div
           class="sm:col-span-5 sm:-mt-10vh w-full order-3 flex flex-col"
-          style="padding: 0 3vw 0 3vw; gap: 4vh"
+          style="padding: 0 5vw 0 5vw; gap: 4vh"
         >
           <div
             v-for="(chunk, index) in wordListChunk"
@@ -134,6 +134,18 @@
               class="font-sans text-xl text-black"
               v-html="$t('extension_promo')"
             />
+          </div>
+        </div>
+        <div ref="thirdTextRef" class="sm:col-span-5 order-5 w-full order-2">
+          <div
+            class="flex flex-col gap-4 items-start bg-primary 2xl:p-18 xl:p-14 p-10 sm:rounded-r-3xl sm:mt-10 transition-all duration-500"
+            :class="firstTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
+          >
+            <span
+              class="font-sans sm:text-4xl text-3xl leading-normal text-black"
+              v-html="$t('learn_title')"
+            />
+            <span class="font-sans text-xl text-black" v-html="$t('learn')" />
           </div>
         </div>
       </div>

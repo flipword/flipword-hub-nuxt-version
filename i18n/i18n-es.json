@@ -5,6 +5,8 @@
   "create_description": "Flipword se creó para dar a sus usuarios la oportunidad de construir una lista de vocabulario personalizada. De este modo, todo el mundo puede aprender las palabras de vocabulario que le faltan en su vida cotidiana",
   "extension_promo_title": "Gracias a la <b>extensión del navegador</b>, agregue <abbr>fácilmente</abbr> palabras a su lista mientras navega",
   "extension_promo": "El objetivo de esta extensión del navegador es facilitar la tarea de añadir palabras a tu lista. Si durante tu navegación diaria no entiendes algunas palabras escritas en un idioma extranjero, puedes traducirlas fácilmente y añadirlas a tu lista",
+  "learn_title": "<b>Aprenda</b> a su ritmo",
+  "learn": "Gracias a un sistema de tarjetas, puedes aprender las palabras de tu lista. Después de un cierto número de aciertos en una palabra, ésta se elimina de su lista",
   "your_turn": "Es tu turno ! <b>¡Pon a prueba</b> tus conocimientos!",
   "start": "Comienza",
   "demo": "Ver demo",

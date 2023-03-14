@@ -57,7 +57,8 @@ module.exports = {
         110: "27rem",
         "2.5vw": "2.5vw",
         "7vw": "7vw",
-        "14vw": "14vw",
+        "12vw": "12vw",
+        "70vw": "70vw",
         "-10vh": "-10vh",
       },
       screens: {
