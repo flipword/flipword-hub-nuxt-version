@@ -152,7 +152,7 @@
 
       <!--    Screen part 3 -->
       <div
-        class="pb-10 flex flex-row justify-center items-center relative mb-10"
+        class="pb-10 flex flex-row justify-center items-center relative my-10"
       >
         <div
           class="trailer-container relative rounded-2xl overflow-hidden"
