@@ -70,8 +70,9 @@
       <div
         class="w-full sm:grid sm:grid-cols-12 flex flex-row flex-wrap pb-10 gap-4"
       >
-        <div ref="firstTextRef" class="sm:col-span-5 sm:order-1 w-full order-2">
+        <div class="sm:col-span-5 sm:order-1 w-full order-2">
           <div
+            ref="firstTextRef"
             class="flex flex-col gap-4 items-start bg-primary 2xl:p-18 xl:p-14 p-10 sm:rounded-r-3xl sm:mt-16 transition-all duration-500"
             :class="firstTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
           >
