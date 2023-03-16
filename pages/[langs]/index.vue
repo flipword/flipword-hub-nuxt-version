@@ -30,7 +30,11 @@
               }"
             >
               <TitleLogoElement ref="titleElementRef" />
-              <StartButton class="mt-10" @click="openStore" />
+              <StartButton
+                :is-first-button="true"
+                class="mt-10"
+                @click="openStore"
+              />
               <NuxtLink class="mt-3" to="/" @click="openTrailer">
                 <span
                   class="text-black font-bold cursor-pointer underline underline-offset-4 sm:text-demo text-xl"
@@ -94,7 +98,7 @@
           />
         </div>
         <div
-          class="sm:col-span-5 sm:-mt-10vh w-full order-3 flex flex-col"
+          class="sm:col-span-5 2xl:-mt-13vh w-full order-3 flex flex-col"
           style="padding: 0 5vw 0 5vw; gap: 4vh"
         >
           <div
@@ -138,14 +142,27 @@
         </div>
         <div ref="thirdTextRef" class="sm:col-span-5 order-5 w-full order-2">
           <div
-            class="flex flex-col gap-4 items-start bg-primary 2xl:p-18 xl:p-14 p-10 sm:rounded-r-3xl sm:mt-10 transition-all duration-500"
-            :class="firstTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
+            class="flex flex-col gap-4 items-start sm:bg-primary bg-white 2xl:p-18 xl:p-14 p-10 sm:mt-4 -mt-4 sm:rounded-r-3xl transition-all duration-500"
+            :class="thirdTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
           >
             <span
               class="font-sans sm:text-4xl text-3xl leading-normal text-black"
               v-html="$t('learn_title')"
             />
             <span class="font-sans text-xl text-black" v-html="$t('learn')" />
+          </div>
+        </div>
+        <div class="sm:col-span-7 order-6 w-full order-2">
+          <div
+            class="flex flex-col gap-4 justify-center items-center 2xl:p-18 xl:p-14 p-2 sm:mt-4 sm:rounded-r-3xl transition-all duration-500"
+            :class="thirdTextDisplayed ? 'opacity-100' : 'opacity-0'"
+          >
+            <span
+              class="w-full font-sans sm:text-3xl text-3xl leading-normal text-black text-center"
+            >
+              {{ $t("install") }}
+            </span>
+            <StartButton :is-first-button="false" />
           </div>
         </div>
       </div>
@@ -262,6 +279,16 @@ const isVisibleSecondText = useElementVisibility(secondTextRef);
 watch(isVisibleSecondText, () => {
   if (isVisibleSecondText) {
     secondTextDisplayed.value = true;
+  }
+});
+
+const thirdTextRef = ref(null);
+const thirdTextDisplayed = ref(false);
+const isVisibleThirdText = useElementVisibility(thirdTextRef);
+
+watch(isVisibleThirdText, () => {
+  if (isVisibleThirdText) {
+    thirdTextDisplayed.value = true;
   }
 });
 

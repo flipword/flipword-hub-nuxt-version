@@ -4,12 +4,14 @@
     @click="emit('click')"
   >
     <div
-      class="flex flex-col justify-center bg-primary self-auto px-4 start-button-icon"
+      class="flex flex-col justify-center self-auto px-4 start-button-icon"
+      :class="props.isFirstButton ? 'bg-primary' : 'bg-positive'"
     >
       <img class="h-auto sm:w-2.5vw w-7" src="~/assets/icons/play.svg" />
     </div>
     <div
-      class="bg-primary text-white sm:py-5 py-3 px-5 start-button-label sm:text-button text-2xl"
+      class="text-white sm:py-5 py-3 px-5 start-button-label sm:text-button text-2xl"
+      :class="props.isFirstButton ? 'bg-primary' : 'bg-positive'"
     >
       {{ $t("start") }}
     </div>
@@ -19,7 +21,11 @@
 <script setup lang="ts">
 import { useNuxtApp } from "#app";
 
+interface IProps {
+  isFirstButton: boolean;
+}
 const emit = defineEmits(["click"]);
+const props = defineProps<IProps>();
 
 const {
   $i18n: { $t },
