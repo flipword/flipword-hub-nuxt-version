@@ -143,7 +143,7 @@
         </div>
         <div ref="thirdTextRef" class="sm:col-span-5 order-5 w-full order-2">
           <div
-            class="flex flex-col gap-4 items-start sm:bg-primary bg-white 2xl:p-18 xl:p-14 p-10 sm:mt-4 -mt-4 sm:rounded-r-3xl transition-all duration-500"
+            class="flex flex-col gap-4 items-start sm:bg-primary bg-white 2xl:p-18 xl:p-14 p-10 sm:mt-8 -mt-4 sm:rounded-r-3xl transition-all duration-500"
             :class="thirdTextDisplayed ? 'translate-x-0' : '-translate-x-full'"
           >
             <span
@@ -153,22 +153,25 @@
             <span class="font-sans text-xl text-black" v-html="$t('learn')" />
           </div>
         </div>
-        <div class="sm:col-span-7 order-6 w-full order-2">
+        <div
+          class="flex flex-col justify-center sm:col-span-7 order-6 w-full order-2"
+        >
           <div
-            class="flex flex-col gap-4 justify-center items-center 2xl:p-18 xl:p-14 p-2 sm:mt-4 sm:rounded-r-3xl transition-all duration-500"
+            class="flex flex-row gap-24 justify-center items-center sm:rounded-r-3xl transition-all duration-500"
             :class="thirdTextDisplayed ? 'opacity-100' : 'opacity-0'"
           >
-            <span
-              class="w-full font-sans sm:text-3xl text-3xl leading-normal text-black text-center"
-            >
-              {{ $t("install") }}
-            </span>
-            <button
-              class="px-5 py-3 bg-positive rounded-xl text-4xl text-white"
-              @click="openStore"
-            >
-              {{ $t("start") }}
-            </button>
+            <FlipCard
+              :native-word="wordList[currentNativeLang][11]"
+              :foreign-word="wordList[currentForeignLang][11]"
+            />
+            <FlipCard
+              :native-word="wordList[currentNativeLang][12]"
+              :foreign-word="wordList[currentForeignLang][12]"
+            />
+            <FlipCard
+              :native-word="wordList[currentNativeLang][13]"
+              :foreign-word="wordList[currentForeignLang][13]"
+            />
           </div>
         </div>
       </div>
