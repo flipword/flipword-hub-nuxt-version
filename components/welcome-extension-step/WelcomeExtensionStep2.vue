@@ -7,13 +7,13 @@
         $t("which_learned_language")
       }}</span>
       <div class="w-full flex flex-col items-center gap-10">
-        <CountrySelect :current-lang="currentLang" @changeLang="pickLanguage" />
+        <CountrySelect :is-native-lang-select="false" />
       </div>
     </div>
     <div class="flex flex-shrink flex-row w-full justify-end">
       <button
-        class="flex flex-row gap-3 bg-positive px-4 py-1 rounded-xl items-center"
-        @click="saveLanguage"
+        class="flex flex-row gap-3 bg-positive px-4 py-1 rounded-md items-center"
+        @click="emit('nexStep')"
       >
         <span>{{ $t("next") }}</span>
         <img src="~/assets/icons/arrow_right.svg" />
@@ -27,20 +27,10 @@ import { defineEmits } from "vue";
 import { useNuxtApp } from "#app";
 import CountrySelect from "~/components/CountrySelect.vue";
 
-const emit = defineEmits(["click"]);
+const emit = defineEmits(["nexStep"]);
 const {
-  $i18n: { $t, currentLang },
+  $i18n: { $t },
 } = useNuxtApp();
-
-let selectedLanguage = null;
-
-const pickLanguage = (lang: string) => {
-  selectedLanguage = lang;
-};
-
-const saveLanguage = () => {
-  emit("click", selectedLanguage);
-};
 </script>
 
 <style scoped></style>

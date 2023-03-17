@@ -88,7 +88,6 @@ const isClient = process.client;
 
 const step = ref<number>(0);
 const displayContentCard = ref<boolean>(false);
-let foreignLanguage = null;
 
 const countDownStep1 = () => {
   if (step.value == 0) {

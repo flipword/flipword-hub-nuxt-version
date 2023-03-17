@@ -12,7 +12,7 @@
         <img src="~/assets/icons/logo.svg" class="h-12 w-auto" />
         <span class="text-3xl text-black font-bold">FlipWord</span>
       </div>
-      <CountrySelect v-if="!titleElementDisplayed" />
+      <LangSelect v-if="!titleElementDisplayed" />
     </div>
     <div class="w-full overflow-hidden">
       <!--    Screen part 1  -->
@@ -56,7 +56,7 @@
         <div
           class="is-mobile absolute w-full h-16 start-gradiant bottom-0 z-50"
         />
-        <CountrySelect
+        <LangSelect
           v-if="titleElementDisplayed"
           class="absolute top-2 right-2 transition-all duration-500 delay-300 z-50"
           :class="{
@@ -163,7 +163,12 @@
             >
               {{ $t("install") }}
             </span>
-            <StartButton :is-first-button="false" @click="openStore" />
+            <button
+              class="px-5 py-3 bg-positive rounded-xl text-4xl text-white"
+              @click="openStore"
+            >
+              {{ $t("start") }}
+            </button>
           </div>
         </div>
       </div>
@@ -218,7 +223,7 @@ import Footer from "~/components/Footer.vue";
 import { wordList, Word } from "assets/data/words";
 import StartButton from "~/components/StartButton.vue";
 import { onKeyUp, useElementVisibility } from "@vueuse/core";
-import CountrySelect from "~/components/CountrySelect.vue";
+import LangSelect from "~/components/LangSelect.vue";
 import { getBrowserType, BrowserType } from "~/utils/browser";
 
 const {

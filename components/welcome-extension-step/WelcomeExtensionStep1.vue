@@ -5,12 +5,12 @@
     >
       <span class="text-3xl text-center">{{ $t("what_is_language") }}</span>
       <div class="w-full flex flex-col items-center gap-10">
-        <CountrySelect :current-lang="currentLang" @changeLang="updateLang" />
+        <CountrySelect :is-native-lang-select="true" />
       </div>
     </div>
     <div class="flex flex-shrink flex-row w-full justify-end">
       <button
-        class="flex flex-row gap-3 bg-positive px-4 py-1 rounded-xl items-center"
+        class="flex flex-row gap-3 bg-positive px-4 py-1 rounded-md items-center"
         @click="saveLanguage"
       >
         <span>{{ $t("next") }}</span>
