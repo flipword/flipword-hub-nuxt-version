@@ -11,7 +11,7 @@
     <div class="flex flex-shrink flex-row w-full justify-end">
       <button
         class="flex flex-row gap-3 bg-positive px-4 py-1 rounded-md items-center"
-        @click="saveLanguage"
+        @click="emit('nexStep')"
       >
         <span>{{ $t("next") }}</span>
         <img src="~/assets/icons/arrow_right.svg" />
@@ -24,15 +24,11 @@
 import { useNuxtApp } from "#app";
 import { defineEmits } from "vue";
 
-const emit = defineEmits(["save"]);
+const emit = defineEmits(["nexStep"]);
 
 const {
-  $i18n: { $t, currentLang, updateLang },
+  $i18n: { $t },
 } = useNuxtApp();
-
-const saveLanguage = () => {
-  emit("save");
-};
 </script>
 
 <style scoped></style>

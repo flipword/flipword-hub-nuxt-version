@@ -19,10 +19,10 @@
                 class="h-full w-full bg-white rounded-lg shadow-lg"
                 :style="step > 0 ? 'transform: rotateY(-180deg)' : ''"
               >
-                <WelcomeExtensionStep1 v-if="step == 1" @save="nextStep" />
+                <WelcomeExtensionStep1 v-if="step == 1" @nex-step="nextStep" />
                 <WelcomeExtensionStep2
                   v-else-if="step == 2"
-                  @click="pickForeignLang"
+                  @nex-step="nextStep"
                 />
                 <WelcomeExtensionStep3
                   v-else-if="step == 3"
@@ -76,7 +76,7 @@ onMounted(() => {
 });
 
 const {
-  $i18n: { $t, currentLang },
+  $i18n: { $t, currentNativeLang, currentForeignLang },
 } = useNuxtApp();
 
 const getTitle = () => `- ${$t("welcome")}`;
@@ -118,15 +118,10 @@ const getCurrentStep = () => {
   return currentStep;
 };
 
-const pickForeignLang = (lang: string) => {
-  foreignLanguage = lang;
-  nextStep();
-};
-
 const signIn = (authMethod: AuthMethod) => {
   if (isClient) {
     // If you try to log but you don't have foreign language set
-    if (!foreignLanguage) {
+    if (!currentForeignLang.value) {
       // TODO: Add notify or store foreign in localStorage
       setStep(2);
       return;
@@ -135,15 +130,15 @@ const signIn = (authMethod: AuthMethod) => {
     const event = new CustomEvent("flipwordAuthRequest", {
       detail: {
         authMethod: authMethod,
-        nativeLanguage: currentLang.value,
-        foreignLanguage: foreignLanguage,
+        nativeLanguage: currentNativeLang.value,
+        foreignLanguage: currentForeignLang.value,
       },
     });
 
     console.log("send: ", {
       authMethod: authMethod,
-      nativeLanguage: currentLang.value,
-      foreignLanguage: foreignLanguage,
+      nativeLanguage: currentNativeLang.value,
+      foreignLanguage: currentForeignLang.value,
     });
     document.dispatchEvent(event);
     // Catch event emit by extension when login success
