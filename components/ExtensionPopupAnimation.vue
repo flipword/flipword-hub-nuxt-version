@@ -170,16 +170,13 @@ const initAnimationPosition = () => {
         (abbrNode.value.offsetLeft +
           abbrNode.value.offsetWidth +
           addingPopupRef.value.offsetWidth) >
-      100
+      120
     ) {
       addingPopupRef.value.style.left = `${
         abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
       }px`;
     } else {
-      addingPopupRef.value.style.left = `${
-        abbrNode.value.offsetLeft -
-        (addingPopupRef.value.offsetWidth + abbrNode.value.offsetWidth)
-      }px`;
+      addingPopupRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
     }
   }
 };
@@ -227,13 +224,13 @@ const setupAnimation = () => {
             (abbrNode.value.offsetLeft +
               abbrNode.value.offsetWidth +
               addingPopupRef.value.offsetWidth) >
-          100
+          120
         ) {
           cursorRef.value.style.left = `${
             abbrNode.value.offsetLeft + abbrNode.value.offsetWidth + 105
           }px`;
         } else {
-          cursorRef.value.style.left = `${abbrNode.value.offsetLeft + 20}px`;
+          cursorRef.value.style.left = `${abbrNode.value.offsetLeft + 100}px`;
         }
         break;
     }
