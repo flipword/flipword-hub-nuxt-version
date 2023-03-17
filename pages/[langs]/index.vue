@@ -154,7 +154,7 @@
           </div>
         </div>
         <div
-          class="flex flex-col justify-center sm:col-span-7 order-6 w-full order-2"
+          class="is-desktop flex flex-col justify-center sm:col-span-7 order-6 w-full"
         >
           <div
             class="flex flex-row xl:gap-24 lg:gap-16 gap-10 justify-center 2xl:mt-4 items-center sm:rounded-r-3xl transition-all duration-500"
