@@ -157,7 +157,7 @@
           class="flex flex-col justify-center sm:col-span-7 order-6 w-full order-2"
         >
           <div
-            class="flex flex-row gap-24 justify-center items-center sm:rounded-r-3xl transition-all duration-500"
+            class="flex flex-row xl:gap-24 lg:gap-16 gap-10 justify-center 2xl:mt-4 items-center sm:rounded-r-3xl transition-all duration-500"
             :class="thirdTextDisplayed ? 'opacity-100' : 'opacity-0'"
           >
             <FlipCard
