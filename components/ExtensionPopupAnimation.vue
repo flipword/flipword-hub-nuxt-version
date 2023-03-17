@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="containerRef">
     <div class="relative">
       <div
         ref="selectedDivRef"
@@ -95,6 +95,7 @@ const {
   $i18n: { $t },
 } = useNuxtApp();
 
+const containerRef = ref<HTMLElement>(null);
 const extensionPromoRef = ref<HTMLElement>(null);
 const selectedDivRef = ref<HTMLElement>(null);
 const cursorRef = ref<HTMLElement>(null);
@@ -108,7 +109,6 @@ let handleResize = () => {};
 
 onMounted(() => {
   if (process.client) {
-    console.log("mounted !!");
     setupAnimation();
     // TODO: refacto duplicate code
     handleResize = () => {
@@ -149,30 +149,42 @@ const initAnimationPosition = () => {
     selectedDivRef.value.style.top = `${abbrNode.value.offsetTop}px`;
     cursorRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
     cursorRef.value.style.top = `${
-      abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
+      abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 45)
     }px`;
     logoRef.value.style.left = `${
       abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
     }px`;
     logoRef.value.style.top = `${
-      abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
-    }px`;
-    addingPopupRef.value.style.left = `${
-      abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
+      abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 45)
     }px`;
     addingPopupRef.value.style.top = `${
-      abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 36)
+      abbrNode.value.offsetTop + (props.isWelcomeExtension ? 15 : 45)
     }px`;
     selectedDivRef.value.style.transition = "none";
     selectedDivRef.value.style.width = "0";
     addingPopupRef.value.style.display = "none";
     cursorRef.value.style.display = "none";
     logoRef.value.style.display = "none";
+    if (
+      containerRef.value.offsetWidth -
+        (abbrNode.value.offsetLeft +
+          abbrNode.value.offsetWidth +
+          addingPopupRef.value.offsetWidth) >
+      100
+    ) {
+      addingPopupRef.value.style.left = `${
+        abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
+      }px`;
+    } else {
+      addingPopupRef.value.style.left = `${
+        abbrNode.value.offsetLeft -
+        (addingPopupRef.value.offsetWidth + abbrNode.value.offsetWidth)
+      }px`;
+    }
   }
 };
 
 const setupAnimation = () => {
-  console.log("setup anim");
   worker = new Worker(blobScriptUrl);
   worker.onmessage = function (e) {
     const result = e.data;
@@ -207,12 +219,22 @@ const setupAnimation = () => {
       // Adding popup appear
       case 6:
         addingPopupRef.value.style.display = "block";
-        cursorRef.value.style.left = `${
-          abbrNode.value.offsetLeft + abbrNode.value.offsetWidth + 105
-        }px`;
         cursorRef.value.style.top = `${
           abbrNode.value.offsetTop + (props.isWelcomeExtension ? 185 : 220)
         }px`;
+        if (
+          containerRef.value.offsetWidth -
+            (abbrNode.value.offsetLeft +
+              abbrNode.value.offsetWidth +
+              addingPopupRef.value.offsetWidth) >
+          100
+        ) {
+          cursorRef.value.style.left = `${
+            abbrNode.value.offsetLeft + abbrNode.value.offsetWidth + 105
+          }px`;
+        } else {
+          cursorRef.value.style.left = `${abbrNode.value.offsetLeft + 20}px`;
+        }
         break;
     }
   };
