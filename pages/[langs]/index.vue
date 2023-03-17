@@ -163,7 +163,7 @@
             >
               {{ $t("install") }}
             </span>
-            <StartButton :is-first-button="false" />
+            <StartButton :is-first-button="false" @click="openStore" />
           </div>
         </div>
       </div>
@@ -219,6 +219,7 @@ import { wordList, Word } from "assets/data/words";
 import StartButton from "~/components/StartButton.vue";
 import { onKeyUp, useElementVisibility } from "@vueuse/core";
 import CountrySelect from "~/components/CountrySelect.vue";
+import { getBrowserType, BrowserType } from "~/utils/browser";
 
 const {
   $i18n: {
@@ -340,10 +341,25 @@ const updateWordInAddingPopup = () => {
   }
 };
 
-const openStore = () =>
-  window.open(
-    "https://chrome.google.com/webstore/detail/flipword/hinoggfcanlhfbeddbadjjpdaeoigkbe?hl=fr"
-  );
+const openStore = () => {
+  const browserType = getBrowserType();
+  let redirectUrl = "";
+  switch (browserType) {
+    case BrowserType.Android:
+      redirectUrl =
+        "https://play.google.com/store/apps/details?id=com.flutter_flip_card&hl=fr_FR";
+      break;
+    case BrowserType.Iphone:
+      redirectUrl =
+        "https://apps.apple.com/us/app/flipword-learn-vocabulary/id1599752185";
+      break;
+    default:
+      redirectUrl =
+        "https://chrome.google.com/webstore/detail/flipword/hinoggfcanlhfbeddbadjjpdaeoigkbe?hl=fr";
+      break;
+  }
+  window.open(redirectUrl);
+};
 
 onKeyUp("Escape", () => {
   if (isTrailerPlaying.value) {
