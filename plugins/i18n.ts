@@ -122,14 +122,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       const fromNativeLang = from.params?.langs?.toString().substring(0, 2);
       const fromForeignLang = from.params?.langs?.toString().substring(3, 5);
       // handle redirect to specific route without lang params (ex: /about-us)
-      if (!to.params?.langs?.toString()) {
-        if (
-          from.params?.langs?.toString().length !== 5 ||
-          !langOptions.find((x: any) => x.id == fromNativeLang) ||
-          !langOptions.find((x: any) => x.id == fromForeignLang)
-        ) {
-          return navigateTo(`${defaultLangUrl}${toRouteWithoutLang}`);
-        }
+      if (!to.params?.langs?.toString() && fromNativeLang && fromForeignLang) {
         return navigateTo(
           `/${fromNativeLang}-${fromForeignLang}${toRouteWithoutLang}`
         );
@@ -138,9 +131,10 @@ export default defineNuxtPlugin(async (nuxtApp) => {
       const toForeignLang = to.params?.langs?.toString().substring(3, 5);
       // handle case of lang params aren't correct
       if (
-        to.params?.langs?.toString().length !== 5 ||
-        !langOptions.find((x: any) => x.id == toNativeLang) ||
-        !langOptions.find((x: any) => x.id == toForeignLang)
+        to.params?.langs &&
+        (to.params?.langs?.toString().length !== 5 ||
+          !langOptions.find((x: any) => x.id == toNativeLang) ||
+          !langOptions.find((x: any) => x.id == toForeignLang))
       ) {
         return navigateTo(
           !toRouteWithoutLang
@@ -148,8 +142,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
             : `${defaultLangUrl}${toRouteWithoutLang}`
         );
       }
-      currentNativeLang.value = toNativeLang;
-      currentForeignLang.value = toForeignLang;
+      currentNativeLang.value = toNativeLang ?? defaultNativeLang;
+      currentForeignLang.value = toForeignLang ?? defaultForeignLang;
     },
     { global: true }
   );
