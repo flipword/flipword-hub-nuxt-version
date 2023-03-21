@@ -14,7 +14,7 @@
         ref="logoRef"
         class="z-20 absolute p-0.5 bg-primary filter specific-shadow hidden"
       >
-        <img class="w-10 h-10" src="~/assets/icons/logo.svg" />
+        <img class="w-10 h-auto" src="~/assets/icons/logo.svg" />
       </div>
       <div
         ref="addingPopupRef"
@@ -167,16 +167,16 @@ const initAnimationPosition = () => {
     logoRef.value.style.display = "none";
     if (
       containerRef.value.offsetWidth -
-        (abbrNode.value.offsetLeft +
-          abbrNode.value.offsetWidth +
-          addingPopupRef.value.offsetWidth) >
-      120
+        (abbrNode.value.offsetLeft + abbrNode.value.offsetWidth) >
+      150
     ) {
       addingPopupRef.value.style.left = `${
         abbrNode.value.offsetLeft + abbrNode.value.offsetWidth
       }px`;
     } else {
-      addingPopupRef.value.style.left = `${abbrNode.value.offsetLeft}px`;
+      addingPopupRef.value.style.left = `${
+        abbrNode.value.offsetLeft - abbrNode.value.offsetWidth
+      }px`;
     }
   }
 };
@@ -221,16 +221,16 @@ const setupAnimation = () => {
         }px`;
         if (
           containerRef.value.offsetWidth -
-            (abbrNode.value.offsetLeft +
-              abbrNode.value.offsetWidth +
-              addingPopupRef.value.offsetWidth) >
-          120
+            (abbrNode.value.offsetLeft + abbrNode.value.offsetWidth) >
+          150
         ) {
           cursorRef.value.style.left = `${
             abbrNode.value.offsetLeft + abbrNode.value.offsetWidth + 105
           }px`;
         } else {
-          cursorRef.value.style.left = `${abbrNode.value.offsetLeft + 100}px`;
+          cursorRef.value.style.left = `${
+            abbrNode.value.offsetLeft - abbrNode.value.offsetWidth + 100
+          }px`;
         }
         break;
     }
