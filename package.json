@@ -1,9 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "dev": "nuxt dev",
-    "tw": "nuxi dev -o & tailwind-config-viewer -o -p 4000",
-    "build": "nuxt build",
+    "dev": "nuxi dev -o",
+    "tw": "yarn dev & tailwind-config-viewer -o -p 4000",
+    "build": "nuxi build",
     "start": "node .output/server/index.mjs",
     "build-firebase": "NITRO_PRESET=firebase yarn build",
     "deploy": "yarn build-firebase && firebase deploy --debug"
