@@ -57,7 +57,7 @@ import WelcomeExtensionStep0 from "~/components/welcome-extension-step/WelcomeEx
 import WelcomeExtensionStep1 from "~/components/welcome-extension-step/WelcomeExtensionStep1.vue";
 import WelcomeExtensionStep2 from "~/components/welcome-extension-step/WelcomeExtensionStep2.vue";
 import WelcomeExtensionStep3 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
-import WelcomeExtensionStep4 from "~/components/welcome-extension-step/WelcomeExtensionStep3.vue";
+import WelcomeExtensionStep4 from "~/components/welcome-extension-step/WelcomeExtensionStep4.vue";
 import WelcomeStepper from "~/components/WelcomeStepper.vue";
 
 // TODO: clear double declaration

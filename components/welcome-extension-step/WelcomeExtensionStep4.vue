@@ -11,7 +11,7 @@
       all projecting favourable now <abbr>unpleasing</abbr>. Son law garden chatty temper. Oh
       children provided to mr elegance marriage strongly. Off can admiration
       prosperous now devonshire diminution law."
-        :native-word="$('extension_popup_native_word')"
+        :native-word="$t('extension_popup_native_word')"
         :foreign-word="$t('extension_popup_foreign_word')"
         :is-welcome-extension="true"
       />

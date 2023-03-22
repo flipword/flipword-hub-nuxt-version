@@ -89,21 +89,26 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  isWelcomeExtension: {
+    type: Boolean,
+    required: false,
+    default: () => false,
+  },
 });
 
 const {
   $i18n: { $t },
 } = useNuxtApp();
 
-const containerRef = ref<HTMLElement>(null);
-const extensionPromoRef = ref<HTMLElement>(null);
-const selectedDivRef = ref<HTMLElement>(null);
-const cursorRef = ref<HTMLElement>(null);
-let abbrNode = ref<HTMLElement>(null);
-let logoRef = ref<HTMLElement>(null);
-let addingPopupRef = ref<HTMLElement>(null);
-let submitBtnRef = ref<HTMLElement>(null);
-let worker = null;
+const containerRef = ref<any>(null);
+const extensionPromoRef = ref<any>(null);
+const selectedDivRef = ref<any>(null);
+const cursorRef = ref<any>(null);
+let abbrNode = ref<any>(null);
+let logoRef = ref<any>(null);
+let addingPopupRef = ref<any>(null);
+let submitBtnRef = ref<any>(null);
+let worker: any = null;
 
 let handleResize = () => {};
 
@@ -139,7 +144,7 @@ onUnmounted(() => {
 });
 
 const initAnimationPosition = () => {
-  extensionPromoRef.value.childNodes.forEach((x) => {
+  extensionPromoRef.value.childNodes.forEach((x: any) => {
     if (x.nodeName == "ABBR") {
       abbrNode.value = x;
     }
@@ -183,7 +188,7 @@ const initAnimationPosition = () => {
 
 const setupAnimation = () => {
   worker = new Worker(blobScriptUrl);
-  worker.onmessage = function (e) {
+  worker.onmessage = function (e: any) {
     const result = e.data;
     switch (result) {
       // Init position
